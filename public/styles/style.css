@@ -1,0 +1,77 @@
+body {
+  padding: 50px;
+  font: 14px  'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
+  font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 50%;
+  margin: auto;
+}
+.header {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.note {
+  background-color:#aaa;
+  border: 1px solid whitesmoke;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.notebody {
+  height: 50px;
+  width: 150px;
+  padding: 0;
+  overflow: hidden;
+  display: inline-block;
+  margin: 0 5px 0 5px;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
