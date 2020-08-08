@@ -11,7 +11,6 @@ function listView() {
         elements[i].style.width = "100%";
     }
 }
-
 // Grid View
 function gridView() {
     for (i = 0; i < elements.length; i++) {
@@ -107,7 +106,6 @@ function deleteDB() {
         console.log("Couldn't delete database due to the operation being blocked");
     };
 }
-
 /* Load Data */
 const queryDB = () => {
     var connection = indexedDB.open(DBNAME);
@@ -123,6 +121,7 @@ const queryDB = () => {
             //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
             // contenteditable
                 html = `<div class="column note" id="${cursor.key}" onclick='editNote(this)'>
+                        <button onclick='deleteNote(this)' name="${cursor.key}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-sm"></i></button>
                             <h2>${marked(cursor.value.title)}</h2>
                         </div>`;
                 notesGrid.innerHTML += html;
@@ -132,10 +131,6 @@ const queryDB = () => {
     };
 }
 
-
-// Add date
-// Add Author
-
 let btnAction = document.getElementsByClassName("btnnote")
 
 // if (btnAction != null) {
@@ -143,12 +138,11 @@ let btnAction = document.getElementsByClassName("btnnote")
 //         console.log(btnAction[i].id)
 //     }
 // }
+var editBox = document.getElementById("editor")
 
 function editNote(notediv){
     var noteid = notediv.id;
-    console.log(noteid)
     var connection = indexedDB.open(DBNAME);
-    var editBox = document.getElementById("editor")
     connection.onsuccess = function () {
         db = connection.result;
         var tx = db.transaction('notes', "readonly")
@@ -159,7 +153,7 @@ function editNote(notediv){
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div name=${matching.noteid} class="editor" id="editpad" contenteditable="true">
+                html = `<div name=${matching.noteid} class="editor" id="editpad">
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
                             <p style="text-align: left;">${marked(matching.body)}</p>
                         </div>`
@@ -169,7 +163,69 @@ function editNote(notediv){
     }    
 }
 
-
 var editPad = document.getElementById("editpad")
+var newNote = document.getElementById("addBtn")
+
+newNote.addEventListener("click", () => {
+    html = `<div name="" class="editor" id="editpad" contenteditable="false">
+                            <input name="title" type="text" id="title" placeholder="Note Title">
+                            <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
+                        </div>`
+    editBox.innerHTML = html;
+})
+
+
+
+function deleteNote(notediv) {
+    var noteid = notediv.name;
+    document.getElementById(noteid).style.display = "none"
+    editBox.innerHTML = "";
+    console.log(noteid)
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readwrite")
+        var store = tx.objectStore("notes")
+        store.delete(noteid);
+        tx.oncomplete = function () {
+            console.log('Note ' + noteid + ' deleted.');
+
+        }
+    }
+}
+
+
+function save() {
+    function genID(d) {
+        return Math.floor(d / 1000);
+    }
+
+    var noteTitle = document.getElementById("title").value
+    var noteBody = document.getElementById("notebody").value
+
+    var d = new Date()
+    var id = genID(d); 
+    const note = {
+        noteid: id.toString(),
+        title: noteTitle,
+        body: noteBody
+    };
+    console.log(note)
+    addNote(note)
+}
+
+function addNote(note) {
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readwrite")
+        var store = tx.objectStore("notes")
+        store.add(note);
+        tx.oncomplete = function () {
+            console.log('Note added' + note );
+        }
+    }
+    queryDB()
+}
 
 

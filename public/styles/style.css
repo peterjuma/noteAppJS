@@ -143,3 +143,27 @@ body {
     height: 90%;
     position: absolute;
 }
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid #666;
+}
+
+
+textarea {
+  width: 100%;
+  display: block;
+  margin-top: 20px;
+  padding: 20px;
+  resize: vertical;
+  border-radius: 5px;
+  box-shadow: none;
+  outline: none;
+  overflow: auto;
+}
+
