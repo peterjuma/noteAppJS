@@ -45,7 +45,7 @@ class Notes {
         Such and such feature will not be available.");
         }
     }
-    initialLoad = (notesData) => {
+    initialLoad = () => {
     const request = indexedDB.open(this.dbName, 1);
 
     request.onerror = (event) => {
@@ -66,9 +66,9 @@ class Notes {
         objectStore.createIndex('noteid', 'noteid', { unique: true });
 
         // Populate the database with the initial set of rows
-        notesData.forEach(function (note) {
-            objectStore.put(note);
-        });
+        // notesData.forEach(function (note) {
+        //     objectStore.put(note);
+        // });
         db.close();
     };
     }
@@ -81,13 +81,12 @@ var clear = document.getElementById("clear")
 const loadDB = () => {
     console.log('Load the Notes database');
     // Notes to add to initially populate the database with
-    const notesData = [
-        { noteid: '444', title: 'Love _is_ bold', body: 'Marked in the browser Rendered by **marked**' },
-        { noteid: '555', title: 'Aenean viverra rhoncus', body: 'Vestibulum ullamcorper mauris at ligula. Ut id nisl quis enim dignissim sagittis.' }
-    ];
+    // const notesData = [
+    //     { noteid: '444', title: 'Love _is_ bold', body: 'Marked in the browser Rendered by **marked**' },
+    //     { noteid: '555', title: 'Aenean viverra rhoncus', body: 'Vestibulum ullamcorper mauris at ligula. Ut id nisl quis enim dignissim sagittis.' }
+    // ];
     let notes = new Notes(DBNAME);
-    notes.initialLoad(notesData);
-    queryDB()
+    notes.initialLoad();
 }
 
 load.addEventListener("click", loadDB)
@@ -107,9 +106,9 @@ function deleteDB() {
     };
 }
 /* Load Data */
+var notesGrid = document.getElementById("notes")
 const queryDB = () => {
     var connection = indexedDB.open(DBNAME);
-    var notesGrid = document.getElementById("notes")
     connection.onsuccess = function () {
         db = connection.result;
         var tx = db.transaction('notes', "readonly")
@@ -147,8 +146,7 @@ function editNote(notediv){
         db = connection.result;
         var tx = db.transaction('notes', "readonly")
         var store = tx.objectStore("notes")
-        var index = store.index("noteid");
-        
+        var index = store.index("noteid");       
         var request = index.get(noteid);
         request.onsuccess = (e) => {
             var matching = request.result;
@@ -224,8 +222,29 @@ function addNote(note) {
         tx.oncomplete = function () {
             console.log('Note added' + note );
         }
-    }
-    queryDB()
+    }  
+    getNote(note.noteid)
 }
 
+function getNote(noteid) {
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readonly")
+        var store = tx.objectStore("notes")
+        var index = store.index("noteid");
+        var request = index.get(noteid);
+        request.onsuccess = (e) => {
+            var matching = request.result;
+            if (matching) {
+                html = `<div class="column note" id="${matching.noteid}" onclick='editNote(this)'>
+                        <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-sm"></i></button>
+                            <h2>${marked(matching.title)}</h2>
+                        </div>`;
+                notesGrid.innerHTML += html;
+            } else { }
+        }
+    }
+}
 
+queryDB()
