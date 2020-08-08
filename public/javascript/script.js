@@ -71,16 +71,16 @@ class Notes {
 
 var DBNAME = "notesdb"
 var load = document.getElementById("load")
-var clear = document.getElementById("clear")
+// var clear = document.getElementById("clear")
 
 const loadDB = () => {
     console.log('Load the Notes database');
     let notes = new Notes(DBNAME);
     notes.initialLoad();
-    document.getElementById("saveBtn").disabled = true;
+    // document.getElementById("saveBtn").disabled = true;
 }
 
-clear.addEventListener("click", deleteDB)
+// clear.addEventListener("click", deleteDB)
 
 function deleteDB() {
     var req = indexedDB.deleteDatabase(DBNAME);
@@ -143,7 +143,7 @@ function showNote(notediv){
                         </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
-                document.getElementById("saveBtn").disabled = true;
+                // document.getElementById("saveBtn").disabled = true;
             } else{}
         }
     }       
@@ -157,9 +157,10 @@ newNote.addEventListener("click", () => {
                 <input name="title" type="text" id="title" placeholder="Note Title">
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
                 <button onclick='cancelEdit("")' class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
+                <button class="btn" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
             </div>`
     editBox.innerHTML = html;
-    document.getElementById("saveBtn").disabled = false;
+    // document.getElementById("saveBtn").disabled = false;
     document.getElementById("editor").style.display = "unset"
     // document.getElementById("addBtn").disabled = true;
 })
@@ -254,7 +255,7 @@ function cancelEdit(notediv){
         showNote(notediv)
     } else {
         document.getElementById("editor").style.display = "none"
-        document.getElementById("saveBtn").disabled = true;
+        // document.getElementById("saveBtn").disabled = true;
     }
 }
 
@@ -312,7 +313,7 @@ function editNote(notediv) {
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
                 document.getElementById("notebody").value = turndownService.turndown(marked(matching.body));
-                document.getElementById("saveBtn").disabled = true;
+                // document.getElementById("saveBtn").disabled = true;
             } else { }
         }
     }
