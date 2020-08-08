@@ -28,6 +28,15 @@ for (var i = 0; i < btns.length; i++) {
         this.className += " active";
     });
 }
+var editContainer = document.getElementById("editContainer");
+var editbtns = editContainer.getElementsByClassName("btn");
+for (var i = 0; i < editbtns.length; i++) {
+    editbtns[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+    });
+}
 
 class Notes {
     constructor(dbName) {
@@ -52,9 +61,10 @@ class Notes {
             console.log('initialLoad - objectStore error: ', event.target.error.code,
                 " - ", event.target.error.message);
         };
-        // Create an index to search customers by name and email
+        // Create an index to search
         objectStore.createIndex('title', 'title', { unique: false });
-        objectStore.createIndex('body', 'body', { unique: true });
+        objectStore.createIndex('body', 'body', { unique: false });
+        objectStore.createIndex('noteid', 'noteid', { unique: true });
 
         // Populate the database with the initial set of rows
         notesData.forEach(function (note) {
@@ -73,7 +83,7 @@ const loadDB = () => {
     console.log('Load the Notes database');
     // Notes to add to initially populate the database with
     const notesData = [
-        { noteid: '444', title: 'Love _is_ bold', body: '## Marked in the browser Rendered by **marked**' },
+        { noteid: '444', title: 'Love _is_ bold', body: 'Marked in the browser Rendered by **marked**' },
         { noteid: '555', title: 'Aenean viverra rhoncus', body: 'Vestibulum ullamcorper mauris at ligula. Ut id nisl quis enim dignissim sagittis.' }
     ];
     let notes = new Notes(DBNAME);
@@ -99,7 +109,6 @@ function deleteDB() {
 }
 
 /* Load Data */
-
 const queryDB = () => {
     var connection = indexedDB.open(DBNAME);
     var notesGrid = document.getElementById("notes")
@@ -111,22 +120,56 @@ const queryDB = () => {
         request.onsuccess = (e) => {
             var cursor = e.target.result
             if (cursor) {
-               //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
-
-                html = `<div class="column note">
-                        <h2>${cursor.value.title}</h2>
-                        <span class="notebody"></span>
+            //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
+            // contenteditable
+                html = `<div class="column note" id="${cursor.key}" onclick='editNote(this)'>
+                            <h2>${marked(cursor.value.title)}</h2>
                         </div>`;
-                notesGrid.innerHTML += '<div class="column note">' +
-                                        '<h2>' + marked(cursor.value.title) + '</h2>' + 
-                                        '<span class="notebody">' + marked(cursor.value.body) + '</span>' + 
-                                        '</div>';  
+                notesGrid.innerHTML += html;
                 cursor.continue()
             }
         }
     };
 }
 
+
 // Add date
 // Add Author
+
+let btnAction = document.getElementsByClassName("btnnote")
+
+// if (btnAction != null) {
+//     for (var i = 0; i < btnAction.length; i++) {
+//         console.log(btnAction[i].id)
+//     }
+// }
+
+function editNote(notediv){
+    var noteid = notediv.id;
+    console.log(noteid)
+    var connection = indexedDB.open(DBNAME);
+    var editBox = document.getElementById("editor")
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readonly")
+        var store = tx.objectStore("notes")
+        var index = store.index("noteid");
+        
+        var request = index.get(noteid);
+        request.onsuccess = (e) => {
+            var matching = request.result;
+            if (matching) {
+                html = `<div name=${matching.noteid} class="editor" id="editpad" contenteditable="true">
+                           <h1 style="text-align: center;">${marked(matching.title)}</h1>
+                            <p style="text-align: left;">${marked(matching.body)}</p>
+                        </div>`
+                editBox.innerHTML = html;
+            } else{}
+        }
+    }    
+}
+
+
+var editPad = document.getElementById("editpad")
+
 
