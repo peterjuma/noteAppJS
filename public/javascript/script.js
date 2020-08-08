@@ -251,7 +251,7 @@ function updateNote(note){
     getNote(note.noteid)
 }
 
-// Get single not to display in the not-list grid
+// Get single not to display in the list and details areas
 function getNote(noteid) {
     var connection = indexedDB.open(DBNAME);
     connection.onsuccess = function () {
@@ -279,6 +279,9 @@ function getNote(noteid) {
     }
 }
 
+const turndownService = new TurndownService();
+
+
 // Get single note for editing
 function editNote(notediv) {
     var noteid = notediv.name;
@@ -298,8 +301,8 @@ function editNote(notediv) {
                             <button onclick='update(this)' name="${matching.noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-2x"></i></button>
                         </div>`
                 editBox.innerHTML = html;
-                document.getElementById("title").value = matching.title;
-                document.getElementById("notebody").value = matching.body;
+                document.getElementById("title").value = turndownService.turndown(marked(matching.title));
+                document.getElementById("notebody").value = turndownService.turndown(marked(matching.body));
             } else { }
         }
     }
