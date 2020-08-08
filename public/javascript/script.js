@@ -74,7 +74,7 @@ class Notes {
     }
 }
 
-var DBNAME = "nodesdb"
+var DBNAME = "notesdb"
 var load = document.getElementById("load")
 var clear = document.getElementById("clear")
 
@@ -89,7 +89,6 @@ const loadDB = () => {
     notes.initialLoad();
 }
 
-load.addEventListener("click", loadDB)
 clear.addEventListener("click", deleteDB)
 
 function deleteDB() {
@@ -119,8 +118,7 @@ const queryDB = () => {
             if (cursor) {
             //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
             // contenteditable
-                html = `<div class="column note" id="${cursor.key}" onclick='editNote(this)'>
-                        <button onclick='deleteNote(this)' name="${cursor.key}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-sm"></i></button>
+                html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <h2>${marked(cursor.value.title)}</h2>
                         </div>`;
                 notesGrid.innerHTML += html;
@@ -131,15 +129,9 @@ const queryDB = () => {
 }
 
 let btnAction = document.getElementsByClassName("btnnote")
-
-// if (btnAction != null) {
-//     for (var i = 0; i < btnAction.length; i++) {
-//         console.log(btnAction[i].id)
-//     }
-// }
 var editBox = document.getElementById("editor")
 
-function editNote(notediv){
+function showNote(notediv){
     var noteid = notediv.id;
     var connection = indexedDB.open(DBNAME);
     connection.onsuccess = function () {
@@ -152,13 +144,15 @@ function editNote(notediv){
             var matching = request.result;
             if (matching) {
                 html = `<div name=${matching.noteid} class="editor" id="editpad">
+                        <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                        <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
                             <p style="text-align: left;">${marked(matching.body)}</p>
                         </div>`
                 editBox.innerHTML = html;
             } else{}
         }
-    }    
+    }       
 }
 
 var editPad = document.getElementById("editpad")
@@ -172,8 +166,7 @@ newNote.addEventListener("click", () => {
     editBox.innerHTML = html;
 })
 
-
-
+// Delete single note by noteid
 function deleteNote(notediv) {
     var noteid = notediv.name;
     document.getElementById(noteid).style.display = "none"
@@ -192,15 +185,13 @@ function deleteNote(notediv) {
     }
 }
 
-
+// Get new note values from the UI
 function save() {
     function genID(d) {
         return Math.floor(d / 1000);
     }
-
     var noteTitle = document.getElementById("title").value
     var noteBody = document.getElementById("notebody").value
-
     var d = new Date()
     var id = genID(d); 
     const note = {
@@ -212,6 +203,7 @@ function save() {
     addNote(note)
 }
 
+// Add single note to the database
 function addNote(note) {
     var connection = indexedDB.open(DBNAME);
     connection.onsuccess = function () {
@@ -224,8 +216,40 @@ function addNote(note) {
         }
     }  
     getNote(note.noteid)
+    document.getElementById("title").value = ""
+    document.getElementById("notebody").value = ""
 }
 
+// Get updated values from the UI and generate a JSON object
+function update(editdiv) {
+    var id = editdiv.name
+    var noteTitle = document.getElementById("title").value
+    var noteBody = document.getElementById("notebody").value
+    const note = {
+        noteid: id.toString(),
+        title: noteTitle,
+        body: noteBody
+    };
+    console.log(note)
+    updateNote(note)
+}
+
+// Update note in the database
+function updateNote(note){
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readwrite")
+        var store = tx.objectStore("notes")
+        store.put(note);
+        tx.oncomplete = function () {
+            console.log('Note updated' + note);
+        }
+    }
+    getNote(note.noteid)
+}
+
+// Get single not to display in the not-list grid
 function getNote(noteid) {
     var connection = indexedDB.open(DBNAME);
     connection.onsuccess = function () {
@@ -237,8 +261,7 @@ function getNote(noteid) {
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div class="column note" id="${matching.noteid}" onclick='editNote(this)'>
-                        <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-sm"></i></button>
+                html = `<div class="column note" id="${matching.noteid}" onclick='showNote(this)'>
                             <h2>${marked(matching.title)}</h2>
                         </div>`;
                 notesGrid.innerHTML += html;
@@ -247,4 +270,33 @@ function getNote(noteid) {
     }
 }
 
+// Get single note for editing
+function editNote(notediv) {
+    var noteid = notediv.name;
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readonly")
+        var store = tx.objectStore("notes")
+        var index = store.index("noteid");
+        var request = index.get(noteid);
+        request.onsuccess = (e) => {
+            var matching = request.result;
+            if (matching) {
+                html = `<div name=${matching.noteid} class="editor" id="editpad">
+                            <input name="title" type="text" id="title">
+                            <textarea style="margin-top: 20px;" name="notebody" id="notebody"></textarea>
+                            <button onclick='update(this)' name="${matching.noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-2x"></i></button>
+                        </div>`
+                editBox.innerHTML = html;
+                document.getElementById("title").value = matching.title;
+                document.getElementById("notebody").value = matching.body;
+            } else { }
+        }
+    }
+}
+
+loadDB()
 queryDB()
+
+
