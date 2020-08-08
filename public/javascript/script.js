@@ -131,6 +131,7 @@ const queryDB = () => {
 let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
 
+// Show notes when grid box clicked
 function showNote(notediv){
     var noteid = notediv.id;
     var connection = indexedDB.open(DBNAME);
@@ -244,6 +245,7 @@ function updateNote(note){
         store.put(note);
         tx.oncomplete = function () {
             console.log('Note updated' + note);
+            document.getElementById(note.noteid).style.display = "none"
         }
     }
     getNote(note.noteid)
@@ -265,6 +267,13 @@ function getNote(noteid) {
                             <h2>${marked(matching.title)}</h2>
                         </div>`;
                 notesGrid.innerHTML += html;
+                html2 = `<div name=${matching.noteid} class="editor" id="editpad">
+                        <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                        <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
+                           <h1 style="text-align: center;">${marked(matching.title)}</h1>
+                            <p style="text-align: left;">${marked(matching.body)}</p>
+                        </div>`
+                editBox.innerHTML = html2;
             } else { }
         }
     }
@@ -298,5 +307,3 @@ function editNote(notediv) {
 
 loadDB()
 queryDB()
-
-
