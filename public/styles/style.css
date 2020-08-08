@@ -169,3 +169,8 @@ textarea {
   overflow-y: scroll;
 }
 
+
+button,pad {
+    font-size: 1.5em;
+    margin: 5px;
+}
