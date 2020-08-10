@@ -112,6 +112,13 @@ const queryDB = () => {
             // contenteditable
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <h2>${marked(cursor.value.title)}</h2>
+                var date_diff = countDown(cursor.value.created_at)
+                var ago = []
+                date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
+                console.log(ago)
+                html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
+                            <h2>${marked(cursor.value.title)}</h2>
+                             <caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption>
                         </div>`;
                 notesGrid.innerHTML += html;
                 noteSelect() 
