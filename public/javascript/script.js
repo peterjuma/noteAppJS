@@ -64,8 +64,6 @@ class Notes {
         objectStore.createIndex('title', 'title', { unique: false });
         objectStore.createIndex('body', 'body', { unique: false });
         objectStore.createIndex('noteid', 'noteid', { unique: true });
-        objectStore.createIndex('created_at', 'created_at', { unique: true });
-        objectStore.createIndex('updated_at', 'updated_at', { unique: true });
         db.close();
     };
     }
@@ -107,7 +105,8 @@ const queryDB = () => {
         var cust = tx.objectStore("notes")
         var request = cust.openCursor()
         request.onsuccess = (e) => {
-            var cursor = e.target.result            
+            var cursor = e.target.result
+            
             if (cursor) {
             //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
             // contenteditable
@@ -117,7 +116,6 @@ const queryDB = () => {
                 console.log(ago)
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <h2>${marked(cursor.value.title)}</h2>
-                             <caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""} ago</caption>
                         </div>`;
                 notesGrid.innerHTML += html;
                 noteSelect() 
@@ -156,7 +154,7 @@ function showNote(notediv){
             } else{}
         }
     } 
-    // document.getElementById(notediv.id).classList.add("active") 
+    document.getElementById(notediv.id).classList.add(" active") 
 }
 
 function noteSelect(){
@@ -204,31 +202,15 @@ function deleteNote(notediv) {
     }
 }
 
-
-
-function countDown(epoch_timestamp) {
-    var now = new Date().getTime();
-    // Find the distance between now and the count down date
-    var distance = now - epoch_timestamp * 1000;
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    dateJson = {
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds
-    }
-    return dateJson
-}
 // Get new note values from the UI
 function save() {
+    function genID(d) {
+        return Math.floor(d / 1000);
+    }
     var noteTitle = document.getElementById("title").value
     var noteBody = document.getElementById("notebody").value
-    var id = Math.round(Date.now() / 1000)  
+    var d = new Date()
+    var id = genID(d); 
     const note = {
         noteid: id.toString(),
         title: noteTitle,
@@ -263,18 +245,30 @@ function update(editdiv) {
     var id = editdiv.name
     var noteTitle = document.getElementById("title").value
     var noteBody = document.getElementById("notebody").value
-    var updated_at = Math.round(Date.now() / 1000)  
     const note = {
         noteid: id.toString(),
         title: noteTitle,
-        body: noteBody,
-        created_at: id.toString(),
-        updated_at: updated_at.toString()
+        body: noteBody
     };
     console.log(note)
     updateNote(note)
 }
 
+// Update note in the database
+function updateNote(note){
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readwrite")
+        var store = tx.objectStore("notes")
+        store.put(note);
+        tx.oncomplete = function () {
+            console.log('Note updated' + note);
+            document.getElementById(note.noteid).style.display = "none"
+        }
+    }
+    getNote(note.noteid)
+}
 
 function cancelEdit(notediv){
     if(notediv){
@@ -313,22 +307,6 @@ function getNote(noteid) {
             } else {}
         }
     }
-}
-
-// Update note in the database
-function updateNote(note) {
-    var connection = indexedDB.open(DBNAME);
-    connection.onsuccess = function () {
-        db = connection.result;
-        var tx = db.transaction('notes', "readwrite")
-        var store = tx.objectStore("notes")
-        store.put(note);
-        tx.oncomplete = function () {
-            console.log('Note updated' + note);
-            document.getElementById(note.noteid).style.display = "none"
-        }
-    }
-    getNote(note.noteid)
 }
 
 const turndownService = new TurndownService();
