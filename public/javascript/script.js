@@ -234,7 +234,7 @@ function save() {
         title: noteTitle,
         body: noteBody,
         created_at: id.toString(),
-        updated_at: ""
+        updated_at: id.toString()
     };
     console.log(note)
     addNote(note)
