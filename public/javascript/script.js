@@ -210,7 +210,9 @@ function save() {
     const note = {
         noteid: id.toString(),
         title: noteTitle,
-        body: noteBody
+        body: noteBody,
+        created_at: id.toString(),
+        updated_at: id.toString()
     };
     console.log(note)
     addNote(note)
