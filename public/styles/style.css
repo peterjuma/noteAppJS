@@ -179,3 +179,7 @@ textarea {
 button,pad {
     margin: 5px;
 }
+
+.github-button{
+  padding: 20px;
+}
