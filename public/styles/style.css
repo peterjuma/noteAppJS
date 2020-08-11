@@ -7,7 +7,6 @@ body {
   box-sizing: border-box;
 }
 
-
 .header {
   width: 50%;
   margin: auto;
@@ -108,7 +107,6 @@ body {
     height: 95%;
     width: 60%;
     position: fixed;
-    overflow-x: hidden;
     padding: 10px;
     margin-left: 10%;
     margin-right: 10%;
@@ -147,8 +145,6 @@ body {
 		display: block;
     width: 99%;
     height: 90%;
-    position: absolute;
-    overflow-y: scroll;
 }
 
 input[type="text"] {
@@ -158,23 +154,21 @@ input[type="text"] {
   outline: none;
   border-radius: 5px;
   box-shadow: none;
-  border: 1px solid #666;
+  border: 1px solid #D8D8D8;
 }
-
 
 textarea {
   width: 100%;
-  height: 80%;
+  height: 90%;
   display: block;
   margin-top: 20px;
   padding: 20px;
-  resize: vertical;
+  resize: none;
   border-radius: 5px;
   box-shadow: none;
   outline: none;
-  overflow-y: scroll;
+  border: 1px solid #D8D8D8;
 }
-
 
 button,pad {
     margin: 5px;

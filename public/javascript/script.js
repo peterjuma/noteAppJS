@@ -176,6 +176,8 @@ newNote.addEventListener("click", () => {
     html = `<div name="" class="editor" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Note Title">
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
+            </div>
+            <div class="editBtns">
                 <button onclick='cancelEdit("")' class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                 <button class="btn" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
             </div>`
