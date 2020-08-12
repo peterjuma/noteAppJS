@@ -144,7 +144,7 @@ function showNote(notediv){
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div name=${matching.noteid} class="editor" id="editpad">
+                html = `<div name=${matching.noteid} class="editor markdown-body" id="editpad">
                         <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
                         <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
@@ -173,7 +173,7 @@ function noteSelect(){
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
-    html = `<div name="" class="editor" id="editpad" contenteditable="false">
+    html = `<div name="" class="editor markdown-body" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Note Title">
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
             </div>
@@ -303,7 +303,7 @@ function getNote(noteid) {
                 // notesGrid.innerHTML += html;
                 notesGrid.innerHTML = "";
                 queryDB()
-                html2 = `<div name=${matching.noteid} class="editor" id="editpad">
+                html2 = `<div name=${matching.noteid} class="editor markdown-body" id="editpad">
                         <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
                         <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
