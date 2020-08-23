@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 20px;
   background-color: whitesmoke;
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
 }
@@ -7,11 +7,11 @@ body {
   box-sizing: border-box;
 }
 
-
 .header {
   width: 50%;
   margin: auto;
   text-align: center;
+
 }
 
 /* Create two equal columns that floats next to each other */
@@ -65,7 +65,7 @@ body {
   }
 }
 
-.notebody {
+/* .notebody {
   height: 18px;
   width: 150px;
   padding: 0;
@@ -74,7 +74,7 @@ body {
   margin: 0 5px 0 5px;
   text-decoration: none;
   white-space: nowrap;
-}
+} */
 
 
 .column:hover {
@@ -94,7 +94,7 @@ body {
 
 
   .left {
-    height: 50%;
+    height: 95%;
     width: 20%;
     position: fixed;
     overflow-x: hidden;
@@ -104,10 +104,9 @@ body {
   }
 
   .right {
-    height: 50%;
+    height: 95%;
     width: 60%;
     position: fixed;
-    overflow-x: hidden;
     padding: 10px;
     margin-left: 10%;
     margin-right: 10%;
@@ -135,8 +134,12 @@ body {
   }
 
 .editor {
-    padding: 10px;
-    resize: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    /* resize: none; */
+    resize: vertical;
+    overflow: auto;
 		background: #F5F5F5;
 		border-color:  #D8D8D8;
 		border-style: solid;
@@ -144,38 +147,62 @@ body {
 		border-width: 1px;
 		box-shadow: none;
 		display: block;
-    width: 99%;
-    height: 90%;
-    position: absolute;
-    overflow-y: scroll;
+    width: 100%;
+    max-height: 85%;
+    min-height: 30%;
+    height: 80%;
 }
 
 input[type="text"] {
   width: 100%;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   outline: none;
   border-radius: 5px;
   box-shadow: none;
-  border: 1px solid #666;
+  border: 1px solid #D8D8D8;
 }
-
 
 textarea {
   width: 100%;
-  height: 100%;
-  max-height: 350px;
+  height: 90%;
   display: block;
-  margin-top: 20px;
-  padding: 20px;
-  resize: vertical;
+  background-color: rgb(249, 239, 226);
+  margin-top: 10px;
+  padding: 20px; 
+  resize: none;
   border-radius: 5px;
   box-shadow: none;
   outline: none;
-  overflow-y: scroll;
+  border: 1px solid #D8D8D8;
 }
 
+/* code {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+} */
 
 button,pad {
     margin: 5px;
+}
+
+.github-button{
+  padding: 20px;
+}
+
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+      padding: 15px;
+  }
 }

@@ -64,6 +64,8 @@ class Notes {
         objectStore.createIndex('title', 'title', { unique: false });
         objectStore.createIndex('body', 'body', { unique: false });
         objectStore.createIndex('noteid', 'noteid', { unique: true });
+        objectStore.createIndex('created_at', 'created_at', { unique: true });
+        objectStore.createIndex('updated_at', 'updated_at', { unique: true });
         db.close();
     };
     }
@@ -81,7 +83,6 @@ const loadDB = () => {
 }
 
 // clear.addEventListener("click", deleteDB)
-
 function deleteDB() {
     var req = indexedDB.deleteDatabase(DBNAME);
     window.location.reload();
@@ -105,17 +106,12 @@ const queryDB = () => {
         var cust = tx.objectStore("notes")
         var request = cust.openCursor()
         request.onsuccess = (e) => {
-            var cursor = e.target.result
-            
+            var cursor = e.target.result            
             if (cursor) {
-            //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
             // contenteditable
-                html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
-                            <h2>${marked(cursor.value.title)}</h2>
                 var date_diff = countDown(cursor.value.created_at)
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
-                console.log(ago)
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <h2>${marked(cursor.value.title)}</h2>
                              <caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption>
@@ -145,7 +141,7 @@ function showNote(notediv){
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div name=${matching.noteid} class="editor" id="editpad">
+                html = `<div name=${matching.noteid} class="editor markdown-body" id="editpad">
                         <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
                         <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
@@ -153,11 +149,9 @@ function showNote(notediv){
                         </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
-                // document.getElementById("saveBtn").disabled = true;
             } else{}
         }
     } 
-    document.getElementById(notediv.id).classList.add(" active") 
 }
 
 function noteSelect(){
@@ -174,16 +168,16 @@ function noteSelect(){
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
-    html = `<div name="" class="editor" id="editpad" contenteditable="false">
+    html = `<div name="" class="editor markdown-body" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Note Title">
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
+            </div>
+            <div class="editBtns">
                 <button onclick='cancelEdit("")' class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                 <button class="btn" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
             </div>`
     editBox.innerHTML = html;
-    // document.getElementById("saveBtn").disabled = false;
     document.getElementById("editor").style.display = "unset"
-    // document.getElementById("addBtn").disabled = true;
 })
 
 // Delete single note by noteid
@@ -199,21 +193,34 @@ function deleteNote(notediv) {
         var store = tx.objectStore("notes")
         store.delete(noteid);
         tx.oncomplete = function () {
-            console.log('Note ' + noteid + ' deleted.');
 
         }
     }
 }
 
+function countDown(epoch_timestamp) {
+    var now = new Date().getTime();
+    // Find the distance between now and the count down date
+    var distance = now - epoch_timestamp * 1000;
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    dateJson = {
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    }
+    return dateJson
+}
 // Get new note values from the UI
 function save() {
-    function genID(d) {
-        return Math.floor(d / 1000);
-    }
     var noteTitle = document.getElementById("title").value
     var noteBody = document.getElementById("notebody").value
-    var d = new Date()
-    var id = genID(d); 
+    var id = Math.round(Date.now() / 1000)  
     const note = {
         noteid: id.toString(),
         title: noteTitle,
@@ -221,7 +228,6 @@ function save() {
         created_at: id.toString(),
         updated_at: id.toString()
     };
-    console.log(note)
     addNote(note)
 }
 
@@ -248,30 +254,17 @@ function update(editdiv) {
     var id = editdiv.name
     var noteTitle = document.getElementById("title").value
     var noteBody = document.getElementById("notebody").value
+    var updated_at = Math.round(Date.now() / 1000)  
     const note = {
         noteid: id.toString(),
         title: noteTitle,
-        body: noteBody
+        body: noteBody,
+        created_at: id.toString(),
+        updated_at: updated_at.toString()
     };
-    console.log(note)
     updateNote(note)
 }
 
-// Update note in the database
-function updateNote(note){
-    var connection = indexedDB.open(DBNAME);
-    connection.onsuccess = function () {
-        db = connection.result;
-        var tx = db.transaction('notes', "readwrite")
-        var store = tx.objectStore("notes")
-        store.put(note);
-        tx.oncomplete = function () {
-            console.log('Note updated' + note);
-            document.getElementById(note.noteid).style.display = "none"
-        }
-    }
-    getNote(note.noteid)
-}
 
 function cancelEdit(notediv){
     if(notediv){
@@ -300,7 +293,7 @@ function getNote(noteid) {
                 // notesGrid.innerHTML += html;
                 notesGrid.innerHTML = "";
                 queryDB()
-                html2 = `<div name=${matching.noteid} class="editor" id="editpad">
+                html2 = `<div name=${matching.noteid} class="editor markdown-body" id="editpad">
                         <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
                         <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
@@ -310,6 +303,21 @@ function getNote(noteid) {
             } else {}
         }
     }
+}
+
+// Update note in the database
+function updateNote(note) {
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readwrite")
+        var store = tx.objectStore("notes")
+        store.put(note);
+        tx.oncomplete = function () {
+            document.getElementById(note.noteid).style.display = "none"
+        }
+    }
+    getNote(note.noteid)
 }
 
 const turndownService = new TurndownService();
@@ -329,9 +337,11 @@ function editNote(notediv) {
             if (matching) {
                 html = `<div name=${matching.noteid} class="editor" id="editpad">
                             <input name="title" type="text" id="title">
-                            <textarea style="margin-top: 20px;" name="notebody" id="notebody"></textarea>
-                            <button onclick='update(this)' name="${matching.noteid}" class="btn btnnote" style="float: left; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-check fa-lg" aria-hidden="true"></i> OK</button>
-                            <button onclick='cancelEdit(this)' name="${matching.noteid}" class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                            <textarea name="notebody" id="notebody"></textarea>
+                        </div>
+                        <div class="editBtns">
+                            <button onclick='update(this)' name="${matching.noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 17px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-check fa-lg" aria-hidden="true"></i> OK</button>
+                            <button onclick='cancelEdit(this)' name="${matching.noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 17px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                         </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
