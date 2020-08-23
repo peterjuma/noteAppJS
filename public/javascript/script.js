@@ -83,7 +83,6 @@ const loadDB = () => {
 }
 
 // clear.addEventListener("click", deleteDB)
-
 function deleteDB() {
     var req = indexedDB.deleteDatabase(DBNAME);
     window.location.reload();
@@ -109,12 +108,10 @@ const queryDB = () => {
         request.onsuccess = (e) => {
             var cursor = e.target.result            
             if (cursor) {
-            //`{noteid: ${cursor.key}, title: ${cursor.value.title}, body: ${cursor.value.body}}`  
             // contenteditable
                 var date_diff = countDown(cursor.value.created_at)
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
-                console.log(ago)
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <h2>${marked(cursor.value.title)}</h2>
                              <caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption>
@@ -152,11 +149,9 @@ function showNote(notediv){
                         </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
-                // document.getElementById("saveBtn").disabled = true;
             } else{}
         }
     } 
-    // document.getElementById(notediv.id).classList.add("active") 
 }
 
 function noteSelect(){
@@ -182,9 +177,7 @@ newNote.addEventListener("click", () => {
                 <button class="btn" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
             </div>`
     editBox.innerHTML = html;
-    // document.getElementById("saveBtn").disabled = false;
     document.getElementById("editor").style.display = "unset"
-    // document.getElementById("addBtn").disabled = true;
 })
 
 // Delete single note by noteid
@@ -200,7 +193,6 @@ function deleteNote(notediv) {
         var store = tx.objectStore("notes")
         store.delete(noteid);
         tx.oncomplete = function () {
-            console.log('Note ' + noteid + ' deleted.');
 
         }
     }
@@ -236,7 +228,6 @@ function save() {
         created_at: id.toString(),
         updated_at: id.toString()
     };
-    console.log(note)
     addNote(note)
 }
 
@@ -271,7 +262,6 @@ function update(editdiv) {
         created_at: id.toString(),
         updated_at: updated_at.toString()
     };
-    console.log(note)
     updateNote(note)
 }
 
@@ -324,7 +314,6 @@ function updateNote(note) {
         var store = tx.objectStore("notes")
         store.put(note);
         tx.oncomplete = function () {
-            console.log('Note updated' + note);
             document.getElementById(note.noteid).style.display = "none"
         }
     }
