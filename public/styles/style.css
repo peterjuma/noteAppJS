@@ -193,8 +193,11 @@ textarea {
 
   textarea {
     height: 80%; 
-    height: 80vh; 
+    height: fit-content; 
+    height: 400px;
     font-size: 12px;
+    max-height: 600px;
+    resize: vertical;
   }
 
   input[type="text"] {
