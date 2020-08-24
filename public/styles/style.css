@@ -192,11 +192,8 @@ textarea {
   }
 
   textarea {
-    height: 80%; 
-    height: fit-content; 
-    height: 400px;
+    height: 78vmax; 
     font-size: 12px;
-    max-height: 600px;
     resize: vertical;
   }
 
