@@ -10,9 +10,7 @@ body {
 .header {
   width: 50%;
   margin: auto;
-  font-size: 24px;
   text-align: center;
-
 }
 
 /* Create two equal columns that floats next to each other */
@@ -165,7 +163,7 @@ textarea {
   background-color: rgb(249, 239, 226);
   margin-top: 5px;
   padding: 10px; 
-  font-size: 18px;
+  /* font-size: 18px; */
   border-radius: 5px;
   box-shadow: none;
   outline: none;
@@ -177,7 +175,7 @@ textarea {
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 10px;
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 
 #btnContainer, .editBtns {
@@ -192,8 +190,8 @@ textarea {
     padding: 5px;
     padding-top: 0px;
     padding-bottom: 0px;
-    font-size: 12px;
-  }
+    /* font-size: 12px; */
+  } 
 
   textarea {
     font-size: 12px;
@@ -205,14 +203,6 @@ textarea {
     margin-bottom: 3px;
     height: calc(100% - 50px);
     margin-bottom: 10px;
-  }
-
-  input[type="text"] {
-    font-size: 12px;
-  }
-
-  .button{
-    font-size: 12px;
   }
 
   .column p {
