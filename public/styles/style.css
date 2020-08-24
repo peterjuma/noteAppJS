@@ -123,12 +123,14 @@ body {
 		box-shadow: none;
     display: block;
     font-size: 18px;
-    /* width: 100vw;
-    height: 90%; */
+    /* width: 100vw; */
+    height: 95%; 
 }
 
 #editpad{
   width: 100%;
+  height: 90%;
+  margin-top: 20px;
 }
 
 input[type="text"] {
@@ -144,7 +146,7 @@ input[type="text"] {
 
 textarea {
   width: 100%;
-  min-height: 30vh; 
+  min-height: 90%; 
   display: block; 
   background-color: rgb(249, 239, 226);
   margin-top: 10px;
@@ -157,10 +159,6 @@ textarea {
   border: 1px solid #D8D8D8;
 }
 
-button,pad {
-    margin: 5px;
-}
-
 .github-button{
   padding: 20px;
 }
@@ -168,6 +166,8 @@ button,pad {
 .markdown-body {
   box-sizing: border-box;
   margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 5px;
   padding: 20px;
   font-size: 20px;
 }
