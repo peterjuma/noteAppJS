@@ -197,12 +197,14 @@ textarea {
 
   textarea {
     font-size: 12px;
+    height: inherit;
     resize: none;
   }
 
   .editnote {
     margin-bottom: 3px;
-    height: calc(100% - 40px);
+    height: calc(100% - 50px);
+    margin-bottom: 10px;
   }
 
   input[type="text"] {
