@@ -16,7 +16,7 @@ body {
 /* Create two equal columns that floats next to each other */
 .column {
   float: left;
-  width: 100%;
+  width: 50%;
   height: 100px;
   border: 2px solid #eee;
   border-radius: 5%;

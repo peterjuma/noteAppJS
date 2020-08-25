@@ -7,6 +7,7 @@ var i;
 
 // List View
 function listView() {
+
     for (i = 0; i < elements.length; i++) {
         elements[i].style.width = "100%";
     }
@@ -22,15 +23,6 @@ var container = document.getElementById("btnContainer");
 var btns = container.getElementsByClassName("btn");
 for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function () {
-        var current = document.getElementsByClassName("active");
-        current[0].className = current[0].className.replace(" active", "");
-        this.className += " active";
-    });
-}
-var editContainer = document.getElementById("editContainer");
-var editbtns = editContainer.getElementsByClassName("btn");
-for (var i = 0; i < editbtns.length; i++) {
-    editbtns[i].addEventListener("click", function () {
         var current = document.getElementsByClassName("active");
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
