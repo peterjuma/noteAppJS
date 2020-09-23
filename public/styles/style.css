@@ -181,13 +181,18 @@ textarea {
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 10px;
-  /* font-size: 20px; */
+  font-size: 100%;
 }
 
 #btnContainer, .editBtns {
   justify-content: space-around;
   display: flex;
   margin-bottom: 10px;
+}
+
+#title {
+  font-size: 100%;
+  text-align:center;
 }
 
 /* Responsive columns - one column layout (vertical) on small screens */
