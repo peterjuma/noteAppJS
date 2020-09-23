@@ -78,42 +78,42 @@ body {
   color: white;
 }
 
-  .left {
-    height: 95%;
-    width: 32%;
-    position: fixed;
-    display: inline-block;
-    overflow-x: hidden;
-    padding: 10px;
-    margin-left: 1%;
-    border: solid #D8D8D8;
-    left: 0;
-    background-color: #bbb;
-  }
+.left {
+  height: 95%;
+  width: 32%;
+  position: fixed;
+  display: inline-block;
+  overflow-x: hidden;
+  padding: 10px;
+  margin-left: 1%;
+  border: solid #D8D8D8;
+  left: 0;
+  background-color: #bbb;
+}
 
-  .right {
-    height: 95%;
-    width: 66%; 
-    display: inline-block;
-    position: fixed;
-    padding: 10px;
-    margin-right: 1%;
-    border: solid #D8D8D8;
-    right: 0;
-    background-color: #bbb;
-  }
+.right {
+  height: 95%;
+  width: 66%; 
+  display: inline-block;
+  position: fixed;
+  padding: 10px;
+  margin-right: 1%;
+  border: solid #D8D8D8;
+  right: 0;
+  background-color: #bbb;
+}
 
-  .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  .centered img {
-    width: 150px;
-    border-radius: 50%;
-  }
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
 
 .shownote {
     padding: 10px;
@@ -150,25 +150,31 @@ input[type="text"] {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
+  background-color: #f6f8fa;
   outline: none;
+  font-weight: 600;
   border-radius: 5px;
   box-shadow: none;
   border: 1px solid #D8D8D8;
   font-size: 18px;
+  font-family: "Courier New", Courier, monospace
 }
 
-textarea {
+textarea { 
+  padding: 16px;
   width: 100%;
-  height: inherit;
-  background-color: rgb(249, 239, 226);
+  overflow: auto;
   margin-top: 5px;
-  padding: 10px; 
-  /* font-size: 18px; */
-  border-radius: 5px;
-  box-shadow: none;
-  outline: none;
-  border: 1px solid #D8D8D8;
+  font-size: 100%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  height: inherit;
   resize: none;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #D8D8D8;
+  font-family: "Courier New", Courier, monospace
 }
 
 .markdown-body {
