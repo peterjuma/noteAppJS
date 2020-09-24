@@ -78,7 +78,8 @@ body {
   width: 32%;
   position: fixed;
   display: inline-block;
-  overflow-x: hidden;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
   padding: 10px;
   margin-left: 1%;
   border: solid #D8D8D8;
@@ -96,6 +97,21 @@ body {
   border: solid #D8D8D8;
   right: 0;
   background-color: #bbb;
+}
+
+#notes {
+  padding: 20px;
+  overflow: auto;
+  resize: none;
+  height: inherit;
+}
+
+.notehead {
+  text-align: center;
+}
+
+.notebody {
+  text-align: left;
 }
 
 .centered {
@@ -177,6 +193,7 @@ textarea {
   margin-bottom: 10px;
 }
 
+
 #title {
   font-size: 100%;
   text-align:center;
@@ -251,4 +268,3 @@ textarea {
   }
 
 }
-

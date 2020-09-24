@@ -136,8 +136,8 @@ function showNote(notediv){
                 html = `<div name=${matching.noteid} class="shownote markdown-body" id="editpad">
                         <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
                         <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
-                           <h1 style="text-align: center;">${marked(matching.title)}</h1>
-                            <p style="text-align: left;">${marked(matching.body)}</p>
+                           <h1 class="notehead">${marked(matching.title)}</h1>
+                            <p class="notebody">${marked(matching.body)}</p>
                         </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
@@ -278,7 +278,6 @@ function getNote(noteid) {
             var matching = request.result;
             if (matching) {
                 notesGrid.innerHTML = "";
-                queryDB()
                 html2 = `<div name=${matching.noteid} class="shownote markdown-body" id="editpad">
                         <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
                         <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
@@ -286,10 +285,15 @@ function getNote(noteid) {
                             <p style="text-align: left;">${marked(matching.body)}</p>
                         </div>`
                 editBox.innerHTML = html2;
-            } else {}
+            } 
         }
     }
+    queryDB()
 }
+
+
+
+
 
 // Update note in the database
 function updateNote(note) {
