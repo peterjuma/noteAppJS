@@ -1,17 +1,12 @@
 body {
-  padding: 10px;
   background-color: whitesmoke;
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
 }
+
 * {
   box-sizing: border-box;
 }
 
-.header {
-  width: 50%;
-  margin: auto;
-  text-align: center;
-}
 
 /* Create two equal columns that floats next to each other */
 .column {
@@ -79,7 +74,7 @@ body {
 }
 
 .left {
-  height: 95%;
+  height: 98%;
   width: 32%;
   position: fixed;
   display: inline-block;
@@ -92,7 +87,7 @@ body {
 }
 
 .right {
-  height: 95%;
+  height: 98%;
   width: 66%; 
   display: inline-block;
   position: fixed;
@@ -116,7 +111,7 @@ body {
 }
 
 .shownote {
-    padding: 10px;
+    padding: 50px;
     overflow: auto;
 		background: #F5F5F5;
 		border-color:  #D8D8D8;
@@ -128,11 +123,10 @@ body {
     font-size: 18px;
     width: 100%;
     height: 100%; 
-    margin-top: 10px;
 }
 
 .editnote {
-  padding: 10px;
+  padding: 50px;
   background: #F5F5F5;
   border-color:  #D8D8D8;
   border-style: solid;
@@ -143,7 +137,7 @@ body {
   font-size: 18px;
   width: 100%;
   margin-bottom: 5px;
-  height: calc(100% - 50px);
+  height: calc(100% - 70px);
 }
 
 input[type="text"] {
@@ -161,7 +155,7 @@ input[type="text"] {
 }
 
 textarea { 
-  padding: 16px;
+  padding: 50px;
   width: 100%;
   overflow: auto;
   margin-top: 5px;
@@ -177,13 +171,6 @@ textarea {
   font-family: "Courier New", Courier, monospace
 }
 
-.markdown-body {
-  margin: 0 auto;
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 100%;
-}
-
 #btnContainer, .editBtns {
   justify-content: space-around;
   display: flex;
@@ -193,6 +180,7 @@ textarea {
 #title {
   font-size: 100%;
   text-align:center;
+  padding: 20px;
 }
 
 /* Responsive columns - one column layout (vertical) on small screens */
@@ -208,12 +196,15 @@ textarea {
     font-size: 12px;
     height: inherit;
     resize: none;
+    padding: 20px;
   }
 
   .editnote {
     margin-bottom: 3px;
     height: calc(100% - 50px);
     margin-bottom: 10px;
+    padding: 20px;
+    padding-bottom: 50px;
   }
 
   .column p {
