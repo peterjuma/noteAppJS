@@ -153,6 +153,28 @@ body {
   font-size: 18px;
   width: 100%;
   margin-bottom: 5px;
+  height: calc(100% - 50px);
+}
+
+.center {
+  padding-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview {
+  padding: 50px;
+  overflow: auto;
+  background: #F5F5F5;
+  border-color:  #D8D8D8;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: none;
+  display: block;
+  font-size: 18px;
+  width: 100%;
   height: calc(100% - 70px);
 }
 

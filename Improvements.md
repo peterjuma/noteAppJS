@@ -5,3 +5,4 @@
 5. Rich editor
 6. Preview before Saving
 7. Backup feature
+8. Download Markdown/PDF/Word

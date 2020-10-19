@@ -133,9 +133,9 @@ function showNote(notediv){
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div name=${matching.noteid} class="shownote markdown-body" id="editpad">
-                        <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
-                        <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                html = `<div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
+                        <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                        <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 class="notehead">${marked(matching.title)}</h1>
                             <p class="notebody">${marked(matching.body)}</p>
                         </div>`
@@ -165,8 +165,9 @@ newNote.addEventListener("click", () => {
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
             </div>
             <div class="editBtns">
-                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
                 <button class="btn" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save"></i> Save</button>
+                <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown()"><i class="fas fa-eye"></i> Preview</button>
+                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
             </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
@@ -255,7 +256,6 @@ function update(editdiv) {
     updateNote(note)
 }
 
-
 function cancelEdit(notediv){
     if(notediv){
         showNote(notediv)
@@ -278,9 +278,9 @@ function getNote(noteid) {
             var matching = request.result;
             if (matching) {
                 notesGrid.innerHTML = "";
-                html2 = `<div name=${matching.noteid} class="shownote markdown-body" id="editpad">
-                        <button onclick='editNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
-                        <button onclick='deleteNote(this)' name="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                html2 = `<div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
+                        <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                        <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                            <h1 style="text-align: center;">${marked(matching.title)}</h1>
                             <p style="text-align: left;">${marked(matching.body)}</p>
                         </div>`
@@ -290,10 +290,6 @@ function getNote(noteid) {
     }
     queryDB()
 }
-
-
-
-
 
 // Update note in the database
 function updateNote(note) {
@@ -330,8 +326,9 @@ function editNote(notediv) {
                             <textarea name="notebody" id="notebody"></textarea>
                         </div>
                         <div class="editBtns">
-                            <button onclick='update(this)' name="${matching.noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-check" aria-hidden="true"></i> OK</button>
-                            <button onclick='cancelEdit(this)' name="${matching.noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
+                            <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+                            <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+                            <button onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                         </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
@@ -339,6 +336,37 @@ function editNote(notediv) {
             } else { }
         }
     }
+}
+
+//Preview Markdown
+function previewMarkdown(noteid){
+    const title = document.getElementById("title").value
+    const body = document.getElementById("notebody").value
+    html = `<div class="preview markdown-body" data-noteid="${noteid}" id="editpad">
+            <h1 class="notehead" id="title">${marked(title)}</h1>
+            <div id="notebody">${marked(body)}</div>
+            </div>
+            <div class="center"><button class="btn" id="continue" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
+    editBox.style.display = "unset"
+    editBox.innerHTML = html;
+}
+
+// Continue Editing
+function continueEdit(noteid){
+    const title = document.getElementById("title").innerHTML
+    const body = document.getElementById("notebody").innerHTML
+    html = `<div name=${noteid} class="editnote" id="editpad">
+    <input name="title" type="text" id="title">
+    <textarea name="notebody" id="notebody"></textarea>
+    </div>
+    <div class="editBtns">
+        <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+        <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+        <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+    </div>`
+    editBox.innerHTML = html;
+    document.getElementById("title").value = turndownService.turndown(marked(title));
+    document.getElementById("notebody").value = turndownService.turndown(marked(body));
 }
 
 loadDB()
