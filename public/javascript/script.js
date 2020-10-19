@@ -134,11 +134,14 @@ function showNote(notediv){
             var matching = request.result;
             if (matching) {
                 html = `<div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
-                        <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
-                        <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
-                           <h1 class="notehead">${marked(matching.title)}</h1>
-                            <p class="notebody">${marked(matching.body)}</p>
-                        </div>`
+                            <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                            <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
+                            <div id="noteHtml">
+                                <h1 class="notehead">${marked(matching.title)}</h1>
+                                <p class="notebody">${marked(matching.body)}</p>
+                            </div>
+                        </div>
+                        <div class="shwBtns"><button class="btn" id="dwld" onclick="downloadMarkdown()" style="font-size: 16px;"><i class="fas fa-download"></i> Download</button></div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
             } else{}
@@ -367,6 +370,12 @@ function continueEdit(noteid){
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
+}
+
+function downloadMarkdown(){
+    const html = document.getElementById('noteHtml').innerHTML
+    const markdown = turndownService.turndown(marked(html))
+    console.log(markdown)
 }
 
 loadDB()
