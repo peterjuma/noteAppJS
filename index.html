@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,25 +12,29 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" integrity="sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==" crossorigin="anonymous" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css"
+        integrity="sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg=="
+        crossorigin="anonymous" />
     <title>Note</title>
 </head>
 
 <body>
-<div class="container">
-    <div class="left">
-        <div id="btnContainer">
-            <button class="btn" onclick="listView()"><i class="fa fa-bars"></i></button>
-            <button class="btn active" onclick="gridView()"><i class="fa fa-th-large"></i></button>  
-            <button class="btn" id="addBtn"><i class="fas fa-plus"></i></button>
+    <div class="container">
+        <div class="left">
+            <div id="btnContainer">
+                <button class="btn" onclick="listView()"><i class="fa fa-bars"></i></button>
+                <button class="btn active" onclick="gridView()"><i class="fa fa-th-large"></i></button>
+                <button class="btn" id="addBtn"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="row" id="notes">
+            </div>
         </div>
-        <div class="row" id="notes">
+        <div class="right" id="editContainer">
+            <div id="editor"></div>
         </div>
     </div>
-    <div class="right" id="editContainer">
-        <div id="editor"></div>
-    </div>
-</div>
-<script src="public/javascript/script.js"></script>
+    <script src="public/javascript/script.js"></script>
 </body>
+
 </html>
