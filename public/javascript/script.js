@@ -137,11 +137,11 @@ function showNote(notediv){
                             <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
                             <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
                             <div id="noteHtml">
-                                <h1 class="notehead">${marked(matching.title)}</h1>
+                                <h1 class="notehead" id="title">${marked(matching.title)}</h1>
                                 <p class="notebody">${marked(matching.body)}</p>
                             </div>
                         </div>
-                        <div class="shwBtns"><button class="btn" id="dwld" onclick="downloadMarkdown()" style="font-size: 16px;"><i class="fas fa-download"></i> Download</button></div>`
+                        <div class="shwBtns"><button class="btn" id="dwld" style="font-size: 16px;" onclick="saveFile()"><i class="fas fa-download"></i> Download</button></div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
             } else{}
@@ -372,10 +372,25 @@ function continueEdit(noteid){
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
 }
 
-function downloadMarkdown(){
-    const html = document.getElementById('noteHtml').innerHTML
-    const markdown = turndownService.turndown(marked(html))
-    console.log(markdown)
+function saveData(data, fileName) {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    var blob = new Blob([data], { type: "text/plain;charset=utf-8" }),
+        url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+function saveFile(e) {
+    const html = document.getElementById("noteHtml").innerHTML;
+    const markdown = turndownService.turndown(marked(html));
+    const title = turndownService.turndown(marked(document.getElementById("title").innerHTML)).replace(/ /g,"_");
+    const filename = `${title}.md`
+    saveData(markdown, filename);
+    e.preventDefault();
 }
 
 loadDB()
