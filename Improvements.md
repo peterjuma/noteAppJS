@@ -6,3 +6,5 @@
 ~~ 6. Preview before Saving ~~
 7. Backup feature
 8. Download Markdown/PDF/Word
+9. Upload markdown file
+10. Rich paste

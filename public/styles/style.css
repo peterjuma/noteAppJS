@@ -18,7 +18,7 @@ body {
 }
 
 
-.column  p {
+.column p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -40,6 +40,7 @@ body {
   display: table;
   clear: both;
 }
+
 /* Style the buttons */
 .btn {
   border: none;
@@ -78,8 +79,10 @@ body {
   width: 32%;
   position: fixed;
   display: inline-block;
-  overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: hidden;
+  /* Hide vertical scrollbar */
+  overflow-x: hidden;
+  /* Hide horizontal scrollbar */
   padding: 10px;
   margin-left: 1%;
   border: solid #D8D8D8;
@@ -89,7 +92,7 @@ body {
 
 .right {
   height: 98%;
-  width: 66%; 
+  width: 66%;
   display: inline-block;
   position: fixed;
   padding: 10px;
@@ -121,30 +124,31 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
 .centered img {
   width: 150px;
   border-radius: 50%;
 }
 
 .shownote {
-    padding: 50px;
-    overflow: auto;
-		background: #F5F5F5;
-		border-color:  #D8D8D8;
-		border-style: solid;
-		border-radius: 5px;
-		border-width: 1px;
-		box-shadow: none;
-    display: block;
-    font-size: 18px;
-    width: 100%;
-    height: calc(100% - 50px);
+  padding: 50px;
+  overflow: auto;
+  background: #F5F5F5;
+  border-color: #D8D8D8;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: none;
+  display: block;
+  font-size: 18px;
+  width: 100%;
+  height: calc(100% - 50px);
 }
 
 .editnote {
   padding: 50px;
   background: #F5F5F5;
-  border-color:  #D8D8D8;
+  border-color: #D8D8D8;
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
@@ -164,18 +168,17 @@ body {
 }
 
 .shwBtns {
-  padding-top: 10px;
-  display: flex;
+  padding-top: 5px;
+  display: inline-flex;
+  width: 100%;
   justify-content: space-around;
-  align-items: center;
 }
-
 
 .preview {
   padding: 50px;
   overflow: auto;
   background: #F5F5F5;
-  border-color:  #D8D8D8;
+  border-color: #D8D8D8;
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
@@ -200,7 +203,7 @@ input[type="text"] {
   font-family: "Courier New", Courier, monospace
 }
 
-textarea { 
+textarea {
   padding: 50px;
   width: 100%;
   overflow: auto;
@@ -217,7 +220,8 @@ textarea {
   font-family: "Courier New", Courier, monospace
 }
 
-#btnContainer, .editBtns {
+#btnContainer,
+.editBtns {
   justify-content: space-around;
   display: flex;
   margin-bottom: 10px;
@@ -226,7 +230,7 @@ textarea {
 
 #title {
   font-size: 100%;
-  text-align:center;
+  text-align: center;
   padding: 20px;
 }
 
@@ -237,7 +241,7 @@ textarea {
     padding-top: 0px;
     padding-bottom: 0px;
     /* font-size: 12px; */
-  } 
+  }
 
   textarea {
     font-size: 12px;
@@ -263,12 +267,12 @@ textarea {
     display: none;
   }
 
-  .right{
+  .right {
     height: 97.5%;
     padding: 5px;
   }
 
-  .left{
+  .left {
     height: 97.5%;
     padding: 5px;
   }
@@ -277,7 +281,7 @@ textarea {
     padding: 5px;
   }
 
-  .fa .fas{
+  .fa .fas {
     font-weight: 700;
   }
 
@@ -288,9 +292,9 @@ textarea {
     border: 1px solid #D8D8D8;
     border-radius: 5%;
   }
-  
+
   .column:nth-of-type(even) {
-    float: right; 
+    float: right;
     width: 50%;
     height: 50px;
     border: 1px solid #D8D8D8;
