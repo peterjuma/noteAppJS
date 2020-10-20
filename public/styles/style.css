@@ -135,6 +135,7 @@ body {
   overflow: auto;
   background: #F5F5F5;
   border-color: #D8D8D8;
+  background-color: #FFF6D9;
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
@@ -149,6 +150,7 @@ body {
   padding: 50px;
   background: #F5F5F5;
   border-color: #D8D8D8;
+  background-color: #FFF6D9;
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
@@ -178,6 +180,7 @@ body {
   padding: 50px;
   overflow: auto;
   background: #F5F5F5;
+  background-color: #FFF6D9;
   border-color: #D8D8D8;
   border-style: solid;
   border-radius: 5px;
