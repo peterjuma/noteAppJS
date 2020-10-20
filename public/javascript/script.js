@@ -177,6 +177,7 @@ newNote.addEventListener("click", () => {
             </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
+    document.getElementById("notebody").addEventListener('paste', handlePaste);
 })
 
 // Delete single note by noteid
@@ -339,6 +340,7 @@ function editNote(notediv) {
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
                 document.getElementById("notebody").value = turndownService.turndown(marked(matching.body));
+                document.getElementById("notebody").addEventListener('paste', handlePaste);
             } else { }
         }
     }
@@ -373,10 +375,10 @@ function continueEdit(noteid){
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
+    document.getElementById("notebody").addEventListener('paste', handlePaste);
 }
 
 // Save Markdown
-
 function saveData(data, fileName) {
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -398,7 +400,6 @@ function saveFile(e) {
     e.preventDefault();
 }
 
-
 // Copy markdown
 function copyMarkdown(){
     const html = document.getElementById("noteHtml").innerHTML;
@@ -416,6 +417,25 @@ let copyToClipboard = (text) => {
     input.parentNode.removeChild(input);
 }
 
+// Handle Paste
+function handlePaste (e) {
+    var clipboardData, pastedData;
+    var notebody = document.getElementById('notebody');
+
+    // Stop data actually being pasted into div
+    e.stopPropagation();
+    e.preventDefault();
+
+    // Get pasted data via clipboard API
+    clipboardData = e.clipboardData || window.clipboardData;
+    pastedData = clipboardData.getData('text/html');
+    
+    // Do whatever with pasteddata
+    const data = turndownService.turndown(marked(pastedData))
+    notebody.value ? notebody.value += data : notebody.value = data;
+    
+    
+}
 
 loadDB()
 queryDB()
