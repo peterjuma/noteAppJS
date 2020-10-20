@@ -141,7 +141,10 @@ function showNote(notediv){
                                 <p class="notebody">${marked(matching.body)}</p>
                             </div>
                         </div>
-                        <div class="shwBtns"><button class="btn" id="dwld" style="font-size: 16px;" onclick="saveFile()"><i class="fas fa-download"></i> Download</button></div>`
+                        <div class="shwBtns">
+                            <button class="btn" id="dwld" style="font-size: 16px; margin: 5px;" onclick="saveFile()"><i class="fas fa-download"></i> Download</button>
+                            <button class="btn" id="copy" style="font-size: 16px; margin: 5px;" onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy</button>
+                        </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
             } else{}
@@ -372,6 +375,8 @@ function continueEdit(noteid){
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
 }
 
+// Save Markdown
+
 function saveData(data, fileName) {
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -392,6 +397,25 @@ function saveFile(e) {
     saveData(markdown, filename);
     e.preventDefault();
 }
+
+
+// Copy markdown
+function copyMarkdown(){
+    const html = document.getElementById("noteHtml").innerHTML;
+    const markdown = turndownService.turndown(marked(html));
+    copyToClipboard(markdown)
+}
+
+let copyToClipboard = (text) => {
+    console.log(text);
+    var input = document.body.appendChild(document.createElement("input"));
+    input.value = text;
+    input.focus();
+    input.select();
+    document.execCommand('copy');
+    input.parentNode.removeChild(input);
+}
+
 
 loadDB()
 queryDB()
