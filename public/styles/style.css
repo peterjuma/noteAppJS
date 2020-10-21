@@ -7,7 +7,6 @@ body {
   box-sizing: border-box;
 }
 
-
 /* Create two equal columns that floats next to each other */
 .column {
   float: left;
@@ -17,13 +16,11 @@ body {
   border-radius: 5%;
 }
 
-
 .column p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 
 .note {
   background-color: #f1f1f1;
@@ -143,11 +140,13 @@ body {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: calc(100% - 50px);
+  margin-top: 8px;
+  margin-bottom: 5px;
+  height: calc(100% - 120px);
 }
 
 .editnote {
-  padding: 50px;
+  padding: 20px;
   background: #F5F5F5;
   border-color: #D8D8D8;
   background-color: #FFF6D9;
@@ -158,8 +157,8 @@ body {
   display: block;
   font-size: 18px;
   width: 100%;
-  margin-bottom: 5px;
-  height: calc(100% - 50px);
+  margin-bottom: 20px;
+  height: calc(100% - 68px);
 }
 
 .center {
@@ -170,9 +169,10 @@ body {
 }
 
 .shwBtns {
-  padding-top: 5px;
+  padding: 10px;
   display: inline-flex;
   width: 100%;
+  align-items: center;
   justify-content: space-around;
 }
 
@@ -223,11 +223,22 @@ textarea {
   font-family: "Courier New", Courier, monospace
 }
 
-#btnContainer,
 .editBtns {
-  justify-content: space-around;
+  justify-content: space-between;
   display: flex;
-  margin-bottom: 10px;
+}
+
+.editBtns {
+  margin: 10px;
+}
+
+#btnContainer {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  justify-content: space-between;
+  display: flex;
 }
 
 
