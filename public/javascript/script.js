@@ -367,7 +367,7 @@ function previewMarkdown(noteid){
             <h1 class="notehead" id="title">${marked(title)}</h1>
             <div id="notebody">${marked(body)}</div>
             </div>
-            <div class="center"><button class="btn" id="continue" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
+            <div class="center"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
     editBox.style.display = "unset"
     editBox.innerHTML = html;
 }
@@ -377,14 +377,14 @@ function continueEdit(noteid){
     const title = document.getElementById("title").innerHTML
     const body = document.getElementById("notebody").innerHTML
     html = `<div name=${noteid} class="editnote" id="editpad">
-    <input name="title" type="text" id="title">
-    <textarea name="notebody" id="notebody"></textarea>
-    </div>
-    <div class="editBtns">
-        <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-        <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
-        <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
-    </div>`
+            <input name="title" type="text" id="title">
+            <textarea name="notebody" id="notebody"></textarea>
+            </div>
+            <div class="editBtns">
+                <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+                <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+                <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+            </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
