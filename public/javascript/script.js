@@ -405,7 +405,7 @@ function saveData(data, fileName) {
 }
 
 function saveFile(e) {
-    const html = document.getElementById("noteHtml").innerHTML;
+    const html = document.getElementById("notebody").innerHTML;
     const markdown = turndownService.turndown(marked(html));
     const title = turndownService.turndown(marked(document.getElementById("title").innerHTML)).replace(/ /g,"_");
     const filename = `${title}.md`
