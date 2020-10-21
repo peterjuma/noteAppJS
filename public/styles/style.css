@@ -266,7 +266,7 @@ textarea {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #666; 
+  background: #aaa; 
 }
 
 /* Handle on hover */
