@@ -133,18 +133,21 @@ function showNote(notediv){
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
-                            <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
-                            <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
+                html = `
+                <div class="shwBtns">
+                    <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                    <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
+                </div>
+                <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                             <div id="noteHtml">
                                 <h1 class="notehead" id="title">${marked(matching.title)}</h1>
-                                <p class="notebody">${marked(matching.body)}</p>
+                                <div class="notebody" id="notebody">${marked(matching.body)}</div>
                             </div>
                         </div>
-                        <div class="shwBtns">
-                            <button class="btn" id="dwld" style="font-size: 16px; margin: 5px;" onclick="saveFile()"><i class="fas fa-download"></i> Download</button>
-                            <button class="btn" id="copy" style="font-size: 16px; margin: 5px;" onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy</button>
-                        </div>`
+                <div class="shwBtns">
+                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy</button>
+                    <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download"></i> Download</button>
+                </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
             } else{}
@@ -216,6 +219,7 @@ function countDown(epoch_timestamp) {
     }
     return dateJson
 }
+
 // Get new note values from the UI
 function save() {
     var noteTitle = document.getElementById("title").value
@@ -285,12 +289,21 @@ function getNote(noteid) {
             var matching = request.result;
             if (matching) {
                 notesGrid.innerHTML = "";
-                html2 = `<div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
-                        <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
-                        <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote" style="float: right;" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
-                           <h1 style="text-align: center;">${marked(matching.title)}</h1>
-                            <p style="text-align: left;">${marked(matching.body)}</p>
-                        </div>`
+                html2 = `
+                    <div class="shwBtns">
+                        <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-lg"></i></button>
+                        <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                    <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
+                                <div id="noteHtml">
+                                    <h1 class="notehead" id="title">${marked(matching.title)}</h1>
+                                    <div class="notebody" id="notebody">${marked(matching.body)}</div>
+                                </div>
+                            </div>
+                    <div class="shwBtns">
+                        <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy</button>
+                        <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download"></i> Download</button>
+                    </div>`
                 editBox.innerHTML = html2;
             } 
         }
@@ -333,9 +346,9 @@ function editNote(notediv) {
                             <textarea name="notebody" id="notebody"></textarea>
                         </div>
                         <div class="editBtns">
-                            <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+                            <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
                             <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
-                            <button onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                            <button onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                         </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
@@ -402,19 +415,45 @@ function saveFile(e) {
 
 // Copy markdown
 function copyMarkdown(){
-    const html = document.getElementById("noteHtml").innerHTML;
+    const title = document.getElementById('title').innerHTML;
+    const notebody = document.getElementById('notebody').innerHTML;
+    const html= `${notebody}`;
+    // console.log(html);
     const markdown = turndownService.turndown(marked(html));
-    copyToClipboard(markdown)
+    copyToClipboard(markdown);
 }
 
-let copyToClipboard = (text) => {
-    console.log(text);
-    var input = document.body.appendChild(document.createElement("input"));
-    input.value = text;
-    input.focus();
-    input.select();
-    document.execCommand('copy');
-    input.parentNode.removeChild(input);
+function copyToClipboard(markdown) {
+    // console.log(markdown);
+    var textArea = document.createElement("textarea");
+    // Place in top-left corner of screen regardless of scroll position.
+    textArea.style.position = 'fixed';
+    textArea.style.top = 0;
+    textArea.style.left = 0;
+    // Ensure it has a small width and height. Setting to 1px / 1em
+    // doesn't work as this gives a negative w/h on some browsers.
+    textArea.style.width = '2em';
+    textArea.style.height = '2em';
+    // We don't need padding, reducing the size if it does flash render.
+    textArea.style.padding = 0;
+    // Clean up any borders.
+    textArea.style.border = 'none';
+    textArea.style.outline = 'none';
+    textArea.style.boxShadow = 'none';
+    // Avoid flash of white box if rendered for any reason.
+    textArea.style.background = 'transparent';
+    textArea.value = markdown;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+    } catch (err) {
+        console.log('Oops, unable to copy');
+    }
+    document.body.removeChild(textArea);
 }
 
 // Handle Paste
@@ -432,9 +471,7 @@ function handlePaste (e) {
     
     // Do whatever with pasteddata
     const data = turndownService.turndown(marked(pastedData))
-    notebody.value ? notebody.value += data : notebody.value = data;
-    
-    
+    notebody.value ? notebody.value += data : notebody.value = data; 
 }
 
 loadDB()

@@ -7,4 +7,4 @@
 7. Backup feature
 8. Download Markdown/PDF/Word
 9. Upload markdown file
-10. Rich paste
+~~10. Rich paste ~~
