@@ -268,9 +268,12 @@ function update(editdiv) {
 }
 
 function cancelEdit(notediv){
-    if(notediv){
+    console.log(notediv.name)
+    if(notediv.name){
         showNote(notediv)
-    } else {
+    } 
+    
+    if(notediv.name == "undefined" || notediv == null){
         document.getElementById("editor").style.display = "none"
         // document.getElementById("saveBtn").disabled = true;
     }
