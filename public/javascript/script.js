@@ -169,8 +169,9 @@ function noteSelect(){
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
-    html = `<div name="" class="editnote markdown-body" id="editpad" contenteditable="false">
+    html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Note Title">
+                <hr>
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
             </div>
             <div class="editBtns">
@@ -268,14 +269,9 @@ function update(editdiv) {
 }
 
 function cancelEdit(notediv){
-    console.log(notediv.name)
-    if(notediv.name){
+    document.getElementById("editor").style.display = "none"
+    if(notediv.name !== "undefined"){
         showNote(notediv)
-    } 
-    
-    if(notediv.name == "undefined" || notediv == null){
-        document.getElementById("editor").style.display = "none"
-        // document.getElementById("saveBtn").disabled = true;
     }
 }
 
@@ -346,11 +342,12 @@ function editNote(notediv) {
             if (matching) {
                 html = `<div name=${matching.noteid} class="editnote" id="editpad">
                             <input name="title" type="text" id="title">
+                            <hr>
                             <textarea name="notebody" id="notebody"></textarea>
                         </div>
                         <div class="editBtns">
                             <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-                            <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+                            <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
                             <button onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                         </div>`
                 editBox.innerHTML = html;
@@ -367,8 +364,8 @@ function previewMarkdown(noteid){
     const title = document.getElementById("title").value
     const body = document.getElementById("notebody").value
     html = `<div class="preview markdown-body" data-noteid="${noteid}" id="editpad">
-            <h1 class="notehead" id="title">${marked(title)}</h1>
-            <div id="notebody">${marked(body)}</div>
+                <h1 class="notehead" id="title">${marked(title)}</h1>
+                <div id="notebody">${marked(body)}</div>
             </div>
             <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
     editBox.style.display = "unset"
@@ -380,8 +377,9 @@ function continueEdit(noteid){
     const title = document.getElementById("title").innerHTML
     const body = document.getElementById("notebody").innerHTML
     html = `<div name=${noteid} class="editnote" id="editpad">
-            <input name="title" type="text" id="title">
-            <textarea name="notebody" id="notebody"></textarea>
+                <input name="title" type="text" id="title">
+                <hr>
+                <textarea name="notebody" id="notebody"></textarea>
             </div>
             <div class="editBtns">
                 <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
