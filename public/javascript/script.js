@@ -174,9 +174,9 @@ newNote.addEventListener("click", () => {
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
             </div>
             <div class="editBtns">
-                <button class="btn" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save"></i> Save</button>
-                <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown()"><i class="fas fa-eye"></i> Preview</button>
-                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right; background-color: #ddd;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
+                <button class="btn btnnote" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save"></i> Save</button>
+                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown()"><i class="fas fa-eye"></i> Preview</button>
+                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
             </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
@@ -370,7 +370,7 @@ function previewMarkdown(noteid){
             <h1 class="notehead" id="title">${marked(title)}</h1>
             <div id="notebody">${marked(body)}</div>
             </div>
-            <div class="center"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
+            <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
     editBox.style.display = "unset"
     editBox.innerHTML = html;
 }
@@ -384,9 +384,9 @@ function continueEdit(noteid){
             <textarea name="notebody" id="notebody"></textarea>
             </div>
             <div class="editBtns">
-                <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left; background-color: #ddd; margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-                <button class="btn" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
-                <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right; background-color: #ddd;margin-top: 7px;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+                <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
             </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
@@ -459,23 +459,44 @@ function copyToClipboard(markdown) {
     document.body.removeChild(textArea);
 }
 
-// Handle Paste
+// Handle the `paste` event
 function handlePaste (e) {
-    var clipboardData, pastedData;
-    var notebody = document.getElementById('notebody');
-
-    // Stop data actually being pasted into div
-    e.stopPropagation();
+    // Prevent the default action
     e.preventDefault();
 
-    // Get pasted data via clipboard API
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('text/html');
-    
-    // Do whatever with pasteddata
-    const data = turndownService.turndown(marked(pastedData))
-    notebody.value ? notebody.value += data : notebody.value = data; 
-}
+    // Get the copied text from the clipboard
+    const text = (e.clipboardData)
+        ? (e.originalEvent || e).clipboardData.getData('text/plain')
+        // For IE
+        : (window.clipboardData ? window.clipboardData.getData('Text') : '');
+
+    // Get the copied text from the clipboard
+    const html = (e.clipboardData)
+        ? (e.originalEvent || e).clipboardData.getData('text/html')
+        // For IE
+        : (window.clipboardData ? window.clipboardData.getData('Html') : '');
+
+    // const pasteData = html || text;
+
+    const pasteData = turndownService.turndown(marked(html || text))
+
+    if (document.queryCommandSupported('insertText')) {
+        document.execCommand('insertText', false, pasteData);
+    } else {
+        // Insert text at the current position of caret
+        const range = document.getSelection().getRangeAt(0);
+        range.deleteContents();
+
+        const textNode = document.createTextNode(pasteData);
+        range.insertNode(textNode);
+        range.selectNodeContents(textNode);
+        range.collapse(false);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+};
 
 loadDB()
 queryDB()
