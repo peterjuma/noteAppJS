@@ -105,6 +105,7 @@ const queryDB = () => {
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
+                            <input type='checkbox' name="checked" value='${cursor.key}'> 
                             <h2>${marked(cursor.value.title)}</h2>
                              <span><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></span>
                         </div>`;
@@ -495,6 +496,30 @@ function handlePaste (e) {
         selection.addRange(range);
     }
 };
+
+// Delete selected notes
+document.getElementById('delete').onclick = function() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    for (var checkbox of checkboxes) {
+      console.log(checkbox.value + ' ');
+    }
+  }
+  
+// Select all Notes
+document.getElementById('select-all').onclick = function toggle() {
+    var checkboxes = document.getElementsByName('checked');
+    for (var checkbox of checkboxes) {
+        checkbox.checked = true;
+      }
+  }
+
+// Unselect all Notes
+document.getElementById('unselect-all').onclick = function toggle() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    for (var checkbox of checkboxes) {
+        checkbox.checked = false;
+      }
+  }
 
 loadDB()
 queryDB()
