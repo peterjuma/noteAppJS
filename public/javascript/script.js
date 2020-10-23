@@ -187,7 +187,7 @@ newNote.addEventListener("click", () => {
 
 // Delete single note by noteid
 function deleteNote(notediv) {
-    var noteid = notediv.name;
+    var noteid = notediv.name || notediv;
     document.getElementById(noteid).style.display = "none"
     editBox.innerHTML = "";
     console.log(noteid)
@@ -502,22 +502,15 @@ document.getElementById('delete').onclick = function() {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     for (var checkbox of checkboxes) {
       console.log(checkbox.value + ' ');
+      deleteNote(checkbox.value)
     }
   }
   
 // Select all Notes
-document.getElementById('select-all').onclick = function toggle() {
+document.getElementById('select-all').onclick = function toggle(source) {
     var checkboxes = document.getElementsByName('checked');
     for (var checkbox of checkboxes) {
-        checkbox.checked = true;
-      }
-  }
-
-// Unselect all Notes
-document.getElementById('unselect-all').onclick = function toggle() {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    for (var checkbox of checkboxes) {
-        checkbox.checked = false;
+        checkbox.checked = document.getElementById('select-all').checked;
       }
   }
 
