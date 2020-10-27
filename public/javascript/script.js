@@ -105,7 +105,7 @@ const queryDB = () => {
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
-                            <input type='checkbox' name="checked" value='${cursor.key}'> 
+                            <input type='checkbox' name="checked" value='${cursor.key}' onclick="event.stopPropagation();"> 
                             <h2>${marked(cursor.value.title)}</h2>
                              <span><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></span>
                         </div>`;
@@ -511,7 +511,12 @@ document.getElementById('select-all').onclick = function toggle(source) {
     for (var checkbox of checkboxes) {
         checkbox.checked = document.getElementById('select-all').checked;
       }
-  }
+  }  
+
+// Select All Button
+document.getElementById('selectBtn').onclick = () => {
+    document.getElementById('select-all').click()
+}
 
 loadDB()
 queryDB()

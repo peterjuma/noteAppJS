@@ -30,11 +30,9 @@
             <div class="row" id="notes">
             </div>
             <div class="shwBtns">
-                <div>
-                    <input type="checkbox" id="select-all" name="select-all">
-                    <label for="select-all" class="labels">Select All</label>
-                </div>
-                <button class="btn" id="delete" onclick=""><i class="fas fa-trash"></i> Detele</button>
+                <input type="checkbox" id="select-all" name="select-all" style="display: none;">
+                <button class="btn" id="selectBtn"><i class="fa fa-check-circle" style="font-size:18px"></i> (Un)Select All</button>
+                <button class="btn" id="delete"><i class="fas fa-trash"></i> Detele</button>
             </div>
         </div>
         <div class="right" id="editContainer">
@@ -45,3 +43,5 @@
 </body>
 
 </html>
+
+
