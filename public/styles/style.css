@@ -261,6 +261,20 @@ hr {
   border-bottom: 0.5px solid #f6f8fa;
 }
 
+
+p,
+label {
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input[type=checkbox] {
+  margin: .4rem;
+  width: 16px;
+  height: 16px;
+}
+
+
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -284,7 +298,6 @@ hr {
     padding: 5px;
     padding-top: 0px;
     padding-bottom: 0px;
-    /* font-size: 12px; */
   }
 
   textarea {

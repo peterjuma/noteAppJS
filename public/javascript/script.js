@@ -476,7 +476,6 @@ function handlePaste (e) {
         : (window.clipboardData ? window.clipboardData.getData('Html') : '');
 
     // const pasteData = html || text;
-
     const pasteData = turndownService.turndown(marked(html || text))
 
     if (document.queryCommandSupported('insertText')) {
@@ -505,7 +504,7 @@ document.getElementById('delete').onclick = function() {
       deleteNote(checkbox.value)
     }
   }
-  
+    
 // Select all Notes
 document.getElementById('select-all').onclick = function toggle(source) {
     var checkboxes = document.getElementsByName('checked');
