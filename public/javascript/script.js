@@ -523,5 +523,30 @@ $('.search-bar .icon').on('click', function() {
     $(this).parent().toggleClass('active-search');
   });
 
+var input = document.getElementById('search');
+
+input.addEventListener("keyup", event => {
+
+  if (event.isComposing || event.keyCode === 229) {
+    return;
+  }
+  
+   var filter = input.value.toUpperCase();
+   var notesContainer = document.getElementById('notes');
+   var notediv = notesContainer.getElementsByTagName('div')
+   for (i = 0; i < notediv.length; i++) {
+       title = notediv[i].getElementsByTagName('h2')[0].textContent
+       console.log(title);
+       if (title.toUpperCase().indexOf(filter) > -1) {
+            notediv[i].style.display = "";
+        } else {
+            notediv[i].style.display = "none";
+        }
+   }
+
+
+});
+
 loadDB()
 queryDB()
+

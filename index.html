@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
         integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;423&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -28,11 +29,9 @@
                     <button class="btn active" onclick="gridView()"><i class="fa fa-th-large"></i></button>
                 </div>
                 <div>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
                     <div class="search-bar">
                       <i class="icon fa fa-search"></i>
-                      <input class="input-text" type="text" name="eingabe" placeholder="Search Notes Titles">
+                      <input id="search" class="input-text" type="text" name="search-titles" placeholder="Search Titles">
                     </div>
                 </div>
                 <div>
@@ -43,7 +42,7 @@
             </div>
             <div class="shwBtns">
                 <input type="checkbox" id="select-all" name="select-all" style="display: none;">
-                <button class="btn" id="selectBtn"><i class="fa fa-check-circle" style="font-size:18px"></i> (Un)Select All</button>
+                <button class="btn" id="selectBtn"><i class="fa fa-check-circle" style="font-size:18px"></i> Select All</button>
                 <button class="btn" id="delete"><i class="fas fa-trash"></i> Detele</button>
             </div>
         </div>

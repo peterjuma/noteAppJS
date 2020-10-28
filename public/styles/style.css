@@ -303,7 +303,7 @@ input[type=checkbox] {
   border: 0;
   border-color: #ccc;
   height: 40px;
-  padding: 8px 6px 8px 35px;
+  padding: 10px 10px 10px 35px;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
