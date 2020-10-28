@@ -302,6 +302,7 @@ input[type=checkbox] {
   max-width: 0;
   border: 0;
   border-color: #ccc;
+  font-size: 15px;
   height: 40px;
   padding: 10px 10px 10px 35px;
   -webkit-transition: all 0.4s ease-in-out;
