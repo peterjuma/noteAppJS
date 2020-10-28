@@ -23,9 +23,21 @@
     <div class="container">
         <div class="left">
             <div id="btnContainer">
-                <button class="btn" onclick="listView()"><i class="fa fa-bars"></i></button>
-                <button class="btn active" onclick="gridView()"><i class="fa fa-th-large"></i></button>
-                <button class="btn" id="addBtn"><i class="fas fa-plus"></i></button>
+                <div>
+                    <button class="btn" onclick="listView()"><i class="fa fa-bars"></i></button>
+                    <button class="btn active" onclick="gridView()"><i class="fa fa-th-large"></i></button>
+                </div>
+                <div>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                    <div class="search-bar">
+                      <i class="icon fa fa-search"></i>
+                      <input class="input-text" type="text" name="eingabe" placeholder="Search Notes Titles">
+                    </div>
+                </div>
+                <div>
+                    <button class="btn" id="addBtn"><i class="fas fa-plus"></i></button>
+                </div>
             </div>
             <div class="row" id="notes">
             </div>

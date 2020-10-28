@@ -9,4 +9,5 @@
 9. Upload markdown file
 10. Rich paste 
 11. Multiple notes Select/Delete (add "selected" class on select - checkbox)
+12. Filter/Search Feature
 

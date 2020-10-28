@@ -518,5 +518,10 @@ document.getElementById('selectBtn').onclick = () => {
     document.getElementById('select-all').click()
 }
 
+// Search Button
+$('.search-bar .icon').on('click', function() {
+    $(this).parent().toggleClass('active-search');
+  });
+
 loadDB()
 queryDB()
