@@ -7,6 +7,10 @@ body {
   box-sizing: border-box;
 }
 
+h1 {
+  font-size: clamp(16px, 5vw, 34px);
+}
+
 /* Create two equal columns that floats next to each other */
 .column {
   float: left;
@@ -223,7 +227,7 @@ textarea {
 }
 
 .editBtns {
-  justify-content: space-between;
+  justify-content: space-evenly;
   display: flex;
 }
 
@@ -236,7 +240,7 @@ textarea {
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 0px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   display: flex;
 }
 
@@ -261,7 +265,6 @@ hr {
   border-bottom: 0.5px solid #f6f8fa;
 }
 
-
 p,
 label {
   font: 1rem 'Fira Sans', sans-serif;
@@ -274,7 +277,6 @@ input[type=checkbox] {
 }
 
 /* Search */
-
 .search-div {
   float: left;
 }
@@ -334,11 +336,16 @@ input[type=checkbox] {
     padding-bottom: 0px;
   }
 
+  .fa,
+  * {
+    font-size: smaller;
+  }
+
   textarea {
-    font-size: 12px;
     height: inherit;
     resize: none;
     padding: 20px;
+    font-size: smaller;
   }
 
   .editnote {
@@ -369,11 +376,7 @@ input[type=checkbox] {
   }
 
   .btn {
-    padding: 5px;
-  }
-
-  .fa .fas {
-    font-weight: 700;
+    padding: 10px;
   }
 
   .column:nth-of-type(odd) {
@@ -392,4 +395,27 @@ input[type=checkbox] {
     border-radius: 5%;
   }
 
+  .search-bar .icon,
+  #search,
+  input[type=checkbox] {
+    display: none;
+  }
+
+  .btn {
+    border: none;
+    outline: none;
+    font-size: 10px;
+    padding: 5px 5px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  #notes {
+    height: calc(100% - 100px);
+  }
+
+  .shownote {
+    margin-top: 15px;
+    height: calc(100% - 99px);
+  }
 }
