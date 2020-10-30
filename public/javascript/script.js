@@ -534,7 +534,6 @@ input.addEventListener("keyup", event => {
    var notediv = notesContainer.getElementsByTagName('div')
    for (i = 0; i < notediv.length; i++) {
        title = notediv[i].getElementsByTagName('h2')[0].textContent
-       console.log(title);
        if (title.toUpperCase().indexOf(filter) > -1) {
             notediv[i].style.display = "";
         } else {
