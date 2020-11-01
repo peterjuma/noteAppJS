@@ -20,12 +20,15 @@ function gridView() {
 }
 
 var container = document.getElementById("btnContainer");
-var btns = container.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function () {
-        var current = document.getElementsByClassName("active");
-        current[0].className = current[0].className.replace(" active", "");
-        this.className += " active";
+document.addEventListener('DOMContentLoaded', toggleActive());
+
+function toggleActive() {
+    let btns=document.querySelectorAll('.btn');
+    btns.forEach(function(btn) {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
     });
 }
 
@@ -450,8 +453,6 @@ function copyToClipboard(markdown) {
     textArea.select();
     try {
         var successful = document.execCommand('copy');
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.log('Copying text command was ' + msg);
     } catch (err) {
         console.log('Oops, unable to copy');
     }
@@ -511,6 +512,10 @@ document.getElementById('select-all').onclick = function toggle(source) {
     for (var checkbox of checkboxes) {
         checkbox.checked = document.getElementById('select-all').checked;
       }
+    var elements = document.getElementsByClassName("note");
+    for (var i = 0; i < elements.length; i++) {
+    elements[i].classList.toggle("highlight");
+    }
   }  
 
 // Select All Button
