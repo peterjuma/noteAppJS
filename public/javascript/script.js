@@ -32,6 +32,7 @@ function toggleActive() {
     });
 }
 
+
 class Notes {
     constructor(dbName) {
         this.dbName = dbName;
@@ -160,12 +161,11 @@ function showNote(notediv){
 }
 
 function noteSelect(){
-    var noteList = document.getElementsByClassName("note");
+    var noteList = document.querySelectorAll(".note");
     for (var i = 0; i < noteList.length; i++) {
         noteList[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
+            noteList.forEach(b => b.classList.remove('highlight'));
+            this.classList.add('highlight')
         });
     }
 }
@@ -514,7 +514,11 @@ document.getElementById('select-all').onclick = function toggle(source) {
       }
     var elements = document.getElementsByClassName("note");
     for (var i = 0; i < elements.length; i++) {
-    elements[i].classList.toggle("highlight");
+        if(checkbox.checked) {
+            elements[i].classList.add("highlight");
+        } else {
+            elements[i].classList.remove("highlight");
+        }  
     }
   }  
 

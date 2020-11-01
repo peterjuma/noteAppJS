@@ -65,11 +65,10 @@ h1 {
   margin-top: 7px;
 }
 
-.column:hover {
-  border: solid 0.1px #ddd;
-  background-color: aliceblue;
-  color: #000;
-}
+/* .column:hover {
+  background-color: rgb(158, 157, 157);
+  color: white;
+} */
 
 .column.selected {
   background-color: #666;
