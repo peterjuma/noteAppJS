@@ -186,6 +186,7 @@ newNote.addEventListener("click", () => {
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
+    document.getElementById('notebody').addEventListener('keydown', handleTab);
 })
 
 // Delete single note by noteid
@@ -358,6 +359,7 @@ function editNote(notediv) {
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
                 document.getElementById("notebody").value = turndownService.turndown(marked(matching.body));
                 document.getElementById("notebody").addEventListener('paste', handlePaste);
+                document.getElementById('notebody').addEventListener('keydown', handleTab);
             } else { }
         }
     }
@@ -371,7 +373,7 @@ function previewMarkdown(noteid){
                 <h1 class="notehead" id="title">${marked(title)}</h1>
                 <div id="notebody">${marked(body)}</div>
             </div>
-            <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit fa-lg"></i> Continue</button></div>`
+            <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit"></i> Write</button></div>`
     editBox.style.display = "unset"
     editBox.innerHTML = html;
 }
@@ -394,6 +396,7 @@ function continueEdit(noteid){
     document.getElementById("title").value = turndownService.turndown(marked(title));
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
     document.getElementById("notebody").addEventListener('paste', handlePaste);
+    document.getElementById('notebody').addEventListener('keydown', handleTab);
 }
 
 // Save Markdown
@@ -496,6 +499,23 @@ function handlePaste (e) {
         selection.addRange(range);
     }
 };
+
+// Handle TAB
+function handleTab(e) {
+    if (e.key == 'Tab') {
+      e.preventDefault();
+      var start = this.selectionStart;
+      var end = this.selectionEnd;
+  
+      // set textarea value to: text before caret + tab + text after caret
+      this.value = this.value.substring(0, start) +
+        "\t" + this.value.substring(end);
+  
+      // put caret at right position again
+      this.selectionStart =
+        this.selectionEnd = start + 1;
+    }
+  }
 
 // Delete selected notes
 document.getElementById('delete').onclick = function() {
