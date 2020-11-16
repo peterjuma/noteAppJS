@@ -145,7 +145,7 @@ function showNote(notediv){
                 </div>
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                             <div id="noteHtml">
-                                <h1 class="notehead" id="title">${marked(matching.title)}</h1>
+                                <h1 class="notehead" id="title">${matching.title}</h1>
                                 <div class="notebody" id="notebody">${marked(matching.body)}</div>
                             </div>
                         </div>
@@ -170,6 +170,7 @@ function noteSelect(){
     }
 }
 
+// Add new Note
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
@@ -300,7 +301,7 @@ function getNote(noteid) {
                     </div>
                     <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                                 <div id="noteHtml">
-                                    <h1 class="notehead" id="title">${marked(matching.title)}</h1>
+                                    <h1 class="notehead" id="title">${matching.title}</h1>
                                     <div class="notebody" id="notebody">${marked(matching.body)}</div>
                                 </div>
                             </div>
@@ -370,7 +371,7 @@ function previewMarkdown(noteid){
     const title = document.getElementById("title").value
     const body = document.getElementById("notebody").value
     html = `<div class="preview markdown-body" data-noteid="${noteid}" id="editpad">
-                <h1 class="notehead" id="title">${marked(title)}</h1>
+                <h1 class="notehead" id="title">${title}</h1>
                 <div id="notebody">${marked(body)}</div>
             </div>
             <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit"></i> Write</button></div>`

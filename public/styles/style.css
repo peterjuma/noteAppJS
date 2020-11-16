@@ -118,6 +118,14 @@ h1 {
 
 .notehead {
   text-align: center;
+  font-size: 64px;
+  line-height: 100px;
+}
+
+input[type="text"]#title {
+  text-align: center;
+  padding: 30px;
+  font-size: 24px;
 }
 
 .notebody {
@@ -223,7 +231,7 @@ textarea {
   box-shadow: none;
   border: none;
   font-family: "Courier New", Courier, monospace;
-  height: calc(100% - 70px);
+  height: calc(100% - 90px);
 }
 
 .editBtns {
@@ -242,12 +250,6 @@ textarea {
   padding-bottom: 0px;
   justify-content: space-evenly;
   display: flex;
-}
-
-#title {
-  font-size: 100%;
-  text-align: center;
-  padding: 20px;
 }
 
 * img {
