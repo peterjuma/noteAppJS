@@ -109,9 +109,9 @@ const queryDB = () => {
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
-                            <input type='checkbox' name="checked" value='${cursor.key}' onclick="event.stopPropagation();"> 
-                            <h2>${marked(cursor.value.title)}</h2>
-                             <span><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></span>
+                            <input type="checkbox" id="vehicle1" name="checked" value='${cursor.key}' onclick="event.stopPropagation();">
+                            <label for="checked"> ${cursor.value.title}</label><br><br>
+                            <div class="caption"><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></div>
                         </div>`;
                 notesGrid.innerHTML += html;
                 noteSelect() 
@@ -251,7 +251,7 @@ function addNote(note) {
         var store = tx.objectStore("notes")
         store.add(note);
         tx.oncomplete = function () {
-            console.log('Note added' + note );
+            console.log('Note added');
         }
     }  
     getNote(note.noteid)
@@ -533,14 +533,6 @@ document.getElementById('select-all').onclick = function toggle(source) {
     for (var checkbox of checkboxes) {
         checkbox.checked = document.getElementById('select-all').checked;
       }
-    var elements = document.getElementsByClassName("note");
-    for (var i = 0; i < elements.length; i++) {
-        if(checkbox.checked) {
-            elements[i].classList.add("highlight");
-        } else {
-            elements[i].classList.remove("highlight");
-        }  
-    }
   }  
 
 // Select All Button

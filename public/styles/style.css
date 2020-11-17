@@ -15,15 +15,16 @@ h1 {
 .column {
   float: left;
   width: 50%;
-  height: 110px;
+  height: 80px;
   border: 2px solid #eee;
   border-radius: 0px;
-}
-
-.column p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.column > div {
+  display: flex;
 }
 
 .note {
@@ -118,8 +119,8 @@ h1 {
 
 .notehead {
   text-align: center;
-  font-size: 64px;
-  line-height: 100px;
+  font-size: 48px;
+  line-height: 800px;
 }
 
 input[type="text"]#title {
@@ -269,13 +270,55 @@ hr {
 
 p,
 label {
-  font: 1rem 'Fira Sans', sans-serif;
+  font: 0.9rem 'Fira Sans', sans-serif;
 }
 
 input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
   margin: .4rem;
   width: 16px;
   height: 16px;
+}
+
+input[type=checkbox]:before {
+   content: "";
+   display: block;
+   position: absolute;
+   width: 18px;
+   height: 18px;
+   top: 0;
+   left: 0;
+   background-color:#bbb;
+}
+input[type=checkbox]:checked:before {
+   content: "";
+   display: block;
+   position: absolute;
+   width: 20px;
+   height: 20px;
+   top: 0;
+   left: 0;
+   background-color:#666;
+}
+
+input[type=checkbox]:checked:after {
+   content: "";
+   display: block;
+   width: 5px;
+   height: 10px;
+   border: solid 2px white;
+   border-width: 0 2px 2px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+   position: absolute;
+   top: 2px;
+   left: 6px;
+}
+
+.caption {
+  padding-left: 2.1rem;
 }
 
 /* Search */
@@ -331,7 +374,7 @@ input[type=checkbox] {
 }
 
 .highlight {
-  background-color: #666;
+  background-color: #707070;
   color: white;
 }
 
