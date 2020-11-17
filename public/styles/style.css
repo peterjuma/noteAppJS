@@ -15,25 +15,29 @@ h1 {
 .column {
   float: left;
   width: 50%;
-  height: 80px;
   border: 2px solid #eee;
+  margin: 0px;
   border-radius: 0px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.column > div {
-  display: flex;
+.row {
+  padding: 5px;
 }
 
 .note {
   background-color: #f1f1f1;
   border: solid 2px #bbb;
   font-size: 10px;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
   text-align: left;
+}
+
+.note:hover{
+  opacity: 0.8;
 }
 
 /* Clear floats after the columns */
@@ -291,6 +295,7 @@ input[type=checkbox]:before {
    left: 0;
    background-color:#bbb;
 }
+
 input[type=checkbox]:checked:before {
    content: "";
    display: block;
