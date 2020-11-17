@@ -150,8 +150,8 @@ function showNote(notediv){
                             </div>
                         </div>
                 <div class="shwBtns">
-                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy</button>
-                    <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download"></i> Download</button>
+                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-lg"></i></button>
+                    <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download fa-lg"></i></button>
                 </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
@@ -180,9 +180,9 @@ newNote.addEventListener("click", () => {
                 <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
             </div>
             <div class="editBtns">
-                <button class="btn btnnote" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save"></i> Save</button>
-                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown()"><i class="fas fa-eye"></i> Preview</button>
-                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close"></i> Cancel</button>
+                <button class="btn btnnote" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
+                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
+                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
             </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
@@ -306,8 +306,8 @@ function getNote(noteid) {
                                 </div>
                             </div>
                     <div class="shwBtns">
-                        <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy</button>
-                        <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download"></i> Download</button>
+                        <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-lg"></i></button>
+                        <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download fa-lg"></i></button>
                     </div>`
                 editBox.innerHTML = html2;
             } 
@@ -352,9 +352,9 @@ function editNote(notediv) {
                             <textarea name="notebody" id="notebody"></textarea>
                         </div>
                         <div class="editBtns">
-                            <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-                            <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
-                            <button onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                            <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+                            <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i></button>
+                            <button onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
                         </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
@@ -374,7 +374,7 @@ function previewMarkdown(noteid){
                 <h1 class="notehead" id="title">${title}</h1>
                 <div id="notebody">${marked(body)}</div>
             </div>
-            <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit"></i> Write</button></div>`
+            <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit"></i></button></div>`
     editBox.style.display = "unset"
     editBox.innerHTML = html;
 }
@@ -389,9 +389,9 @@ function continueEdit(noteid){
                 <textarea name="notebody" id="notebody"></textarea>
             </div>
             <div class="editBtns">
-                <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
-                <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i></button>
+                <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
             </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
@@ -553,13 +553,14 @@ input.addEventListener("keyup", event => {
   }
    var filter = input.value.toUpperCase();
    var notesContainer = document.getElementById('notes');
-   var notediv = notesContainer.getElementsByTagName('div')
-   for (i = 0; i < notediv.length; i++) {
-       title = notediv[i].getElementsByTagName('h2')[0].textContent
+   var noteTitles = notesContainer.querySelectorAll('label')
+   for (i = 0; i < noteTitles.length; i++) {
+       title = noteTitles[i].outerText
        if (title.toUpperCase().indexOf(filter) > -1) {
-            notediv[i].style.display = "";
+            console.log(noteTitles[i].parentElement)
+            noteTitles[i].parentElement.style.display = "";
         } else {
-            notediv[i].style.display = "none";
+            noteTitles[i].parentElement.style.display = "none";
         }
    }
 });
