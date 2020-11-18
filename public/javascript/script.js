@@ -32,7 +32,6 @@ function toggleActive() {
     });
 }
 
-
 class Notes {
     constructor(dbName) {
         this.dbName = dbName;
@@ -92,6 +91,7 @@ function deleteDB() {
         console.log("Couldn't delete database due to the operation being blocked");
     };
 }
+
 /* Load Data */
 var notesGrid = document.getElementById("notes")
 const queryDB = () => {
@@ -151,7 +151,7 @@ function showNote(notediv){
                         </div>
                 <div class="shwBtns">
                     <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-lg"></i></button>
-                    <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download fa-lg"></i></button>
+                    <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download fa-lg"></i></button>
                 </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
@@ -208,6 +208,7 @@ function deleteNote(notediv) {
     }
 }
 
+// Caption - created date
 function countDown(epoch_timestamp) {
     var now = new Date().getTime();
     // Find the distance between now and the count down date
@@ -227,10 +228,12 @@ function countDown(epoch_timestamp) {
     return dateJson
 }
 
-// Get new note values from the UI
+// Save / Add New Note
 function save() {
     var noteTitle = document.getElementById("title").value
-    var noteBody = document.getElementById("notebody").value
+    // Get textarea value with line breaks
+    var noteText = document.getElementById("notebody").value
+    var noteBody = noteText.replace(/\n\r?/g, '<br />');
     var id = Math.round(Date.now() / 1000)  
     const note = {
         noteid: id.toString(),
@@ -307,7 +310,7 @@ function getNote(noteid) {
                             </div>
                     <div class="shwBtns">
                         <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-lg"></i></button>
-                        <button class="btn" id="dwld"  onclick="saveFile()"><i class="fas fa-download fa-lg"></i></button>
+                        <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download fa-lg"></i></button>
                     </div>`
                 editBox.innerHTML = html2;
             } 
@@ -413,7 +416,7 @@ function saveData(data, fileName) {
     window.URL.revokeObjectURL(url);
 }
 
-function saveFile(e) {
+function downloadFile(e) {
     const html = document.getElementById("notebody").innerHTML;
     const markdown = turndownService.turndown(marked(html));
     const title = turndownService.turndown(marked(document.getElementById("title").innerHTML)).replace(/ /g,"_");
@@ -480,8 +483,7 @@ function handlePaste (e) {
         // For IE
         : (window.clipboardData ? window.clipboardData.getData('Html') : '');
 
-    // const pasteData = html || text;
-    const pasteData = turndownService.turndown(marked(html || text))
+    const pasteData = html ? turndownService.turndown(marked(html)) : text    
 
     if (document.queryCommandSupported('insertText')) {
         document.execCommand('insertText', false, pasteData);
@@ -564,7 +566,5 @@ input.addEventListener("keyup", event => {
         }
    }
 });
-
 loadDB()
 queryDB()
-
