@@ -116,7 +116,7 @@ h1 {
   overflow: auto;
   resize: none;
   height: inherit;
-  margin-top: 20px;
+  margin-top: 10px;
   border: solid 1px #D8D8D8;
   height: calc(100% - 130px);
 }
@@ -249,10 +249,7 @@ textarea {
 }
 
 #btnContainer {
-  padding-left: 20px;
-  padding-right: 20px;
   padding-top: 10px;
-  padding-bottom: 0px;
   justify-content: space-evenly;
   display: flex;
 }
@@ -336,7 +333,7 @@ input[type=checkbox]:checked:after {
 }
 
 .search-bar.active-search .input-text {
-  max-width: 100%;
+  max-width: 200px;
   border: 1px solid #ccc;
   background: #eee;
 }
@@ -344,10 +341,10 @@ input[type=checkbox]:checked:after {
 .search-bar .icon {
   cursor: pointer;
   position: absolute;
-  top: 47%;
+  top: 50%;
   left: 0;
   transform: translateY(-50%);
-  padding: 13px 15px 13px 11px;
+  padding: 15px;
 }
 
 .search-bar .input-text {
@@ -384,7 +381,7 @@ input[type=checkbox]:checked:after {
 }
 
 /* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
   body {
     padding: 5px;
     padding-top: 0px;
@@ -394,6 +391,24 @@ input[type=checkbox]:checked:after {
   .fa,
   * {
     font-size: smaller;
+  }
+
+  #btnContainer {
+    padding-top: 15px;
+    justify-content: space-evenly;
+    display: flex;
+  }
+
+  #check {
+    display: none;
+  }
+
+  .search-bar.active-search, .input-text, .icon, .fa-search {
+    display: none;
+  }
+
+  .search-bar .icon .search{
+    display: none;
   }
 
   textarea {
@@ -450,9 +465,7 @@ input[type=checkbox]:checked:after {
     border-radius: 5%;
   }
 
-  .search-bar .icon,
-  #search,
-  input[type=checkbox] {
+  .caption {
     display: none;
   }
 
@@ -470,7 +483,7 @@ input[type=checkbox]:checked:after {
   }
 
   .shownote {
-    margin-top: 15px;
+    margin-top: 10px;
     height: calc(100% - 99px);
   }
 }
