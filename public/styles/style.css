@@ -402,12 +402,8 @@ input[type=checkbox]:checked:after {
   #check {
     display: none;
   }
-
-  .search-bar.active-search, .input-text, .icon, .fa-search {
-    display: none;
-  }
-
-  .search-bar .icon .search{
+  
+  .search-bar, .icon, .search{
     display: none;
   }
 
