@@ -157,6 +157,9 @@ function showNote(notediv){
                 editBox.innerHTML = html;
             } else{}
         }
+        var e = document.createElement("base");
+        e.target = "_blank";
+        document.head.appendChild(e); 
     } 
 }
 
@@ -195,16 +198,14 @@ function deleteNote(notediv) {
     var noteid = notediv.name || notediv;
     document.getElementById(noteid).style.display = "none"
     editBox.innerHTML = "";
-    console.log(noteid)
+    // console.log(noteid)
     var connection = indexedDB.open(DBNAME);
     connection.onsuccess = function () {
         db = connection.result;
         var tx = db.transaction('notes', "readwrite")
         var store = tx.objectStore("notes")
         store.delete(noteid);
-        tx.oncomplete = function () {
-
-        }
+        tx.oncomplete = function () {}
     }
 }
 
@@ -254,7 +255,7 @@ function addNote(note) {
         var store = tx.objectStore("notes")
         store.add(note);
         tx.oncomplete = function () {
-            console.log('Note added');
+            // console.log('Note added');
         }
     }  
     getNote(note.noteid)
@@ -524,7 +525,7 @@ function handleTab(e) {
 document.getElementById('delete').onclick = function() {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     for (var checkbox of checkboxes) {
-      console.log(checkbox.value + ' ');
+    //   console.log(checkbox.value + ' ');
       deleteNote(checkbox.value)
     }
   }
@@ -559,7 +560,7 @@ input.addEventListener("keyup", event => {
    for (i = 0; i < noteTitles.length; i++) {
        title = noteTitles[i].outerText
        if (title.toUpperCase().indexOf(filter) > -1) {
-            console.log(noteTitles[i].parentElement)
+            // console.log(noteTitles[i].parentElement)
             noteTitles[i].parentElement.style.display = "";
         } else {
             noteTitles[i].parentElement.style.display = "none";
