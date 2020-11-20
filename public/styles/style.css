@@ -163,9 +163,9 @@ input[type="text"]#title {
   display: block;
   font-size: 18px;
   width: 100%;
-  margin-top: 12px;
+  margin-top: 5px;
   margin-bottom: 5px;
-  height: calc(100% - 118px);
+  height: calc(100% - 120px);
 }
 
 .editnote {
@@ -433,7 +433,7 @@ input[type=checkbox]:checked:after {
 
   .right {
     height: 97.5%;
-    padding: 5px;
+    padding: 1px;
   }
 
   .left {
@@ -480,6 +480,7 @@ input[type=checkbox]:checked:after {
 
   .shownote {
     margin-top: 10px;
-    height: calc(100% - 99px);
+    margin-bottom: 5px;
+    height: calc(100% - 105px);
   }
 }

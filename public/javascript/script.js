@@ -335,7 +335,9 @@ function updateNote(note) {
     getNote(note.noteid)
 }
 
+var gfm = turndownPluginGfm.gfm
 const turndownService = new TurndownService();
+turndownService.use(gfm)
 
 // Get single note for editing
 function editNote(notediv) {
