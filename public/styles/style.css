@@ -129,7 +129,7 @@ h1 {
 
 input[type="text"]#title {
   text-align: center;
-  padding: 30px;
+  padding: 15px;
   font-size: 24px;
 }
 
@@ -176,7 +176,7 @@ input[type="text"]#title {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100% - 60px);
 }
 
 .continueBtn {
@@ -410,16 +410,22 @@ input[type=checkbox]:checked:after {
   textarea {
     height: inherit;
     resize: none;
-    padding: 20px;
+    padding: 5px;
+    font-size: smaller;
+  }
+
+  input[type="text"]#title {
+    text-align: center;
+    padding: 10px;
     font-size: smaller;
   }
 
   .editnote {
     margin-bottom: 3px;
-    height: calc(100% - 50px);
+    border-style: none;
+    height: calc(100% - 60px);
     margin-bottom: 10px;
-    padding: 20px;
-    padding-bottom: 50px;
+    padding: 10px;
   }
 
   .column p {
@@ -479,8 +485,18 @@ input[type=checkbox]:checked:after {
   }
 
   .shownote {
+    padding: 15px;
     margin-top: 10px;
     margin-bottom: 5px;
     height: calc(100% - 105px);
   }
+
+  #title {
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    line-height: 1;
+    padding-bottom: .3em;
+    border-bottom: 1px solid #eaecef;
+    }
 }

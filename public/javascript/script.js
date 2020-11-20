@@ -109,7 +109,7 @@ const queryDB = () => {
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
                 html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
-                            <input type="checkbox" id="check" name="checked" value='${cursor.key}' onclick="event.stopPropagation();">
+                            <input type="checkbox" id="check" name="checked" value='${cursor.key}' onclick="event.stopPropagation();" autocomplete="off">
                             <label for="checked"> ${cursor.value.title}</label><br><br>
                             <div class="caption"><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></div>
                         </div>`;
@@ -189,9 +189,9 @@ var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
     html = `<div name="" class="editnote" id="editpad" contenteditable="false">
-                <input name="title" type="text" id="title" placeholder="Note Title">
+                <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
                 <hr>
-                <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Body..."></textarea>
+                <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Note"></textarea>
             </div>
             <div class="editBtns">
                 <button class="btn btnnote" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
@@ -364,7 +364,7 @@ function editNote(notediv) {
             var matching = request.result;
             if (matching) {
                 html = `<div name=${matching.noteid} class="editnote" id="editpad">
-                            <input name="title" type="text" id="title">
+                            <input name="title" type="text" id="title" autocomplete="off">
                             <hr>
                             <textarea name="notebody" id="notebody"></textarea>
                         </div>
@@ -401,7 +401,7 @@ function continueEdit(noteid){
     const title = document.getElementById("title").innerHTML
     const body = document.getElementById("notebody").innerHTML
     html = `<div name=${noteid} class="editnote" id="editpad">
-                <input name="title" type="text" id="title">
+                <input name="title" type="text" id="title" autocomplete="off">
                 <hr>
                 <textarea name="notebody" id="notebody"></textarea>
             </div>
