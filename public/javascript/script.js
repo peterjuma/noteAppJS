@@ -121,6 +121,17 @@ const queryDB = () => {
     }
 }
 
+window.onload = function() {
+    setTimeout(loadAfterTime, 100)
+ }; 
+  
+ function loadAfterTime(){
+    var notes = document.getElementsByClassName('note')
+    if(notes) {
+        notes[0].click() 
+    } 
+ }
+
 let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
 
