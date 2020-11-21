@@ -451,18 +451,9 @@ input[type=checkbox]:checked:after {
     padding: 10px;
   }
 
-  .column:nth-of-type(odd) {
-    float: left;
-    width: 50%;
-    height: 50px;
-    border: 1px solid #D8D8D8;
-    border-radius: 5%;
-  }
-
-  .column:nth-of-type(even) {
-    float: right;
-    width: 50%;
-    height: 50px;
+  .column {
+    width: 100%;
+    height: 40px;
     border: 1px solid #D8D8D8;
     border-radius: 5%;
   }

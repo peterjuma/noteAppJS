@@ -21,7 +21,6 @@ function gridView() {
 
 var container = document.getElementById("btnContainer");
 document.addEventListener('DOMContentLoaded', toggleActive());
-
 function toggleActive() {
     let btns=document.querySelectorAll('.btn');
     btns.forEach(function(btn) {
@@ -41,28 +40,28 @@ class Notes {
         }
     }
     initialLoad = () => {
-    const request = indexedDB.open(this.dbName, 1);
+        const request = indexedDB.open(this.dbName, 1);
 
-    request.onerror = (event) => {
-        console.log('initialLoad - Database error: ', event.target.error.code,
-            " - ", event.target.error.message);
-    };
-    request.onupgradeneeded = (event) => {
-        console.log('Populating customers...');
-        const db = event.target.result;
-        const objectStore = db.createObjectStore('notes', { keyPath: 'noteid' });
-        objectStore.onerror = (event) => {
-            console.log('initialLoad - objectStore error: ', event.target.error.code,
+        request.onerror = (event) => {
+            console.log('initialLoad - Database error: ', event.target.error.code,
                 " - ", event.target.error.message);
         };
-        // Create an index to search
-        objectStore.createIndex('title', 'title', { unique: false });
-        objectStore.createIndex('body', 'body', { unique: false });
-        objectStore.createIndex('noteid', 'noteid', { unique: true });
-        objectStore.createIndex('created_at', 'created_at', { unique: true });
-        objectStore.createIndex('updated_at', 'updated_at', { unique: true });
-        db.close();
-    };
+        request.onupgradeneeded = (event) => {
+            console.log('Populating customers...');
+            const db = event.target.result;
+            const objectStore = db.createObjectStore('notes', { keyPath: 'noteid' });
+            objectStore.onerror = (event) => {
+                console.log('initialLoad - objectStore error: ', event.target.error.code,
+                    " - ", event.target.error.message);
+            };
+            // Create an index to search
+            objectStore.createIndex('title', 'title', { unique: false });
+            objectStore.createIndex('body', 'body', { unique: false });
+            objectStore.createIndex('noteid', 'noteid', { unique: true });
+            objectStore.createIndex('created_at', 'created_at', { unique: true });
+            objectStore.createIndex('updated_at', 'updated_at', { unique: true });
+            db.close();
+        };
     }
 }
 
@@ -271,6 +270,9 @@ function addNote(note) {
     }  
     getNote(note.noteid)
     showNote(note.noteid)
+    setTimeout(function(){
+        document.getElementById(note.noteid).click()
+   }, 150); //wait for atleast  200 ms before click action
 }
 
 // Get updated values from the UI and generate a JSON object
@@ -294,6 +296,7 @@ function cancelEdit(notediv){
     if(notediv.name !== "undefined"){
         showNote(notediv)
     }
+    
 }
 
 // Get single note to display in the list and details areas
@@ -344,6 +347,10 @@ function updateNote(note) {
         }
     }
     getNote(note.noteid)
+
+    setTimeout(function(){
+        document.getElementById(note.noteid).click()
+   }, 100); // Wait for atleast  100 ms before click action
 }
 
 var gfm = turndownPluginGfm.gfm
