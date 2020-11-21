@@ -24,7 +24,9 @@ h1 {
 }
 
 .row {
-  padding: 5px;
+  padding: 2.5px;
+  padding-right: 2.5px;
+  padding-top: 1px;
 }
 
 .note {
@@ -87,14 +89,14 @@ h1 {
 
 .left {
   height: 98%;
-  width: 32%;
+  width: 32.3%;
   position: fixed;
   display: inline-block;
   overflow-y: hidden;
   /* Hide vertical scrollbar */
   overflow-x: hidden;
   /* Hide horizontal scrollbar */
-  margin-left: 0.5%;
+  margin-left: 0.75%;
   border: solid 1px #D8D8D8;
   left: 0;
   background-color: #bbb;
@@ -102,10 +104,10 @@ h1 {
 
 .right {
   height: 98%;
-  width: 66%;
+  width: 66.3%;
   display: inline-block;
   position: fixed;
-  margin-right: 1%;
+  margin-right: 0.75%;
   border: solid 1px #D8D8D8;
   right: 0;
   background-color: #bbb;
