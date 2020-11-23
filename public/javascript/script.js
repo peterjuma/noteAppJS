@@ -190,7 +190,7 @@ newNote.addEventListener("click", () => {
     html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
                 <hr>
-                <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Note"></textarea>
+                <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Note" data-provide="markdown-editable"></textarea>
             </div>
             <div class="editBtns">
                 <button class="btn btnnote" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
@@ -373,7 +373,7 @@ function editNote(notediv) {
                 html = `<div name=${matching.noteid} class="editnote" id="editpad">
                             <input name="title" type="text" id="title" autocomplete="off">
                             <hr>
-                            <textarea name="notebody" id="notebody"></textarea>
+                            <textarea name="notebody" id="notebody" data-provide="markdown-editable"></textarea>
                         </div>
                         <div class="editBtns">
                             <button onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
@@ -410,7 +410,7 @@ function continueEdit(noteid){
     html = `<div name=${noteid} class="editnote" id="editpad">
                 <input name="title" type="text" id="title" autocomplete="off">
                 <hr>
-                <textarea name="notebody" id="notebody"></textarea>
+                <textarea name="notebody" id="notebody" data-provide="markdown-editable"></textarea>
             </div>
             <div class="editBtns">
                 <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
