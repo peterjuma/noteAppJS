@@ -189,13 +189,17 @@ var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
     html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-                <hr>
-                <textarea name="notebody" cols="30" rows="10" id="notebody" placeholder="Note"></textarea>
-            </div>
-            <div class="editBtns">
-                <button class="btn btnnote" id="saveBtn" style="float: left;" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
-                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
-                <button onclick='cancelEdit("")' class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
+                <div class="md-editor-tools">
+                    <button class="md-buttons" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
+                    <button class="md-buttons" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
+                    <button class="md-buttons" onclick="continueEdit()"><i class="fas fa-edit"></i></button>
+                    <button onclick='cancelEdit("")' class="md-buttons" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
+                </div>
+                <div class="md-preview" id="md-preview">
+                </div> 
+                <div class="md-editor" id="md-editor">
+                    <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
+                </div> 
             </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
@@ -395,33 +399,20 @@ function previewMarkdown(noteid){
     const title = document.getElementById("title").value
     const body = document.getElementById("notebody").value
     html = `<div class="preview markdown-body" data-noteid="${noteid}" id="editpad">
-                <h1 class="notehead" id="title">${title}</h1>
                 <div id="notebody">${marked(body)}</div>
-            </div>
-            <div class="continueBtn"><button class="btn" id="continue" name="${noteid}" onclick="continueEdit(${noteid})" style="font-size: 16px;"><i class="fas fa-edit"></i></button></div>`
-    editBox.style.display = "unset"
-    editBox.innerHTML = html;
+            </div>`
+    document.getElementById("md-editor").style.display = "none"
+    document.getElementById("md-preview").style.display = "unset"
+    document.getElementById("md-preview").innerHTML = html;
 }
 
 // Continue Editing
 function continueEdit(noteid){
+    document.getElementById("md-editor").style.display = "unset"
+    document.getElementById("md-preview").style.display = "none"
     const title = document.getElementById("title").innerHTML
     const body = document.getElementById("notebody").innerHTML
-    html = `<div name=${noteid} class="editnote" id="editpad">
-                <input name="title" type="text" id="title" autocomplete="off">
-                <hr>
-                <textarea name="notebody" id="notebody"></textarea>
-            </div>
-            <div class="editBtns">
-                <button onclick='update(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: left;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
-                <button class="btn btnnote" id="previewBtn" style="float: center;" onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i></button>
-                <button onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" class="btn btnnote" style="float: right;" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
-            </div>`
-    editBox.innerHTML = html;
-    document.getElementById("title").value = turndownService.turndown(marked(title));
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
-    document.getElementById("notebody").addEventListener('paste', handlePaste);
-    document.getElementById('notebody').addEventListener('keydown', handleTab);
 }
 
 // Save Markdown

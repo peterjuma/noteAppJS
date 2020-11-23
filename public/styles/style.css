@@ -3,6 +3,10 @@ body {
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
 }
 
+html,body {
+    height:100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -103,6 +107,7 @@ h1 {
 }
 
 .right {
+  position: relative;
   height: 98%;
   width: 66.3%;
   display: inline-block;
@@ -178,6 +183,7 @@ input[type="text"]#title {
   display: block;
   font-size: 18px;
   width: 100%;
+  position: relative;
   height: calc(100% - 60px);
 }
 
@@ -201,15 +207,11 @@ input[type="text"]#title {
   overflow: auto;
   background: #F5F5F5;
   background-color: #FFF6D9;
-  border-color: #D8D8D8;
-  border-style: solid;
-  border-radius: 0px;
-  border-width: 1px;
-  box-shadow: none;
   display: block;
   font-size: 18px;
   width: 100%;
-  height: calc(100% - 50px);
+  position: absolute;
+  height: inherit;
 }
 
 input[type="text"] {
@@ -232,21 +234,17 @@ textarea {
   line-height: 1.45;
   background-color: #f6f8fa;
   border-radius: 0px;
-  height: inherit;
   resize: none;
   outline: none;
   box-shadow: none;
   border: none;
   font-family: "Courier New", Courier, monospace;
-  height: calc(100% - 90px);
+  height: inherit;
 }
 
 .editBtns {
   justify-content: space-evenly;
   display: flex;
-}
-
-.editBtns {
   margin: 5px;
 }
 
@@ -254,6 +252,31 @@ textarea {
   padding-top: 10px;
   justify-content: space-evenly;
   display: flex;
+}
+
+.md-editor-tools {
+  padding: 5px;
+  background-color: #aaa;
+}
+
+.md-buttons {
+  border: none;
+  margin: 1px;
+  outline: none;
+  padding: 10px 10px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.md-preview {
+  height: inherit;
+  background-color: antiquewhite;
+  height: inherit;
+  display: none;
+}
+
+.md-editor {
+  height: inherit;
 }
 
 * img {
@@ -427,7 +450,6 @@ input[type=checkbox]:checked:after {
     border-style: none;
     height: calc(100% - 60px);
     margin-bottom: 10px;
-    padding: 10px;
   }
 
   .column p {
