@@ -190,10 +190,21 @@ newNote.addEventListener("click", () => {
     html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
                 <div class="md-editor-tools">
-                    <button class="md-buttons" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
-                    <button class="md-buttons" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
-                    <button class="md-buttons" onclick="continueEdit()"><i class="fas fa-edit"></i></button>
-                    <button onclick='cancelEdit("")' class="md-buttons" onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="bold" id="btnBold"><i class="fas fa-bold fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="italic" id="btnItalic"><i class="fas fa-italic fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="heading" id="btnHeading"><i class="fas fa-heading fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="link" id="btnLink"><i class="fas fa-link fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="olist" id="btnOList"><i class="fas fa-list-ol fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="code" id="btnCode"><i class="fas fa-code fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="tasklist" id="btnTask"><i class="fas fa-tasks fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-lg"></i></button>
+                    <button class="md-buttons" data-handler="save" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
+                    <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
+                    <button class="md-buttons" data-handler="edit" onclick="continueEdit()"><i class="fas fa-edit"></i></button>
+                    <button class="md-buttons" data-handler="cancel" onclick='cancelEdit("")' onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
                 </div> 
@@ -205,6 +216,12 @@ newNote.addEventListener("click", () => {
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
     document.getElementById('notebody').addEventListener('keydown', handleTab);
+    document.querySelectorAll('.md-icon').forEach(item => {
+        item.addEventListener('click', function(e){
+            // console.log(this.dataset.handler)
+            getSel(this.dataset.handler) 
+          })
+    })
 })
 
 // Delete single note by noteid
@@ -578,5 +595,68 @@ input.addEventListener("keyup", event => {
         }
    }
 });
+
+// Editor Buttons
+
+function getSel(button_handler) // javascript
+{
+console.log(button_handler);
+	  
+    // obtain the object reference for the textarea>
+    var txtarea = document.getElementById("notebody");
+    // obtain the index of the first selected character
+    var start = txtarea.selectionStart;
+    // obtain the index of the last selected character
+    var finish = txtarea.selectionEnd;
+    //obtain all Text
+    var allText = txtarea.value;
+    
+    // obtain the selected text
+    var sel = allText.substring(start, finish);
+    //append te text;
+
+    var newText = ""
+
+    switch(button_handler) {
+        case "code":
+            newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
+            break;
+        case "bold":
+            // Functionality
+            break;
+        case "italic":
+            // Functionality
+            break;
+        case "heading":
+            // Functionality
+            break;
+        case "link":
+            // Functionality
+            break;
+        case "olist":
+            // Functionality
+            break;
+        case "ulist":
+            // Functionality
+            break;
+        case "quote":
+            // Functionality
+            break;
+        case "image":
+            // Functionality
+            break;
+        case "tasklist":
+            // Functionality
+            break;
+        default:
+            // Functionality
+            break;
+    }
+    
+    txtarea.value=newText;
+    console.log(newText);
+    // do something with the selected content
+}
+
 loadDB()
 queryDB()

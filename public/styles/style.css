@@ -140,6 +140,12 @@ input[type="text"]#title {
   font-size: 24px;
 }
 
+input[type="text"]#title::placeholder {
+  text-align: center;
+  font-size: 18px;
+  color: #D8D8D8;
+}
+
 .notebody {
   text-align: left;
 }
@@ -256,14 +262,14 @@ textarea {
 
 .md-editor-tools {
   padding: 5px;
-  background-color: #aaa;
+  background-color: #f1f1f1;
 }
 
 .md-buttons {
   border: none;
   margin: 1px;
   outline: none;
-  padding: 10px 10px;
+  padding: 8px;
   background-color: #f1f1f1;
   cursor: pointer;
 }
@@ -273,6 +279,10 @@ textarea {
   background-color: antiquewhite;
   height: inherit;
   display: none;
+}
+
+.md-icon {
+  border: none;
 }
 
 .md-editor {
