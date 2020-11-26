@@ -615,47 +615,52 @@ console.log(button_handler);
     var sel = allText.substring(start, finish);
     //append te text;
 
-    var newText = ""
+    var link = `[](https://)`
+    var img = `![](https://)`
+    var cblock = `\`\`\``
 
     switch(button_handler) {
         case "code":
-            newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
+            var newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
             break;
         case "bold":
-            // Functionality
+            var newText = `${allText.substring(0, start)}\*\*${sel}\*\*${allText.substring(finish, allText.length)}`
             break;
         case "italic":
-            // Functionality
+            var newText = `${allText.substring(0, start)}\_${sel}\_${allText.substring(finish, allText.length)}`
             break;
         case "heading":
-            // Functionality
+            var newText = `${allText.substring(0, start)}\# ${sel}${allText.substring(finish, allText.length)}`
             break;
         case "link":
-            // Functionality
-            break;
-        case "olist":
-            // Functionality
+            var newText = `${allText.substring(0, start)}${link}${allText.substring(finish, allText.length)}`
             break;
         case "ulist":
-            // Functionality
+            var newText = `${allText.substring(0, start)}\- ${sel}${allText.substring(finish, allText.length)}`
+            break;
+        case "olist":
+            var newText = `${allText.substring(0, start)}1\. ${sel}${allText.substring(finish, allText.length)}`
             break;
         case "quote":
-            // Functionality
+            var newText = `${allText.substring(0, start)}\> ${sel}${allText.substring(finish, allText.length)}`
             break;
         case "image":
-            // Functionality
+            var newText = `${allText.substring(0, start)}${img}${allText.substring(finish, allText.length)}`
             break;
         case "tasklist":
-            // Functionality
+            var newText = `${allText.substring(0, start)}\-[] ${sel}${allText.substring(finish, allText.length)}`
+            break;
+        case "codeblock":
+            var newText = `${allText.substring(0, start)}${cblock}\n${sel}\n${cblock}${allText.substring(finish, allText.length)}`
             break;
         default:
             // Functionality
             break;
     }
-    
-    txtarea.value=newText;
-    console.log(newText);
-    // do something with the selected content
+
+    if (newText) {
+        txtarea.value=newText;
+    } 
 }
 
 loadDB()
