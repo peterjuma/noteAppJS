@@ -199,12 +199,16 @@ newNote.addEventListener("click", () => {
                     <button class="md-buttons md-icon" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-lg"></i></button>
                     <button class="md-buttons md-icon" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
                     <button class="md-buttons md-icon" data-handler="code" id="btnCode"><i class="fas fa-code fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="codeblock" id="btnCodeBlock"><span style='font-size:18px;'>&#10100;<i class="fas fa-code fa-sm"></i>&#10101;</span></button>
                     <button class="md-buttons md-icon" data-handler="tasklist" id="btnTask"><i class="fas fa-tasks fa-lg"></i></button>
-                    <button class="md-buttons md-icon" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-lg"></i></button>
-                    <button class="md-buttons" data-handler="save" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="table" id="btnTable"><i class="fas fa-table fa-lg"></i></button>
+                    <button class="md-buttons md-icon" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
+                    <button class="md-buttons md-icon" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
+                    <button class="md-buttons md-icon" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>
                     <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
                     <button class="md-buttons" data-handler="edit" onclick="continueEdit()"><i class="fas fa-edit"></i></button>
-                    <button class="md-buttons" data-handler="cancel" onclick='cancelEdit("")' onMouseOut="this.style.color='crimson'" onMouseOver="this.style.color='green'"><i class="fas fa-window-close fa-lg"></i></button>
+                    <button class="md-buttons" data-handler="save" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
+                    <button class="md-buttons" data-handler="cancel" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-lg"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
                 </div> 
@@ -618,6 +622,14 @@ console.log(button_handler);
     var link = `[](https://)`
     var img = `![](https://)`
     var cblock = `\`\`\``
+    var tbl = 
+`column1 | column2 | column3  
+------- | ------- | -------  
+column1 | column2 | column3  
+column1 | column2 | column3  
+column1 | column2 | column3`
+
+    var tilde = `~~`
 
     switch(button_handler) {
         case "code":
@@ -652,6 +664,15 @@ console.log(button_handler);
             break;
         case "codeblock":
             var newText = `${allText.substring(0, start)}${cblock}\n${sel}\n${cblock}${allText.substring(finish, allText.length)}`
+            break;
+        case "table":
+            var newText = `${allText.substring(0, start)}\n${tbl}\n${sel}${allText.substring(finish, allText.length)}`
+            break;
+        case "strike":
+            var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
+            break;
+        case "underline":
+            var newText = `${allText.substring(0, start)}<u>${sel}</u>${allText.substring(finish, allText.length)}`
             break;
         default:
             // Functionality
