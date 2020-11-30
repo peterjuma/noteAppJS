@@ -277,7 +277,7 @@ textarea {
 .md-preview {
   height: inherit;
   background-color: antiquewhite;
-  height: inherit;
+  min-height: 50%;
   display: none;
 }
 
