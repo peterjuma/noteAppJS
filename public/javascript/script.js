@@ -199,7 +199,7 @@ newNote.addEventListener("click", () => {
                     <button class="md-buttons md-icon" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-lg"></i></button>
                     <button class="md-buttons md-icon" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
                     <button class="md-buttons md-icon" data-handler="code" id="btnCode"><i class="fas fa-code fa-lg"></i></button>
-                    <button class="md-buttons md-icon" data-handler="codeblock" id="btnCodeBlock"><span style='font-size:18px;'>&#10100; &#10101;</span></button>
+                    <button class="md-buttons md-icon" data-handler="codeblock" id="btnCodeBlock"><span style='font-size:18px;'>&#10100; <i class="fa fa-terminal fa-xs" aria-hidden="true"></i> &#10101;</span></button>
                     <button class="md-buttons md-icon" data-handler="tasklist" id="btnTask"><i class="fas fa-tasks fa-lg"></i></button>
                     <button class="md-buttons md-icon" data-handler="table" id="btnTable"><i class="fas fa-table fa-lg"></i></button>
                     <button class="md-buttons md-icon" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
