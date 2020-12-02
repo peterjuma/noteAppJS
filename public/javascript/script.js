@@ -684,6 +684,8 @@ function getSel(button_handler) // javascript
     var finish = txtarea.selectionEnd;
     //obtain all Text
     var allText = txtarea.value;
+
+    // console.log(button_handler)
     
     // obtain the selected text
     var sel = allText.substring(start, finish);
@@ -700,6 +702,8 @@ column1 | column2 | column3
 column1 | column2 | column3`
 
     var tilde = `~~`
+
+    var hline = `----`
 
     switch(button_handler) {
         case "code":
@@ -740,6 +744,9 @@ column1 | column2 | column3`
             break;
         case "strike":
             var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
+            break;
+        case "hline":
+            var newText = `${allText.substring(0, start)}${sel}\n${hline}${allText.substring(finish, allText.length)}`
             break;
         default:
             // Functionality
