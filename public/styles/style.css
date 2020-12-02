@@ -178,18 +178,19 @@ input[type="text"]#title::placeholder {
   width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
-  height: calc(100% - 120px);
+  height: 90%;
 }
 
 .editnote {
   background: #F5F5F5;
-  border: #D8D8D8;
+  border: 2px #D8D8D8;
+  margin-top: 62px;
   /* box-shadow: none; */
   /* display: block; */
   /* font-size: 18px; */
   /* width: 100%; */
   /* position: relative; */
-  height: 93%;
+  height: 90.1%;
 }
 
 .continueBtn {
@@ -225,7 +226,7 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: inherit;
+  height: 91.5%;
 }
 
 input[type="text"] {
@@ -501,7 +502,7 @@ input[type=checkbox]:checked:after {
 
   .fa,
   * {
-    font-size: smaller;
+    font-size: 0.8rem;
   }
 
   #btnContainer {
@@ -522,20 +523,19 @@ input[type=checkbox]:checked:after {
     height: inherit;
     resize: none;
     padding: 5px;
-    font-size: smaller;
+    font-size: 1.0rem;
   }
 
   input[type="text"]#title {
     text-align: center;
     padding: 10px;
-    font-size: smaller;
+    font-size: medium;
   }
 
   .editnote {
-    margin-bottom: 3px;
+    margin-top: 53px;
     border-style: none;
-    height: 93%;
-    margin-bottom: 10px;
+    height: 89.3%;
   }
 
   .column p {
@@ -587,9 +587,8 @@ input[type=checkbox]:checked:after {
 
   .shownote {
     padding: 15px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    height: calc(100% - 105px);
+    margin-top: 5px;
+    height: 89%;
   }
 
   #title {
@@ -609,6 +608,37 @@ input[type=checkbox]:checked:after {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: inherit;
+      height: 89%;
+    }
+
+    .md-editor-tools {
+      /* display: none; */
+      font-size: 0.4rem;
+    }
+
+    .md-buttons {
+      border: none;
+      margin: auto;
+      outline: none;
+      padding: 2px;
+      background-color: #f1f1f1;
+      cursor: pointer;
+  }
+
+    .shwBtns {
+      padding-top: 5px;
+    }
+
+    .shwBtnsR {
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-around;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
+      display: none;
     }
 }

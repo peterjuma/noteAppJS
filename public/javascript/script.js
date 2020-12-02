@@ -121,7 +121,7 @@ const queryDB = () => {
 }
 
 window.onload = function() {
-    setTimeout(loadAfterTime, 100)
+    setTimeout(loadAfterTime, 150)
  }; 
   
  function loadAfterTime(){
@@ -202,9 +202,9 @@ newNote.addEventListener("click", () => {
                     <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                    <button class="md-buttons md-icon" data-tooltip="Underline" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>
                     <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-sm"></i></button>
                     <button class="md-buttons" data-tooltip="Save" data-handler="save" id="saveBtn" onclick="save()"><i class="fas fa-save fa-sm"></i></button>
+                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-sm"></i></button>
                     <button class="md-buttons" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-sm"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
@@ -409,7 +409,6 @@ function editNote(notediv) {
                     <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                    <button class="md-buttons md-icon" data-tooltip="Underline" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>
                     <button class="md-buttons" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-sm" aria-hidden="true"></i></button>
                     <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-sm"></i></button>
                     <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-sm"></i></button>
@@ -741,9 +740,6 @@ column1 | column2 | column3`
             break;
         case "strike":
             var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
-            break;
-        case "underline":
-            var newText = `${allText.substring(0, start)}<u>${sel}</u>${allText.substring(finish, allText.length)}`
             break;
         default:
             // Functionality
