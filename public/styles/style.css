@@ -3,10 +3,6 @@ body {
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
 }
 
-html,body {
-    height:100%;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -190,7 +186,7 @@ input[type="text"]#title::placeholder {
   /* font-size: 18px; */
   /* width: 100%; */
   /* position: relative; */
-  height: 90.1%;
+  height: 90%;
 }
 
 .continueBtn {
@@ -226,7 +222,7 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: 91.5%;
+  height: 90.35%;
 }
 
 input[type="text"] {
@@ -533,7 +529,7 @@ input[type=checkbox]:checked:after {
   }
 
   .editnote {
-    margin-top: 53px;
+    margin-top: 55px;
     border-style: none;
     height: 89.3%;
   }
@@ -554,7 +550,10 @@ input[type=checkbox]:checked:after {
 
   .left {
     height: 97.5%;
-    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .btn {
@@ -588,7 +587,9 @@ input[type=checkbox]:checked:after {
   .shownote {
     padding: 15px;
     margin-top: 5px;
-    height: 89%;
+    height: 89.35%;
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   #title {
@@ -608,7 +609,7 @@ input[type=checkbox]:checked:after {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: 89%;
+      height: 92.5%;
     }
 
     .md-editor-tools {
