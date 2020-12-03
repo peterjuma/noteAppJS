@@ -149,18 +149,18 @@ function showNote(notediv){
             var matching = request.result;
             if (matching) {
                 html = `
-                <div class="shwBtnsR">
-                    <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-sm"></i></button>
-                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-sm"></i></button>
-                    <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download fa-sm"></i></button>
-                    <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-sm"></i></button>
-                </div>
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
-                            <div id="noteHtml">
-                                <h1 class="notehead" id="title">${matching.title}</h1>
-                                <div class="notebody" id="notebody">${marked(matching.body)}</div>
-                            </div>
-                        </div>`
+                    <div class="shwBtnsR">
+                        <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
+                        <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+                        <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
+                        <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                    </div>
+                    <div id="noteHtml">
+                        <h1 class="notehead" id="title">${matching.title}</h1>
+                        <div class="notebody" id="notebody">${marked(matching.body)}</div>
+                    </div>
+                </div>`
                 editBox.style.display = "unset"
                 editBox.innerHTML = html;
             } else{}

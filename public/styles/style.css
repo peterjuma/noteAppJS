@@ -58,6 +58,15 @@ h1 {
   cursor: pointer;
   margin: 2px;
 }
+.btnSelect {
+  border: none;
+  outline: none;
+  padding: 5px;
+  background-color: #bbb;
+  cursor: pointer;
+  margin: 2px;
+  color: #24292e;
+}
 
 .btn:hover {
   background-color: #ddd;
@@ -73,10 +82,14 @@ h1 {
   margin-top: 7px;
 }
 
-/* .column:hover {
-  background-color: rgb(158, 157, 157);
-  color: white;
-} */
+.btnShow {
+  border: none;
+  outline: none;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  margin-right: 15px;
+  margin: 2px;
+}
 
 .column.selected {
   background-color: #666;
@@ -134,6 +147,7 @@ input[type="text"]#title {
   text-align: center;
   padding: 15px;
   font-size: 24px;
+  border-top: solid 1px #bbb;
 }
 
 input[type="text"]#title::placeholder {
@@ -160,7 +174,8 @@ input[type="text"]#title::placeholder {
 }
 
 .shownote {
-  padding: 25px;
+  padding: 100px;
+  padding-top: 0px;
   overflow: auto;
   background: #F5F5F5;
   border-color: #D8D8D8;
@@ -172,21 +187,20 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  margin-top: 5px;
   margin-bottom: 5px;
-  height: 90%;
+  height: 100%;
 }
 
 .editnote {
   background: #F5F5F5;
-  border: 2px #D8D8D8;
-  margin-top: 62px;
+  border: solid 1px #bbb;
+  margin-top: 63px;
   /* box-shadow: none; */
   /* display: block; */
   /* font-size: 18px; */
   /* width: 100%; */
   /* position: relative; */
-  height: 90%;
+  height: 94.7%;
 }
 
 .continueBtn {
@@ -197,21 +211,30 @@ input[type="text"]#title::placeholder {
 }
 
 .shwBtns {
-  padding-top: 10px;
+  padding-top: 7px;
   display: inline-flex;
   width: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.shwBtnsR {
-  padding-top: 10px;
-  padding-bottom: 5px;
+/* .shwBtnsR {
   display: inline-flex;
   width: 100%;
   align-items: center;
-  justify-content: flex-start;
   padding-left: 20px;
+} */
+
+.shwBtnsR {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  border-bottom: 0.5px solid #eaecef;
+  background-color: #f1f1f1;
 }
 
 .preview {
@@ -223,6 +246,7 @@ input[type="text"]#title::placeholder {
   font-size: 18px;
   width: 100%;
   height: 90.35%;
+  border: none;
 }
 
 input[type="text"] {
@@ -234,7 +258,6 @@ input[type="text"] {
   box-shadow: none;
   border: none;
   font-size: 18px;
-  font-family: "Courier New", Courier, monospace
 }
 
 textarea {
@@ -269,6 +292,8 @@ textarea {
   display: flex;
   padding: 5px;
   background-color: #f1f1f1;
+  border-bottom: solid 1px #bbb;
+  border-top: solid 1px #bbb;
 }
 
 .md-buttons {
@@ -502,7 +527,7 @@ input[type=checkbox]:checked:after {
   }
 
   #btnContainer {
-    padding-top: 15px;
+    padding-top: 16px;
     justify-content: space-evenly;
     display: flex;
   }
@@ -530,8 +555,9 @@ input[type=checkbox]:checked:after {
 
   .editnote {
     margin-top: 55px;
-    border-style: none;
-    height: 89.3%;
+    border-style: solid;
+    border: solid 2px #D8D8D8;
+    height: 95.4%;
   }
 
   .column p {
@@ -585,12 +611,13 @@ input[type=checkbox]:checked:after {
   }
 
   .shownote {
-    padding: 15px;
-    margin-top: 5px;
-    height: 89.35%;
-    margin-left: 0px;
-    margin-right: 0px;
-  }
+    padding: 25px;
+    padding-top: 0%;
+    /* margin-top: 5px; */
+    height: 100%;
+    /* margin-left: 0px; */
+    /* margin-right: 0px; */
+}
 
   #title {
     margin-top: 5px;
@@ -634,9 +661,11 @@ input[type=checkbox]:checked:after {
       display: inline-flex;
       width: 100%;
       align-items: center;
-      justify-content: space-around;
-      padding-left: 20px;
-      margin-top: 10px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-top: 0.5px solid #eaecef;
+      border-bottom: 0.5px solid #eaecef;
     }
 
     #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
