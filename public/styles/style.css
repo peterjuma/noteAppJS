@@ -200,7 +200,7 @@ input[type="text"]#title::placeholder {
   /* font-size: 18px; */
   /* width: 100%; */
   /* position: relative; */
-  height: 90.3%;
+  height: 90.2%;
 }
 
 .continueBtn {
@@ -261,7 +261,10 @@ input[type="text"] {
 }
 
 textarea {
-  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   width: 100%;
   overflow: auto;
   font-size: 100%;
@@ -273,7 +276,7 @@ textarea {
   box-shadow: none;
   border: none;
   font-family: "Courier New", Courier, monospace;
-  height: inherit;
+  height: 100%;
 }
 
 .editBtns {
