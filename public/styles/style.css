@@ -1,6 +1,7 @@
 body {
   background-color: whitesmoke;
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
+  height:100%;
 }
 
 * {
@@ -9,6 +10,11 @@ body {
 
 h1 {
   font-size: clamp(16px, 5vw, 34px);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
 }
 
 /* Create two equal columns that floats next to each other */
@@ -85,7 +91,7 @@ h1 {
 .btnShow {
   border: none;
   outline: none;
-  background-color: #f1f1f1;
+  background-color: #bbb;
   cursor: pointer;
   margin-right: 15px;
   margin: 2px;
@@ -102,39 +108,26 @@ h1 {
 }
 
 .left {
-  height: 98%;
+  height: inherit; 
   width: 32.3%;
-  position: fixed;
-  display: inline-block;
-  overflow-y: hidden;
-  /* Hide vertical scrollbar */
-  overflow-x: hidden;
-  /* Hide horizontal scrollbar */
   margin-left: 0.75%;
   border: solid 1px #D8D8D8;
-  left: 0;
   background-color: #bbb;
 }
 
+
 .right {
-  height: 98%;
   width: 66.3%;
   display: inline-block;
-  position: fixed;
-  margin-right: 0.75%;
   border: solid 1px #D8D8D8;
-  right: 0;
   background-color: #bbb;
-  /* padding-bottom: 10px; */
 }
 
 #notes {
-  overflow: auto;
-  resize: none;
-  height: inherit;
+  overflow: scroll;
   margin-top: 10px;
   border: solid 1px #D8D8D8;
-  height: 90%;
+  height: calc(100% - 120px);
 }
 
 .notehead {
@@ -187,20 +180,14 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  margin-bottom: 5px;
   height: 100%;
 }
 
 .editnote {
   background: #F5F5F5;
   border: solid 1px #bbb;
-  margin-top: 63px;
-  /* box-shadow: none; */
-  /* display: block; */
-  /* font-size: 18px; */
-  /* width: 100%; */
-  /* position: relative; */
-  height: 90.2%;
+  margin-top: 61px;
+  height: calc(100% - 117px);
 }
 
 .continueBtn {
@@ -220,21 +207,14 @@ input[type="text"]#title::placeholder {
   padding-right: 10px;
 }
 
-/* .shwBtnsR {
-  display: inline-flex;
-  width: 100%;
-  align-items: center;
-  padding-left: 20px;
-} */
-
 .shwBtnsR {
   display: inline-flex;
   width: 100%;
   align-items: center;
   justify-content: space-evenly;
-  padding: 5px;
+  padding: 20px;
   border-bottom: 0.5px solid #eaecef;
-  background-color: #f1f1f1;
+  background-color: #bbb;
 }
 
 .preview {
@@ -245,7 +225,7 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: 91%;
+  height: calc(100% - 115px);
   border: none;
 }
 
@@ -276,7 +256,7 @@ textarea {
   box-shadow: none;
   border: none;
   font-family: "Courier New", Courier, monospace;
-  height: 98.5%;
+  height: 100%;
 }
 
 .editBtns {
@@ -294,6 +274,7 @@ textarea {
 .md-editor-tools {
   display: flex;
   padding: 5px;
+  padding-left: 40px;
   background-color: #f1f1f1;
   border-bottom: solid 1px #bbb;
   border-top: solid 1px #bbb;
@@ -519,7 +500,6 @@ input[type=checkbox]:checked:after {
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 1100px) {
   body {
-    padding: 5px;
     padding-top: 0px;
     padding-bottom: 0px;
   }
@@ -530,7 +510,7 @@ input[type=checkbox]:checked:after {
   }
 
   #btnContainer {
-    padding-top: 16px;
+    padding-top: 10px;
     justify-content: space-evenly;
     display: flex;
   }
@@ -544,17 +524,25 @@ input[type=checkbox]:checked:after {
   }
 
   textarea {
-    height: inherit;
+    height: 100%;
     resize: none;
     padding: 5px;
     font-size: 1.0rem;
   }
 
   .editnote {
-    margin-top: 55px;
+    margin-top: 49px;
     border-style: solid;
     border: solid 2px #D8D8D8;
-    height: 89.5%;
+    /* height: 89.5%; */
+    height: calc(100% - 90px);
+  }
+
+    #notes {
+      overflow: scroll;
+      margin-top: 10px;
+      border: solid 1px #D8D8D8;
+      height: calc(100% - 82px);
   }
 
   .column p {
@@ -603,17 +591,10 @@ input[type=checkbox]:checked:after {
     cursor: pointer;
   }
 
-  #notes {
-    height: 90%;
-  }
-
-  .shownote {
-    padding: 25px;
-    padding-top: 0%;
-    /* margin-top: 5px; */
-    height: 100%;
-    /* margin-left: 0px; */
-    /* margin-right: 0px; */
+.shownote {
+  padding: 15px;
+  padding-top: 0%;
+  /* height: calc(100% - 42px); */
 }
 
 input[type="text"]#title {
@@ -632,7 +613,7 @@ input[type="text"]#title {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: 94.3%;
+      height: 88.8%;
     }
 
     .md-editor-tools {
