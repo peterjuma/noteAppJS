@@ -145,8 +145,8 @@ h1 {
 
 input[type="text"]#title {
   text-align: center;
-  padding: 15px;
-  font-size: 24px;
+  padding: 20px;
+  font-size: 18px;
   border-top: solid 1px #bbb;
 }
 
