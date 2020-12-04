@@ -556,14 +556,13 @@ input[type=checkbox]:checked:after {
 
   .right {
     height: 97.5%;
-    padding: 1px;
   }
 
   .left {
     height: 97.5%;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 0px;
+    padding-left: 10px;
     padding-right: 0px;
   }
 
