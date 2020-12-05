@@ -91,10 +91,21 @@ h1 {
 .btnShow {
   border: none;
   outline: none;
-  background-color: #bbb;
+  padding: 10px;
+  background-color: #f1f1f1;
   cursor: pointer;
-  margin-right: 15px;
   margin: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btnShow:hover {
+  background-color: #ddd;
+}
+
+.btnShow.active {
+  background-color: #666;
+  color: white;
 }
 
 .column.selected {
@@ -179,8 +190,9 @@ input[type="text"]#title::placeholder {
   box-shadow: none;
   display: block;
   font-size: 18px;
+  margin-top: 61px;
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
 
 .editnote {
@@ -209,12 +221,16 @@ input[type="text"]#title::placeholder {
 
 .shwBtnsR {
   display: inline-flex;
-  width: 100%;
   align-items: center;
   justify-content: space-evenly;
-  padding: 20px;
-  border-bottom: 0.5px solid #eaecef;
   background-color: #bbb;
+  position: fixed;
+  padding: 10px;
+  padding-top: 10px;
+}
+
+#noteHtml {
+  margin-top: 50px;
 }
 
 .preview {
@@ -590,10 +606,12 @@ input[type=checkbox]:checked:after {
     cursor: pointer;
   }
 
-.shownote {
-  padding: 15px;
-  padding-top: 0%;
-  /* height: calc(100% - 42px); */
+  .shownote {
+    padding: 15px;
+    padding-top: 0%;
+    margin-top: 51px;
+    width: 100%;
+    height: 92.2%;
 }
 
 input[type="text"]#title {
@@ -612,7 +630,7 @@ input[type="text"]#title {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: 88.8%;
+      height: 93.8%;
     }
 
     .md-editor-tools {
@@ -637,16 +655,30 @@ input[type="text"]#title {
 
     .shwBtnsR {
       display: inline-flex;
-      width: 100%;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      padding: 5px;
-      border-top: 0.5px solid #eaecef;
-      border-bottom: 0.5px solid #eaecef;
+      justify-content: space-evenly;
+      padding: 10px;
+      background-color: #bbb;
+      position: fixed;
+      padding: 0px;
+      padding-top: 10px;
     }
 
     #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
       display: none;
     }
+}
+
+@media screen and (max-width: 700px) {
+  .shownote {
+    padding: 15px;
+    padding-top: 0%;
+    margin-top: 49px;
+    width: 100%;
+    height: 88.7%;
+}
+
+.preview {
+  height: 90.8%;
+}
 }
