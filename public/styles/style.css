@@ -241,7 +241,7 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: calc(100% - 115px);
+  height: calc(100% - 111px);
   border: none;
 }
 
