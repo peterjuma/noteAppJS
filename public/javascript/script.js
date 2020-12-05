@@ -223,6 +223,7 @@ newNote.addEventListener("click", () => {
             getSel(this.dataset.handler) 
           })
     })
+    document.getElementById("title").focus();
 })
 
 // Delete single note by noteid
@@ -434,6 +435,7 @@ function editNote(notediv) {
                 })
 
                 document.getElementById("continue-edit").disabled = true;
+                document.getElementById("notebody").focus();
             } else { }
         }
     }
@@ -506,6 +508,7 @@ function continueEdit(noteid){
     })
 
     document.getElementById("continue-edit").disabled = true;
+    document.getElementById("notebody").focus();
 }
 
 // Save Markdown
@@ -691,8 +694,8 @@ function getSel(button_handler) // javascript
     var sel = allText.substring(start, finish);
     //append te text;
 
-    var link = `[](https://)`
-    var img = `![](https://)`
+    var link = `[link](url)`
+    var img = `![alt text](url)`
     var cblock = `\`\`\``
     var tbl = 
 `column1 | column2 | column3  
