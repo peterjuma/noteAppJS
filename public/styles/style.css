@@ -8,13 +8,19 @@ body {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 h1 {
   font-size: clamp(16px, 5vw, 34px);
 }
 
 .container {
+  height: 98vh;
   display: flex;
-  height: 98.8vh;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Create two equal columns that floats next to each other */
@@ -128,6 +134,7 @@ h1 {
 
 
 .right {
+  height: inherit; 
   width: 66.3%;
   display: inline-block;
   border: solid 1px #D8D8D8;
@@ -661,7 +668,7 @@ input[type="text"]#title {
       background-color: #bbb;
       position: fixed;
       padding: 0px;
-      padding-top: 10px;
+      padding-top: 15px;
     }
 
     #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
@@ -677,8 +684,10 @@ input[type="text"]#title {
     }
 
     .btnShow {
-      padding: 5px 5px;
-  }
+      padding: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -691,7 +700,7 @@ input[type="text"]#title {
   }
 
   .preview {
-    height: 90.8%;
+    height: calc(100% - 65px);
   }
 
   .note {
@@ -702,7 +711,9 @@ input[type="text"]#title {
   }
 
   .btnShow {
-    padding: 5px 5px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
 
@@ -716,7 +727,7 @@ input[type="text"]#title {
   }
 
   .preview {
-    height: 90.8%;
+    height: calc(100% - 65px);
   }
 
   .note {
@@ -726,17 +737,20 @@ input[type="text"]#title {
   .column {
     height: 30px;
   }
+
   .btnShow {
-    padding: 5px 5px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
 
 @media screen and (max-width: 300px) {
-    #notes {
-      overflow: scroll;
-      margin-top: 10px;
-      border: solid 1px #D8D8D8;
-      height: calc(100% - 82px);
+  #notes {
+    overflow: scroll;
+    margin-top: 10px;
+    border: solid 1px #D8D8D8;
+    height: calc(100% - 82px);
   }
 
   .left {
@@ -763,6 +777,8 @@ input[type="text"]#title {
   }
 
   .btnShow {
-    padding: 5px 5px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }

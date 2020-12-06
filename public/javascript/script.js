@@ -121,7 +121,7 @@ const queryDB = () => {
 }
 
 window.onload = function() {
-    setTimeout(loadAfterTime, 150)
+    setTimeout(loadAfterTime, 100)
  }; 
   
  function loadAfterTime(){
@@ -295,7 +295,7 @@ function addNote(note) {
     showNote(note.noteid)
     setTimeout(function(){
         document.getElementById(note.noteid).click()
-   }, 150); //wait for atleast  200 ms before click action
+   }, 100); //wait for atleast  200 ms before click action
 }
 
 // Get updated values from the UI and generate a JSON object
@@ -435,6 +435,7 @@ function editNote(notediv) {
                 })
 
                 document.getElementById("continue-edit").disabled = true;
+                document.getElementById("notebody").blur();
                 document.getElementById("notebody").focus();
             } else { }
         }
@@ -508,6 +509,7 @@ function continueEdit(noteid){
     })
 
     document.getElementById("continue-edit").disabled = true;
+    document.getElementById("notebody").blur();
     document.getElementById("notebody").focus();
 }
 
@@ -694,8 +696,8 @@ function getSel(button_handler) // javascript
     var sel = allText.substring(start, finish);
     //append te text;
 
-    var link = `[link](url)`
-    var img = `![alt text](url)`
+    var link = `[link](link-url)`
+    var img = `![alt text](image-url)`
     var cblock = `\`\`\``
     var tbl = 
 `column1 | column2 | column3  
@@ -711,54 +713,128 @@ column1 | column2 | column3`
     switch(button_handler) {
         case "code":
             var newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
+            } 
             break;
         case "bold":
             var newText = `${allText.substring(0, start)}\*\*${sel}\*\*${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "italic":
             var newText = `${allText.substring(0, start)}\_${sel}\_${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "heading":
             var newText = `${allText.substring(0, start)}\# ${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "link":
             var newText = `${allText.substring(0, start)}${link}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                var searchText = "link-url"
+                txtarea.value=newText;
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
+            }
             break;
         case "ulist":
             var newText = `${allText.substring(0, start)}\- ${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "olist":
             var newText = `${allText.substring(0, start)}1\. ${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "quote":
             var newText = `${allText.substring(0, start)}\> ${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "image":
             var newText = `${allText.substring(0, start)}${img}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                var searchText = "image-url"
+                txtarea.value=newText;
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
+            } 
             break;
         case "tasklist":
             var newText = `${allText.substring(0, start)}\-[] ${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "codeblock":
-            var newText = `${allText.substring(0, start)}${cblock}\n${sel}\n${cblock}${allText.substring(finish, allText.length)}`
+            var newText = `${allText.substring(0, start)}${cblock}\n${sel}\n${cblock}\n${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
+            } 
             break;
         case "table":
             var newText = `${allText.substring(0, start)}\n${tbl}\n${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "strike":
             var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         case "hline":
             var newText = `${allText.substring(0, start)}${sel}\n${hline}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+            } 
             break;
         default:
             // Functionality
             break;
     }
-
-    if (newText) {
-        txtarea.value=newText;
-    } 
 }
 
 loadDB()
