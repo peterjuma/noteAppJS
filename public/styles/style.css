@@ -197,9 +197,9 @@ input[type="text"]#title::placeholder {
   box-shadow: none;
   display: block;
   font-size: 18px;
-  margin-top: 61px;
+  margin-top: 61.89px;
   width: 100%;
-  height: calc(100% - 118px);
+  height: calc(100% - 119.5px);
 }
 
 .editnote {
