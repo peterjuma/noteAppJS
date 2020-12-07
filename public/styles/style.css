@@ -136,6 +136,7 @@ h1 {
   width: 75%;
   display: inline-block;
   border: solid 1px #D8D8D8;
+  border-right: solid 2px #D8D8D8;
   background-color: #bbb;
 }
 
@@ -191,20 +192,20 @@ input[type="text"]#title::placeholder {
   background-color: #FFF6D9;
   border-style: solid;
   border-radius: 0px;
-  border-width: 1px;
+  border-width: 0px;
   box-shadow: none;
   display: block;
   font-size: 18px;
-  margin-top: 61.89px;
+  margin-top: 62.9px;
   width: 100%;
-  height: calc(100% - 119.5px);
+  height: calc(100% - 120px);
 }
 
 .editnote {
   background: #F5F5F5;
-  border: solid 1px #bbb;
-  margin-top: 61px;
-  height: calc(100% - 117px);
+  border: none;
+  margin-top: 62px;
+  height: calc(100% - 119px);
 }
 
 .continueBtn {
@@ -635,7 +636,7 @@ input[type="text"]#title {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: calc(100% - 65px);
+      height: calc(100% - 66px);
     }
 
     .md-editor-tools {
@@ -692,9 +693,9 @@ input[type="text"]#title {
   .shownote {
     padding: 15px;
     padding-top: 0%;
-    margin-top: 50px;
+    margin-top: 50.5px;
     width: 100%;
-    height: calc(100% - 91px);
+    height: calc(100% - 91.5px);
   }
 
   .preview {
