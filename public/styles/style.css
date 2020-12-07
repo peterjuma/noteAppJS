@@ -126,7 +126,7 @@ h1 {
 
 .left {
   height: inherit; 
-  width: 32.3%;
+  width: 30%;
   margin-left: 0.75%;
   border: solid 1px #D8D8D8;
   background-color: #bbb;
@@ -135,7 +135,7 @@ h1 {
 
 .right {
   height: inherit; 
-  width: 66.3%;
+  width: 70%;
   display: inline-block;
   border: solid 1px #D8D8D8;
   background-color: #bbb;
@@ -205,8 +205,8 @@ input[type="text"]#title::placeholder {
 .editnote {
   background: #F5F5F5;
   border: solid 1px #bbb;
-  margin-top: 61px;
-  height: calc(100% - 117px);
+  margin-top: 59px;
+  height: calc(100% - 116px);
 }
 
 .continueBtn {
@@ -554,11 +554,11 @@ input[type=checkbox]:checked:after {
   }
 
   .editnote {
-    margin-top: 49px;
+    margin-top: 50px;
     border-style: solid;
     border: solid 2px #D8D8D8;
     /* height: 89.5%; */
-    height: calc(100% - 90px);
+    height: calc(100% - 92px);
   }
 
     #notes {
