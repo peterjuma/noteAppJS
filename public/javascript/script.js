@@ -123,16 +123,29 @@ const queryDB = () => {
 window.onload = function() {
     setTimeout(loadAfterTime, 100)
  }; 
-  
- function loadAfterTime(){
-    var notes = document.getElementsByClassName('note')
-    if(notes) {
-        notes[0].click() 
-    } 
- }
 
 let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
+  
+ function loadAfterTime(){
+    var notes = document.getElementsByClassName('note')
+    if(notes[0]) {
+        notes[0].click() 
+    } else {
+        html = `
+        <div class="shwBtnsR">
+            <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+        </div>
+        <div class="shownote markdown-body" id="editpad">
+            <div id="noteHtml">
+                <h1 class="notehead" id="title">TITLE</h1>
+                <div class="notebody" id="notebody">WELCOME</div>
+            </div>
+        </div>`
+        editBox.style.display = "unset"
+        editBox.innerHTML = html;
+    }
+ }
 
 // Show note when grid box clicked
 function showNote(notediv){
@@ -150,10 +163,10 @@ function showNote(notediv){
             if (matching) {
                 html = `
                 <div class="shwBtnsR">
-                    <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
-                    <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
-                    <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
-                    <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
+                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+                    <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
+                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
                 </div>
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                     <div id="noteHtml">
@@ -185,8 +198,12 @@ function noteSelect(){
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
-    html = `<div name="" class="editnote" id="editpad" contenteditable="false">
-                <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
+        html = `<div class="shwBtnsR">
+                    <button class="btn" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
+                    <button class="btn" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-lg"></i></button>
+                </div>
+                <div name="" class="editnote" id="editpad" contenteditable="false">
+                    <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
                 <div class="md-editor-tools">
                     <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic fa-sm"></i></button>
@@ -204,8 +221,6 @@ newNote.addEventListener("click", () => {
                     <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
                     <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-sm"></i></button>
                     <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-sm"></i></button>
-                    <button class="md-buttons" data-tooltip="Save" data-handler="save" id="saveBtn" onclick="save()"><i class="fas fa-save fa-sm"></i></button>
-                    <button class="md-buttons" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-sm"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
                 </div> 
@@ -398,7 +413,12 @@ function editNote(notediv) {
         request.onsuccess = (e) => {
             var matching = request.result;
             if (matching) {
-                html = `<div name="" class="editnote" id="editpad" contenteditable="false">
+                html = `
+                <div class="shwBtnsR">
+                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+                    <button class="btn" onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i></button>
+                </div>
+                <div name="" class="editnote" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
                 <div class="md-editor-tools">
                     <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" data-tooltip="Bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
@@ -417,8 +437,6 @@ function editNote(notediv) {
                     <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
                     <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-sm"></i></button>
                     <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-sm"></i></button>
-                    <button class="md-buttons" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-sm" aria-hidden="true"></i></button>
-                    <button class="md-buttons" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fas fa-window-close fa-sm"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
                 </div> 
@@ -474,7 +492,12 @@ function previewMarkdown(noteid){
 function continueEdit(noteid){
     const title = document.getElementById("title").value
     const body = document.getElementById("notebody").innerHTML
-    html = `<div name="" class="editnote" id="editpad" contenteditable="false">
+    html = `
+    <div class="shwBtnsR">
+        <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+        <button class="btn" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i></button>
+    </div>
+    <div name="" class="editnote" id="editpad" contenteditable="false">
     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
     <div class="md-editor-tools">
         <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" data-tooltip="Bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
@@ -491,11 +514,9 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-        <button class="md-buttons md-icon" data-tooltip="Underline" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>
-        <button class="md-buttons" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-sm" aria-hidden="true"></i></button>
+        <button class="md-buttons md-icon" data-tooltip="Underline" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>  
+        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
         <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-sm"></i></button>
-        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-sm"></i></button>
-        <button class="md-buttons" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-sm"></i></button>
     </div>
     <div class="md-preview" id="md-preview">
     </div> 
