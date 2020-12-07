@@ -150,10 +150,10 @@ function showNote(notediv){
             if (matching) {
                 html = `
                 <div class="shwBtnsR">
-                <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
-                <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
-                <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
-                <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                    <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
+                    <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+                    <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
+                    <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
                 </div>
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                     <div id="noteHtml">
@@ -336,19 +336,17 @@ function getNote(noteid) {
             if (matching) {
                 notesGrid.innerHTML = "";
                 html2 = `
-                    <div class="shwBtns">
-                        <button onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"  class="btn btnnote"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit fa-sm"></i></button>
-                        <button onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" class="btn btnnote"  onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-sm"></i></button>
-                    </div>
+                <div class="shwBtnsR">
+                    <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
+                    <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+                    <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
+                    <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                </div>
                     <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
-                                <div id="noteHtml">
-                                    <h1 class="notehead" id="title">${matching.title}</h1>
-                                    <div class="notebody" id="notebody">${marked(matching.body)}</div>
-                                </div>
-                            </div>
-                    <div class="shwBtns">
-                        <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-sm"></i></button>
-                        <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download fa-sm"></i></button>
+                        <div id="noteHtml">
+                            <h1 class="notehead" id="title">${matching.title}</h1>
+                            <div class="notebody" id="notebody">${marked(matching.body)}</div>
+                        </div>
                     </div>`
                 editBox.innerHTML = html2;
             } 
@@ -377,8 +375,10 @@ function updateNote(note) {
 }
 
 var gfm = turndownPluginGfm.gfm
+var tsklst = turndownPluginGfm.taskListItems
 const turndownService = new TurndownService();
 turndownService.use(gfm)
+turndownService.use(tsklst)
 
 // Get single note for editing
 function editNote(notediv) {
@@ -457,9 +457,7 @@ function previewMarkdown(noteid){
     for(var i = 0; i < elems.length; i++) {
         elems[i].disabled = true;
     }
-
     document.getElementById("continue-edit").disabled = false;
-
 }
 
 // Continue Editing
@@ -763,12 +761,21 @@ column1 | column2 | column3`
             var newText = `${allText.substring(0, start)}\- ${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
             } 
             break;
         case "olist":
             var newText = `${allText.substring(0, start)}1\. ${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
             } 
             break;
         case "quote":
