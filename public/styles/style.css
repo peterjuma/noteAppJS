@@ -204,7 +204,7 @@ input[type="text"]#title::placeholder {
 .editnote {
   background: #F5F5F5;
   border: none;
-  margin-top: 62px;
+  margin-top: 61px;
   height: calc(100% - 119px);
 }
 
