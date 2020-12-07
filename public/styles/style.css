@@ -97,12 +97,11 @@ h1 {
 .btnShow {
   border: none;
   outline: none;
-  padding: 10px;
+  padding: 13px;
   background-color: #f1f1f1;
   cursor: pointer;
   margin: 2px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-bottom: 0%;
 }
 
 .btnShow:hover {
