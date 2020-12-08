@@ -264,6 +264,9 @@ newNote.addEventListener("click", () => {
     document.getElementById('notebody').oninput = function() {
         document.getElementById("saveBtn").disabled = false;
     }
+    document.getElementById('notebody').onpaste = function() {
+        document.getElementById("saveBtn").disabled = false;
+    }
 })
 
 // Delete single note by noteid
@@ -474,11 +477,12 @@ function editNote(notediv) {
                 document.getElementById("continue-edit").disabled = true;
                 document.getElementById("notebody").blur();
                 document.getElementById("notebody").focus();
-                
                 document.getElementById("updateBtn").disabled = true;
-                document.getElementById('notebody').addEventListener('paste input', function(event) {
+                document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
+                document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
+                function enableSaveBtn(event) {
                     document.getElementById("updateBtn").disabled = false;
-                }, false)
+                }
             } else { }
         }
     }
