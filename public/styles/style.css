@@ -226,6 +226,17 @@ input[type="text"]#title::placeholder {
   padding-top: 10px;
 }
 
+.shwBtnsL {
+  padding-top: 7px;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
 .shwBtnsR {
   display: inline-flex;
   align-items: center;
