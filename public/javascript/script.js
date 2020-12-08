@@ -91,6 +91,17 @@ function deleteDB() {
     };
 }
 
+// Turndown
+var gfm = turndownPluginGfm.gfm
+var tsklst = turndownPluginGfm.taskListItems
+const turndownService = new TurndownService();
+turndownService.use(gfm)
+turndownService.use(tsklst)
+
+// Markdown-It
+var md = new window.markdownit()
+md.use(window.markdownitEmoji);
+
 /* Load Data */
 var notesGrid = document.getElementById("notes")
 const queryDB = () => {
@@ -134,7 +145,7 @@ var editBox = document.getElementById("editor")
     } else {
         html = `
         <div class="shwBtnsR">
-            <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+            <!--button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button-->
         </div>
         <div class="shownote markdown-body" id="editpad">
             <div id="noteHtml">
@@ -149,7 +160,7 @@ var editBox = document.getElementById("editor")
 
 // Show note when grid box clicked
 function showNote(notediv){
-    var noteid = notediv.id || notediv.name || notediv;
+    var noteid = notediv.id || notediv.name || notediv
     // Highlight note when clicked
     var connection = indexedDB.open(DBNAME);
     connection.onsuccess = function () {
@@ -171,7 +182,7 @@ function showNote(notediv){
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                     <div id="noteHtml">
                         <h1 class="notehead" id="title">${matching.title}</h1>
-                        <div class="notebody" id="notebody">${marked(matching.body)}</div>
+                        <div class="notebody" id="notebody">${md.render(matching.body)}</div>
                     </div>
                 </div>`
                 editBox.style.display = "unset"
@@ -181,6 +192,12 @@ function showNote(notediv){
         var e = document.createElement("base");
         e.target = "_blank";
         document.head.appendChild(e); 
+        setTimeout(function(){
+            // Highlight JS
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+                });
+        }, 20); //wait for atleast  200 ms before click action
     } 
 }
 
@@ -334,10 +351,10 @@ function update(editdiv) {
     updateNote(note)
 }
 
-function cancelEdit(notediv){
+function cancelEdit(noteid){
     document.getElementById("editor").style.display = "none"
-    if(notediv.name !== "undefined"){
-        showNote(notediv)
+    if(noteid !== "undefined"){
+        showNote(noteid)
     }
     
 }
@@ -394,12 +411,6 @@ function updateNote(note) {
    }, 100); // Wait for atleast  100 ms before click action
 }
 
-var gfm = turndownPluginGfm.gfm
-var tsklst = turndownPluginGfm.taskListItems
-const turndownService = new TurndownService();
-turndownService.use(gfm)
-turndownService.use(tsklst)
-
 // Get single note for editing
 function editNote(notediv) {
     var noteid = notediv.name;
@@ -416,7 +427,7 @@ function editNote(notediv) {
                 html = `
                 <div class="shwBtnsR">
                     <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
-                    <button class="btn" onclick='cancelEdit(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i></button>
+                    <button class="btn" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i></button>
                 </div>
                 <div name="" class="editnote" id="editpad" contenteditable="false">
                 <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
@@ -470,12 +481,14 @@ function editNote(notediv) {
     }
 }
 
+var prevBody = ""
+
 //Preview Markdown
 function previewMarkdown(noteid){
     const title = document.getElementById("title").innerHTML
-    const body = document.getElementById("notebody").value
+    prevBody = document.getElementById("notebody").value
     html = `<div class="preview markdown-body" data-noteid="preview" id="editpad">
-                <div id="notebody" class="notebody" name="notebody">${marked(body)}</div>
+                <div id="notebody" class="notebody" name="notebody">${md.render(prevBody)}</div>
             </div>`
     document.getElementById("md-editor").style.display = "none"
     document.getElementById("md-preview").style.display = "unset"
@@ -486,12 +499,16 @@ function previewMarkdown(noteid){
         elems[i].disabled = true;
     }
     document.getElementById("continue-edit").disabled = false;
+    // Highlight JS
+    document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+    });
 }
 
 // Continue Editing
 function continueEdit(noteid){
     const title = document.getElementById("title").value
-    const body = document.getElementById("notebody").innerHTML
+    var body = prevBody
     html = `
     <div class="shwBtnsR">
         <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
