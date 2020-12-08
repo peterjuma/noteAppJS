@@ -218,36 +218,36 @@ function noteSelect(){
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
-        html = `<div class="shwBtnsR">
-                    <button class="btn" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
-                    <button class="btn" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-lg"></i></button>
-                </div>
-                <div name="" class="editnote" id="editpad" contenteditable="false">
+        html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-                <div class="md-editor-tools">
-                    <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Link" data-handler="link" id="btnLink"><i class="fas fa-link fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
-                    <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
+                    <div class="md-editor-tools">
+                        <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Link" data-handler="link" id="btnLink"><i class="fas fa-link fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
+                        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
+                        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
+                    </div>
+                    <div class="md-preview" id="md-preview">
+                    </div> 
+                    <div class="md-editor" id="md-editor">
+                        <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
+                    </div> 
                 </div>
-                <div class="md-preview" id="md-preview">
-                </div> 
-                <div class="md-editor" id="md-editor">
-                    <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
-                </div> 
-            </div>`
+                    <div class="shwBtnsR">
+                    <button class="btn" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
+                    <button class="btn" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                 </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
@@ -265,6 +265,9 @@ newNote.addEventListener("click", () => {
         document.getElementById("saveBtn").disabled = false;
     }
     document.getElementById('notebody').onpaste = function() {
+        document.getElementById("saveBtn").disabled = false;
+    }
+    document.getElementById('notebody').propertychange = function() {
         document.getElementById("saveBtn").disabled = false;
     }
 })
@@ -431,36 +434,36 @@ function editNote(notediv) {
             var matching = request.result;
             if (matching) {
                 html = `
-                <div class="shwBtnsR">
-                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
-                    <button class="btn" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i></button>
-                </div>
                 <div name="" class="editnote" id="editpad" contenteditable="false">
-                <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-                <div class="md-editor-tools">
-                    <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" data-tooltip="Bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Link" data-handler="link" id="btnLink"><i class="fas fa-link fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
-                    <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i></button>
-                    <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i></button>
+                    <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
+                    <div class="md-editor-tools">
+                        <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" data-tooltip="Bold" id="btnBold"><i class="fas fa-bold fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Link" data-handler="link" id="btnLink"><i class="fas fa-link fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
+                        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i></button>
+                        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i></button>
+                    </div>
+                    <div class="md-preview" id="md-preview">
+                    </div> 
+                    <div class="md-editor" id="md-editor">
+                        <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
+                    </div> 
                 </div>
-                <div class="md-preview" id="md-preview">
-                </div> 
-                <div class="md-editor" id="md-editor">
-                    <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
-                </div> 
-            </div>`
+                <div class="shwBtnsR">
+                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+                    <button class="btn" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
                 document.getElementById("notebody").value = turndownService.turndown(marked(matching.body));
@@ -473,13 +476,13 @@ function editNote(notediv) {
                         getSel(this.dataset.handler) 
                     })
                 })
-
                 document.getElementById("continue-edit").disabled = true;
                 document.getElementById("notebody").blur();
                 document.getElementById("notebody").focus();
                 document.getElementById("updateBtn").disabled = true;
                 document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
+                document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
                 function enableSaveBtn(event) {
                     document.getElementById("updateBtn").disabled = false;
                 }
@@ -517,10 +520,6 @@ function continueEdit(noteid){
     const title = document.getElementById("title").value
     var body = prevBody
     html = `
-    <div class="shwBtnsR">
-        <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
-        <button class="btn" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i></button>
-    </div>
     <div name="" class="editnote" id="editpad" contenteditable="false">
     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
     <div class="md-editor-tools">
@@ -537,8 +536,7 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
-        <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-        <button class="md-buttons md-icon" data-tooltip="Underline" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>  
+        <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>  
         <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
         <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i></button>
     </div>
@@ -547,7 +545,11 @@ function continueEdit(noteid){
     <div class="md-editor" id="md-editor">
         <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
     </div> 
-</div>`
+    </div>
+    <div class="shwBtnsR">
+        <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
+        <button class="btn" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+    </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
@@ -560,7 +562,6 @@ function continueEdit(noteid){
             getSel(this.dataset.handler) 
         })
     })
-
     document.getElementById("continue-edit").disabled = true;
     document.getElementById("notebody").blur();
     document.getElementById("notebody").focus();
@@ -706,12 +707,13 @@ document.getElementById('selectBtn').onclick = () => {
 }
 
 // Search Button
+var input = document.getElementById('search');
 $('.search-bar .icon').on('click', function() {
     $(this).parent().toggleClass('active-search');
+    input.focus()
   });
 
   // Filter input value
-var input = document.getElementById('search');
 input.addEventListener("keyup", event => {
   if (event.isComposing || event.keyCode === 229) {
     return;
@@ -731,7 +733,6 @@ input.addEventListener("keyup", event => {
 });
 
 // Editor Buttons
-
 function getSel(button_handler) // javascript
 {  
     // obtain the object reference for the textarea>

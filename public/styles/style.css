@@ -149,20 +149,21 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 }
 
 .notehead {
-  text-align: center;
+  text-align: left;
   font-size: 48px;
   line-height: 800px;
 }
 
 input[type="text"]#title {
-  text-align: center;
+  text-align: left;
   padding: 20px;
+  padding-left: 50px;
   font-size: 18px;
   border-top: solid 1px #bbb;
 }
 
 input[type="text"]#title::placeholder {
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   color: #D8D8D8;
 }
@@ -231,7 +232,6 @@ input[type="text"]#title::placeholder {
   display: inline-flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -240,11 +240,10 @@ input[type="text"]#title::placeholder {
 .shwBtnsR {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
   background-color: #bbb;
   position: fixed;
-  padding: 10px;
-  padding-top: 10px;
+  padding-left: 10px;
+  padding-top: 8px;
   width: 74%;
 }
 
@@ -268,7 +267,6 @@ input[type="text"] {
   width: 100%;
   background-color: #f6f8fa;
   outline: none;
-  font-weight: 600;
   border-radius: 0px;
   box-shadow: none;
   border: none;
