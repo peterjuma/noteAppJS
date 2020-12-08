@@ -102,6 +102,9 @@ turndownService.use(tsklst)
 var md = new window.markdownit()
 md.use(window.markdownitEmoji);
 
+// Task List
+md.use(window.markdownitTaskLists)
+
 /* Load Data */
 var notesGrid = document.getElementById("notes")
 const queryDB = () => {
@@ -173,7 +176,7 @@ function showNote(notediv){
             var matching = request.result;
             if (matching) {
                 html = `
-                <div class="shwBtnsR">
+                <div class="shwBtns">
                     <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
                     <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
                     <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
@@ -197,7 +200,7 @@ function showNote(notediv){
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightBlock(block);
                 });
-        }, 20); //wait for atleast  200 ms before click action
+        }, 20); 
     } 
 }
 
@@ -236,8 +239,8 @@ newNote.addEventListener("click", () => {
                     <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                    <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-sm"></i></button>
-                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-sm"></i></button>
+                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
+                    <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
                 </div> 
@@ -446,8 +449,8 @@ function editNote(notediv) {
                     <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                     <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                    <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-sm"></i></button>
-                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-sm"></i></button>
+                    <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i></button>
+                    <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i></button>
                 </div>
                 <div class="md-preview" id="md-preview">
                 </div> 
@@ -473,9 +476,9 @@ function editNote(notediv) {
                 document.getElementById("notebody").focus();
                 
                 document.getElementById("updateBtn").disabled = true;
-                document.getElementById('notebody').oninput = function() {
+                document.getElementById('notebody').addEventListener('paste input', function(event) {
                     document.getElementById("updateBtn").disabled = false;
-                }
+                }, false)
             } else { }
         }
     }
@@ -533,7 +536,7 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
         <button class="md-buttons md-icon" data-tooltip="Underline" data-handler="underline" id="btnUnderline"><i class="fas fa-underline"></i></button>  
         <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
-        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-sm"></i></button>
+        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i></button>
     </div>
     <div class="md-preview" id="md-preview">
     </div> 

@@ -16,6 +16,8 @@ h1 {
   font-size: clamp(16px, 5vw, 34px);
 }
 
+p code.hljs, li code.hljs { display: inline; padding: .2em }
+
 .container {
   height: 98vh;
   display: flex;
@@ -215,16 +217,6 @@ input[type="text"]#title::placeholder {
 }
 
 .shwBtns {
-  padding-top: 7px;
-  display: inline-flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.shwBtnsR {
   display: inline-flex;
   align-items: center;
   justify-content: space-evenly;
@@ -232,6 +224,17 @@ input[type="text"]#title::placeholder {
   position: fixed;
   padding: 10px;
   padding-top: 10px;
+}
+
+.shwBtnsR {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #bbb;
+  position: fixed;
+  padding: 10px;
+  padding-top: 10px;
+  width: 74%;
 }
 
 #noteHtml {
