@@ -187,7 +187,7 @@ input[type="text"]#title::placeholder {
 
 .shownote {
   padding: 100px;
-  padding-top: 25px;
+  padding-top: 50px;
   overflow: auto;
   background: #F5F5F5;
   border-color: #D8D8D8;

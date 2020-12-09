@@ -196,11 +196,11 @@ function showNote(notediv){
         e.target = "_blank";
         document.head.appendChild(e); 
         setTimeout(function(){
-            // Highlight JS
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightBlock(block);
-                });
-        }, 20); 
+        // Highlight JS
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+            });
+    }, 20); 
     } 
 }
 
@@ -365,7 +365,6 @@ function cancelEdit(noteid){
     if(noteid !== "undefined"){
         showNote(noteid)
     }
-    
 }
 
 // Get single note to display in the list and details areas
@@ -743,8 +742,6 @@ function getSel(button_handler) // javascript
     var finish = txtarea.selectionEnd;
     //obtain all Text
     var allText = txtarea.value;
-
-    // console.log(button_handler)
     
     // obtain the selected text
     var sel = allText.substring(start, finish);
