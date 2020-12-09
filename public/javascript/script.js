@@ -391,7 +391,7 @@ function getNote(noteid) {
                     <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                         <div id="noteHtml">
                             <h1 class="notehead" id="title">${matching.title}</h1>
-                            <div class="notebody" id="notebody">${marked(matching.body)}</div>
+                            <div class="notebody" id="notebody">${md.render(matching.body)}</div>
                         </div>
                     </div>`
                 editBox.innerHTML = html2;

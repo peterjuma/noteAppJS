@@ -187,7 +187,7 @@ input[type="text"]#title::placeholder {
 
 .shownote {
   padding: 100px;
-  padding-top: 0px;
+  padding-top: 25px;
   overflow: auto;
   background: #F5F5F5;
   border-color: #D8D8D8;
@@ -253,6 +253,7 @@ input[type="text"]#title::placeholder {
 
 .preview {
   padding: 25px;
+  padding-left: 50px;
   overflow: auto;
   background: #F5F5F5;
   background-color: #FFF6D9;
