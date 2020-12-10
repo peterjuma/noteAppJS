@@ -105,6 +105,19 @@ md.use(window.markdownitEmoji);
 // Task List
 md.use(window.markdownitTaskLists)
 
+// Embedded video
+var html5medialPlugin = window.markdownitHTML5Embed;
+md.use(html5medialPlugin, { 
+        html5embed: { useLinkSyntax: true, useImageSyntax: true, 
+            attributes: {
+            'audio': 'width="33%" controls class="audioplayer"',
+            'video': 'width="33%" height="auto" class="audioplayer" controls' },
+            is_allowed_mime_type: function(mimetype) {
+                var v = document.createElement(mimetype[1]);
+                return v.canPlayType && v.canPlayType(mimetype[0]) !== ''; }
+        } 
+    });
+
 /* Load Data */
 var notesGrid = document.getElementById("notes")
 const queryDB = () => {
