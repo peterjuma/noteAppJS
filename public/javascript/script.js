@@ -434,6 +434,7 @@ function updateNote(note) {
 }
 
 // Get single note for editing
+var btnStatus = true;
 function editNote(notediv) {
     var noteid = notediv.name;
     var connection = indexedDB.open(DBNAME);
@@ -475,7 +476,7 @@ function editNote(notediv) {
                 </div>
                 <div class="shwBtnsR">
                     <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-                    <button class="btn" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                    <button class="btn" id="cancel-edit" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
                 </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
@@ -498,6 +499,7 @@ function editNote(notediv) {
                 document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
                 function enableSaveBtn(event) {
                     document.getElementById("updateBtn").disabled = false;
+                    btnStatus = false
                 }
             } else { }
         }
@@ -522,6 +524,8 @@ function previewMarkdown(noteid){
         elems[i].disabled = true;
     }
     document.getElementById("continue-edit").disabled = false;
+    document.getElementById("cancel-edit").disabled = true;
+    document.getElementById("updateBtn").disabled = true;
     // Highlight JS
     document.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightBlock(block);
@@ -561,7 +565,7 @@ function continueEdit(noteid){
     </div>
     <div class="shwBtnsR">
         <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-        <button class="btn" data-tooltip="Cancel" data-handler="cancel" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+        <button class="btn" data-tooltip="Cancel" data-handler="cancel" id="cancel-edit" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
     </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
@@ -569,6 +573,9 @@ function continueEdit(noteid){
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
     document.getElementById('notebody').addEventListener('keydown', handleTab);
+    document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
+    document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
+    document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
@@ -576,8 +583,14 @@ function continueEdit(noteid){
         })
     })
     document.getElementById("continue-edit").disabled = true;
+    document.getElementById("updateBtn").disabled = btnStatus;
+    document.getElementById("cancel-edit").disabled = false;
     document.getElementById("notebody").blur();
     document.getElementById("notebody").focus();
+    function enableSaveBtn(event) {
+        document.getElementById("updateBtn").disabled = false;
+        btnStatus = false
+    }
 }
 
 // Save Markdown
