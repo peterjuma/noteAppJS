@@ -229,8 +229,8 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="code" id="btnCode"><i class="fas fa-terminal fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
@@ -445,8 +445,8 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="code" id="btnCode"><i class="fas fa-terminal fa-sm"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
@@ -531,8 +531,8 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-sm"></i></button>
-        <button class="md-buttons md-icon" data-tooltip="Code" data-handler="code" id="btnCode"><i class="fas fa-code fa-sm"></i></button>
-        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="far fa-file-code fa-sm"></i></button>
+        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="code" id="btnCode"><i class="fas fa-terminal fa-sm"></i></button>
+        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table fa-sm"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
