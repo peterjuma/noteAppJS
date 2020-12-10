@@ -247,7 +247,8 @@ newNote.addEventListener("click", () => {
                     <div class="shwBtnsR">
                     <button class="btn" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
                     <button class="btn" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
-                 </div>`
+                 </div>
+                 <script src="public/javascript/taboverride.js"></script>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
@@ -667,19 +668,10 @@ function handlePaste (e) {
 };
 
 // Handle TAB
-function handleTab(e) {
-    if (e.key == 'Tab') {
-      e.preventDefault();
-      var start = this.selectionStart;
-      var end = this.selectionEnd;
-  
-      // set textarea value to: text before caret + tab + text after caret
-      this.value = this.value.substring(0, start) +
-        "\t" + this.value.substring(end);
-  
-      // put caret at right position again
-      this.selectionStart =
-        this.selectionEnd = start + 1;
+function handleTab(event) {
+    if ( event.keyCode === 9 ) {
+        getSel('tab')
+        event.preventDefault();
     }
   }
 
@@ -713,7 +705,7 @@ $('.search-bar .icon').on('click', function() {
   });
 
   // Filter input value
-input.addEventListener("keyup", event => {
+input.addEventListener("keyup", function (event) {
   if (event.isComposing || event.keyCode === 229) {
     return;
   }
@@ -755,15 +747,37 @@ function getSel(button_handler) // javascript
 ------- | ------- | -------  
 column1 | column2 | column3  
 column1 | column2 | column3  
-column1 | column2 | column3`
+column1 | column2 | column3`;
 
-    var tilde = `~~`
+    var tilde = `~~`;
 
-    var hline = `----`
+    var hline = `----`;
+
+    var tab = `\t`;
 
     switch(button_handler) {
         case "code":
             var newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.value=newText;
+                    var searchText = sel
+                    var index = txtarea.value.indexOf(searchText)
+                    if( index >= 0) {
+                        txtarea.selectionStart = index;
+                        txtarea.selectionEnd = index+searchText.length
+                    }
+                }
+            } 
+            break;
+        case "bold":
+            var newText = `${allText.substring(0, start)}\*\*${sel}\*\*${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
                 var searchText = sel
@@ -777,16 +791,19 @@ column1 | column2 | column3`
                 }
             } 
             break;
-        case "bold":
-            var newText = `${allText.substring(0, start)}\*\*${sel}\*\*${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-            } 
-            break;
         case "italic":
             var newText = `${allText.substring(0, start)}\_${sel}\_${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
             } 
             break;
         case "heading":
@@ -873,6 +890,23 @@ column1 | column2 | column3`
                 }
             } 
             break;
+        case "tab":
+            // console.log(sel.replace(/^/gm, "\t"))
+            sel = sel.replace(/^/gm, "\t")
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
+            } 
+            break;
         case "table":
             var newText = `${allText.substring(0, start)}\n${tbl}\n${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
@@ -883,12 +917,25 @@ column1 | column2 | column3`
             var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
             } 
             break;
         case "hline":
             var newText = `${allText.substring(0, start)}${sel}\n${hline}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                var searchText = sel
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
             } 
             break;
         default:
