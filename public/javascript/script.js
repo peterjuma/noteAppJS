@@ -190,10 +190,10 @@ function showNote(notediv){
             if (matching) {
                 html = `
                 <div class="shwBtns">
-                    <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
-                    <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
-                    <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
-                    <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='green'"><i class="fa fa-edit"></i></button>
+                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+                    <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
+                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='black'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
                 </div>
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                     <div id="noteHtml">
@@ -258,8 +258,8 @@ newNote.addEventListener("click", () => {
                     </div> 
                 </div>
                     <div class="shwBtnsR">
-                    <button class="btn" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i> Save</button>
-                    <button class="btn" onclick='cancelEdit("")' style="float: right;"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                    <button class="btn" id="saveBtn" onclick="save()" style="background-color: #2ea44f; color: white"><i class="fas fa-save fa-lg"></i></button>
+                    <button class="btn" onclick='cancelEdit("")' style="background-color: while; color: red"><i class="fas fa-window-close fa-lg"></i></button>
                  </div>
                  <script src="public/javascript/taboverride.js"></script>`
     editBox.innerHTML = html;
@@ -475,8 +475,8 @@ function editNote(notediv) {
                     </div> 
                 </div>
                 <div class="shwBtnsR">
-                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-                    <button class="btn" id="cancel-edit" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" style="background-color: #2ea44f; color: white"><i class="fa fa-save fa-lg" aria-hidden="true"></i> </button>
+                    <button class="btn" id="cancel-edit" onclick='cancelEdit(this)' name="${matching.noteid}" style="background-color: while; color: red"><i class="fas fa-window-close fa-lg"></i></button>
                 </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
@@ -564,8 +564,8 @@ function continueEdit(noteid){
     </div> 
     </div>
     <div class="shwBtnsR">
-        <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Save</button>
-        <button class="btn" data-tooltip="Cancel" data-handler="cancel" id="cancel-edit" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i> Cancel</button>
+        <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}" style="background-color: #2ea44f; color: white"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+        <button class="btn" data-tooltip="Cancel" data-handler="cancel" id="cancel-edit" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" style="background-color: while; color: red"><i class="fas fa-window-close fa-lg"></i></button>
     </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
