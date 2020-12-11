@@ -158,7 +158,8 @@ input[type="text"]#title {
   text-align: left;
   padding: 20px;
   padding-left: 50px;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 300;
   border-top: solid 1px #bbb;
 }
 
