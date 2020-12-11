@@ -771,10 +771,10 @@ function getSel(button_handler) // javascript
     var img = `![alt text](image-url)`
     var cblock = `\`\`\``
     var tbl = 
-`column1 | column2 | column3  
-------- | ------- | -------  
-column1 | column2 | column3  
-column1 | column2 | column3  
+`column1 | column2 | column3
+------- | ------- | -------
+column1 | column2 | column3
+column1 | column2 | column3
 column1 | column2 | column3`;
 
     var tilde = `~~`;
