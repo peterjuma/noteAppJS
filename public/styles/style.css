@@ -405,6 +405,27 @@ input[type=checkbox]:checked:after {
    left: 6px;
 }
 
+.md-editor-tools > button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.md-editor-tools > button {
+  border: 1px solid #0066cc;
+  background-color: #0099cc;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+.md-editor-tools > button:hover {
+  border: 1px solid #0099cc;
+  background-color: #00aacc;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
 .caption {
   padding-left: 2.1rem;
 }
@@ -567,12 +588,11 @@ input[type=checkbox]:checked:after {
   }
 
   .editnote {
-    margin-top: 50px;
+    margin-top: 32px;
     border-style: solid;
     border: solid 0px #D8D8D8;
-    /* height: 89.5%; */
-    height: calc(100% - 91px);
-  }
+    height: calc(100% - 64px);
+}
 
     #notes {
       overflow: scroll;
@@ -677,12 +697,12 @@ input[type="text"]#title {
     .shwBtnsR {
       display: inline-flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-between;
       background-color: #bbb;
       position: fixed;
-      padding: 0px;
-      padding-top: 15px;
-    }
+      padding: 2px 5px 0px 5px;
+      width: 73%;
+  }
 
     #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
       display: none;
