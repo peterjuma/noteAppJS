@@ -376,8 +376,8 @@ function update(editdiv) {
 
 function cancelEdit(noteid){
     document.getElementById("editor").style.display = "none"
-    if(noteid !== "undefined"){
-        showNote(noteid)
+    if(noteid.name !== "undefined"){
+        showNote(noteid.name)
     }
 }
 
