@@ -583,7 +583,7 @@ button[disabled]{
   textarea {
     height: 100%;
     resize: none;
-    padding: 5px;
+    padding: 25px;
     font-size: 1.0rem;
   }
 
@@ -723,7 +723,7 @@ input[type="text"]#title {
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1099px) {
   .shownote {
     padding: 15px;
     padding-top: 0%;
