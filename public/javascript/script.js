@@ -374,6 +374,26 @@ function update(editdiv) {
     updateNote(note)
 }
 
+// Update note in the database
+function updateNote(note) {
+    var connection = indexedDB.open(DBNAME);
+    connection.onsuccess = function () {
+        db = connection.result;
+        var tx = db.transaction('notes', "readwrite")
+        var store = tx.objectStore("notes")
+        store.put(note);
+        tx.oncomplete = function () {
+            document.getElementById(note.noteid).style.display = "none"
+        }
+    }
+    // getNote(note.noteid)
+    showNote(note.noteid)
+    setTimeout(function(){
+        document.getElementById(note.noteid).click()
+   }, 200); // Wait for atleast  100 ms before click action
+}
+
+
 function cancelEdit(noteid){
     document.getElementById("editor").style.display = "none"
     if(noteid.name !== "undefined"){
@@ -413,26 +433,6 @@ function getNote(noteid) {
     }
     queryDB()
 }
-
-// Update note in the database
-function updateNote(note) {
-    var connection = indexedDB.open(DBNAME);
-    connection.onsuccess = function () {
-        db = connection.result;
-        var tx = db.transaction('notes', "readwrite")
-        var store = tx.objectStore("notes")
-        store.put(note);
-        tx.oncomplete = function () {
-            document.getElementById(note.noteid).style.display = "none"
-        }
-    }
-    getNote(note.noteid)
-
-    setTimeout(function(){
-        document.getElementById(note.noteid).click()
-   }, 100); // Wait for atleast  100 ms before click action
-}
-
 // Get single note for editing
 var btnStatus = true;
 function editNote(notediv) {
@@ -727,7 +727,9 @@ document.getElementById('selectBtn').onclick = () => {
 var input = document.getElementById('search');
 $('.search-bar .icon').on('click', function() {
     $(this).parent().toggleClass('active-search');
-    input.focus()
+    $('#gridView').toggleClass('disparu');
+    $('#listView').toggleClass('disparu');
+    input.focus();
   });
 
   // Filter input value
@@ -833,7 +835,8 @@ column1 | column2 | column3`;
             } 
             break;
         case "heading":
-            var newText = `${allText.substring(0, start)}\# ${sel}${allText.substring(finish, allText.length)}`
+            sel = sel.replace(/^/gm, "# ")
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
             } 
@@ -854,7 +857,19 @@ column1 | column2 | column3`;
             }
             break;
         case "ulist":
-            var newText = `${allText.substring(0, start)}\- ${sel}${allText.substring(finish, allText.length)}`
+            var transsel="";
+            var match = /\r|\n/.exec(sel);
+            if (match) {
+                var lines = sel.split('\n');
+                for(var i = 0;i < lines.length;i++){
+                    if(lines[i].length > 0 && lines[i] !== undefined) {
+                        transsel +=`- ${lines[i]}\n`
+                    }  
+                }
+                sel = transsel;
+            } else {sel = sel.replace(/^/gm, "1. ")}
+
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
                 var searchText = sel
@@ -864,7 +879,19 @@ column1 | column2 | column3`;
             } 
             break;
         case "olist":
-            var newText = `${allText.substring(0, start)}1\. ${sel}${allText.substring(finish, allText.length)}`
+            var transsel="";
+            var match = /\r|\n/.exec(sel);
+            if (match) {
+                var lines = sel.split('\n');
+                for(var i = 0;i < lines.length;i++){
+                    if(lines[i].length > 0 && lines[i] !== undefined) {
+                        transsel +=`1. ${lines[i]}\n`
+                    }  
+                }
+                sel = transsel;
+            } else {sel = sel.replace(/^/gm, "1. ")}
+
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
                 txtarea.value=newText;
@@ -875,7 +902,8 @@ column1 | column2 | column3`;
             } 
             break;
         case "quote":
-            var newText = `${allText.substring(0, start)}\> ${sel}${allText.substring(finish, allText.length)}`
+            sel = sel.replace(/^/gm, "> ")
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
             } 
@@ -896,7 +924,19 @@ column1 | column2 | column3`;
             } 
             break;
         case "tasklist":
-            var newText = `${allText.substring(0, start)}\-[] ${sel}${allText.substring(finish, allText.length)}`
+            var transsel="";
+            var match = /\r|\n/.exec(sel);
+            if (match) {
+                var lines = sel.split('\n');
+                for(var i = 0;i < lines.length;i++){
+                    if(lines[i].length > 0) {
+                        transsel +=`- [ ] ${lines[i]}\n`
+                    }  
+                }
+                sel = transsel;
+            } else {sel = sel.replace(/^/gm, "\- [ ] ")}
+            
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
             } 
@@ -911,14 +951,19 @@ column1 | column2 | column3`;
                 txtarea.focus()
                 var index = txtarea.value.indexOf(searchText)
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
+                    txtarea.selectionStart = index; 
                     txtarea.selectionEnd = index+searchText.length
                 }
             } 
             break;
         case "tab":
             // console.log(sel.replace(/^/gm, "\t"))
-            sel = sel.replace(/^/gm, "\t")
+            // 
+            var match = /\r|\n/.exec(sel);
+            if (match) {
+                sel = sel.replace(/^/gm, "\t")
+            } else {sel = sel.replace(/^/gm, "\t")}
+            
             var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
@@ -937,6 +982,15 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}\n${tbl}\n${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                var searchText = tbl
+                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
+                txtarea.blur()
+                txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
             } 
             break;
         case "strike":
@@ -958,10 +1012,15 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}\n${hline}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
+                var searchText = hline
                 txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
+                var index = txtarea.value.indexOf(searchText)
+                if( index >= 0) {
+                    txtarea.selectionStart = index;
+                    txtarea.selectionEnd = index+searchText.length
+                }
             } 
             break;
         default:
