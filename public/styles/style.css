@@ -670,14 +670,14 @@ input[type="text"]#title {
   }
 
     .shwBtns {
-      padding-top: 5px;
+      padding: 0px;
+      padding-top: 10px;
     }
 
     .shwBtnsR {
       display: inline-flex;
       align-items: center;
       justify-content: space-evenly;
-      padding: 10px;
       background-color: #bbb;
       position: fixed;
       padding: 0px;
@@ -703,14 +703,19 @@ input[type="text"]#title {
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .shownote {
     padding: 15px;
     padding-top: 0%;
-    margin-top: 50.5px;
+    margin-top: 31.5px;
     width: 100%;
-    height: calc(100% - 91.5px);
-  }
+    height: calc(100% - 65px);
+}
+
+.shwBtns {
+  padding: 0px;
+  padding-top: 4px;
+}
 
   .preview {
     height: calc(100% - 65px);
@@ -728,6 +733,42 @@ input[type="text"]#title {
     margin-left: 5px;
     margin-right: 5px;
   }
+
+  #notes {
+    overflow: scroll;
+    margin-top: 1px;
+    border: solid 1px #D8D8D8;
+    height: calc(100% - 55px);
+}
+
+  .row {
+    padding: 0px;
+    padding-right: 0;
+    padding-top: 0;
+  }
+  .shwBtnsL {
+    padding-top: 4px;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: space-between;
+  }
+
+  #btnContainer {
+    padding-top: 0px;
+    padding-bottom: 1px;
+  }
+
+    .left {
+      height: 97.5%;
+      padding-top: 4px;
+      padding-bottom: 5px;
+      padding-left: 0px;
+      padding-right: 0px;
+  }
+
 }
 
 @media screen and (max-width: 300px) {
