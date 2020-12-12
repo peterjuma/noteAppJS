@@ -747,7 +747,7 @@ input[type="text"]#title {
     padding-top: 0%;
     margin-top: 31px;
     width: 100%;
-    height: calc(100% - 65px);
+    height: calc(100% - 62px);
 }
 
 .shwBtns {
