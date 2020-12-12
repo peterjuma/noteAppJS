@@ -1,6 +1,6 @@
 # About NoteApp
 
-NoteApp is a server-less lightweight and easy-to-use note-taking app that uses GitHub flavoured Markdown syntax for styling all forms of writing on the GitHub platform. NoteApp uses an in-browser database called [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) to store notes data inside user's browser.
+NoteApp is a server-less, lightweight and easy-to-use note-taking app that uses GitHub flavoured Markdown syntax for styling all forms of writing on the GitHub platform. NoteApp uses an in-browser database called [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) to store notes data inside user's browser.
 
 Features 
 ------------
@@ -9,7 +9,7 @@ Features
 - Filter notes' titles.
 - Syntax highliting for code blocks.
 - Detect HTML in clipboard content (on paste event) and convert to Markdown.
-- Emojis! :fire: :heart_eyes: :star2: :sunglasses: :sparkles: 
+- Emojis!! :fire: :heart_eyes: :star2: :sunglasses: :sparkles: 
 
 Syntax guide
 ------------
