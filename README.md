@@ -5,6 +5,7 @@ NoteApp is a server-less, lightweight and easy-to-use note-taking app that uses 
 Features 
 ------------
 - Add / Edit / Delete Notes.
+- Download Notes as Markdown files.
 - Markdown editing tools.
 - Filter notes' titles.
 - Syntax highliting for code blocks.
