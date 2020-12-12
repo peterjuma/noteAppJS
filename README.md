@@ -7,7 +7,7 @@ Features
 - Add / Edit / Delete Notes.
 - Download Notes as Markdown files.
 - Markdown editing tools.
-- Filter notes' titles.
+- Filter/Search notes.
 - Syntax highliting for code blocks.
 - Detect HTML in clipboard content (on paste event) and convert to Markdown.
 - Emojis!! :fire: :heart_eyes: :star2: :sunglasses: :sparkles: 
