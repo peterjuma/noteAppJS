@@ -285,6 +285,7 @@ newNote.addEventListener("click", () => {
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
     document.getElementById('notebody').addEventListener('keydown', handleTab);
+    document.getElementById('notebody').addEventListener('keyup', function(){ textAreaContent("notebody", "saveBtn") });
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
@@ -292,18 +293,17 @@ newNote.addEventListener("click", () => {
           })
     })
     document.getElementById("title").focus();
-    document.getElementById("saveBtn").disabled = true;
     document.getElementById("continue-edit").disabled = true;
-    document.getElementById('notebody').oninput = function() {
-        document.getElementById("saveBtn").disabled = false;
-    }
-    document.getElementById('notebody').onpaste = function() {
-        document.getElementById("saveBtn").disabled = false;
-    }
-    document.getElementById('notebody').propertychange = function() {
-        document.getElementById("saveBtn").disabled = false;
-    }
+    document.getElementById("saveBtn").disabled = true;
 })
+
+function textAreaContent(txtId, btnId) {
+    if(document.getElementById(txtId).value==="") { 
+            document.getElementById(btnId).disabled = true;
+       } else { 
+            document.getElementById(btnId).disabled = false;
+       }
+   }
 
 // Delete single note by noteid
 function deleteNote(notediv) {
@@ -503,6 +503,7 @@ function editNote(notediv) {
                 document.getElementById("editor").style.display = "unset"
                 document.getElementById("notebody").addEventListener('paste', handlePaste);
                 document.getElementById('notebody').addEventListener('keydown', handleTab);
+                document.getElementById('notebody').addEventListener('keyup', textAreaContent("notebody", "updateBtn"));
                 document.querySelectorAll('.md-icon').forEach(item => {
                     item.addEventListener('click', function(e){
                         // console.log(this.dataset.handler)
