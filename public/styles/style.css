@@ -133,6 +133,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 }
 
 .right {
+  position: relative;
   height: inherit; 
   width: 75%;
   display: inline-block;
@@ -244,11 +245,11 @@ input[type="text"]#title::placeholder {
   display: inline-flex;
   align-items: center;
   background-color: #bbb;
-  position: fixed;
+  position: absolute;
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 8px;
-  width: 74%;
+  width: 100%;
   justify-content: space-between;
 }
 
@@ -627,6 +628,10 @@ button[disabled]{
     height: 97.5%;
   }
 
+  .md-editor {
+    height: 90%;
+  }
+
   .left {
     height: 97.5%;
     padding-top: 5px;
@@ -708,13 +713,13 @@ input[type="text"]#title {
     }
 
     .shwBtnsR {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #bbb;
-      position: fixed;
+      background-color: #bbb; 
+      position: absolute;
       padding: 2px 5px 0px 5px;
-      width: 73%;
+      width: 100%;
   }
 
     #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
@@ -791,7 +796,7 @@ input[type="text"]#title {
     overflow: scroll;
     margin-top: 1px;
     border: solid 1px #D8D8D8;
-    height: calc(100% - 55px);
+    height: calc(100% - 53px);
 }
 
   .row {
@@ -800,12 +805,12 @@ input[type="text"]#title {
     padding-top: 0;
   }
   .shwBtnsL {
-    padding-top: 4px;
+    padding-top: 3px;
     display: inline-flex;
     width: 100%;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     justify-content: space-between;
   }
 
@@ -836,7 +841,6 @@ input[type="text"]#title {
   .search-bar .input-text {
     height: 21px;
 }
-
   .left {
     height: 97.5%;
     padding-top: 5px;
@@ -869,5 +873,17 @@ input[type="text"]#title {
   .shwBtns {
     padding: 0px;
     padding-top: 5px;
+  }
+
+  .md-editor-tools > button {
+    border: 1px solid #0066cc;
+    background-color: #0099cc;
+    color: #ffffff;
+    padding: 5px 5px;
+  }
+
+  textarea {
+    padding: 10px;
+    font-size: 0.8rem;
   }
 }
