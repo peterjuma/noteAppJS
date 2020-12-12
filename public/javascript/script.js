@@ -151,6 +151,28 @@ window.onload = function() {
     setTimeout(loadAfterTime, 100)
  }; 
 
+
+
+ function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                welcomebody = allText;
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
+
+
 let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
   
@@ -159,14 +181,14 @@ var editBox = document.getElementById("editor")
     if(notes[0]) {
         notes[0].click() 
     } else {
+        readTextFile("README.md");
         html = `
         <div class="shwBtnsR">
             <!--button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button-->
         </div>
         <div class="shownote markdown-body" id="editpad">
             <div id="noteHtml">
-                <h1 class="notehead" id="title">TITLE</h1>
-                <div class="notebody" id="notebody">WELCOME</div>
+                <div class="notebody" id="notebody">${md.render(welcomebody)}</div>
             </div>
         </div>`
         editBox.style.display = "unset"
