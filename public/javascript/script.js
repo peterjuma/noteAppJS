@@ -2,6 +2,10 @@
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
 
+var e = document.createElement("base");
+e.target = "_blank";
+document.head.appendChild(e);
+
 // Declare a loop variable
 var i;
 
@@ -67,13 +71,11 @@ class Notes {
 
 var DBNAME = "notesdb"
 var load = document.getElementById("load")
-// var clear = document.getElementById("clear")
 
 const loadDB = () => {
     console.log('Load the Notes database');
     let notes = new Notes(DBNAME);
     notes.initialLoad();
-    // document.getElementById("saveBtn").disabled = true;
 }
 
 // clear.addEventListener("click", deleteDB)
@@ -151,8 +153,6 @@ window.onload = function() {
     setTimeout(loadAfterTime, 100)
  }; 
 
-
-
  function readTextFile(file)
 {
     var rawFile = new XMLHttpRequest();
@@ -227,9 +227,6 @@ function showNote(notediv){
                 editBox.innerHTML = html;
             } else{}
         }
-        var e = document.createElement("base");
-        e.target = "_blank";
-        document.head.appendChild(e); 
         setTimeout(function(){
         // Highlight JS
         document.querySelectorAll('pre code').forEach((block) => {
