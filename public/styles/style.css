@@ -833,9 +833,9 @@ input[type="text"]#title {
 @media screen and (max-width: 250px) {
   #notes {
     overflow: scroll;
-    margin-top: 1px;
+    margin-top: 2px;
     border: solid 1px #D8D8D8;
-    height: calc(100% - 55px);
+    height: calc(100% - 56px);
   }
 
   .search-bar .input-text {
