@@ -722,7 +722,7 @@ input[type="text"]#title {
       width: 100%;
   }
 
-    #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
+    #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock, #btnHeading {
       display: none;
     }
 
