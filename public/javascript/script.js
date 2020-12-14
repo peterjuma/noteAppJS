@@ -226,7 +226,6 @@ var editBox = document.getElementById("editor")
         var viewport = scrollTop + $(ul).height();
         var elOffset = elHeight * selected;
         
-        console.log('select', selected, ' viewport', viewport, ' elOffset', elOffset);
         if (elOffset < scrollTop || (elOffset + elHeight) > viewport)
             $(ul).scrollTop(elOffset);
         el.click()
