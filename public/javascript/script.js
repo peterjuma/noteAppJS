@@ -201,7 +201,7 @@ var editBox = document.getElementById("editor")
 
     [].forEach.call(nodes, function(el) {
         el.addEventListener('click', function() {
-            select(this);
+            select(this); 
         })
     });
 
@@ -212,7 +212,7 @@ var editBox = document.getElementById("editor")
         if (e.keyCode === 40) { // down
             select(nodes[selected + 1]);
         }
-        e.preventDefault();
+        // e.preventDefault();
     });
 
     function select(el) {
