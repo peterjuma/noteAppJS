@@ -136,11 +136,11 @@ const queryDB = () => {
                 var date_diff = countDown(cursor.value.created_at)
                 var ago = []
                 date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
-                html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
+                html = `<li class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <input type="checkbox" id="check" name="checked" value='${cursor.key}' onclick="event.stopPropagation();" autocomplete="off">
                             <label for="checked"> ${cursor.value.title}</label><br><br>
                             <div class="caption"><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></div>
-                        </div>`;
+                        </li>`;
                 notesGrid.innerHTML += html;
                 noteSelect() 
                 cursor.continue()
@@ -177,7 +177,7 @@ let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
   
  function loadAfterTime(){
-    var notes = document.getElementsByClassName('note')
+    var notes = document.querySelectorAll('li');
     if(notes[0]) {
         notes[0].click() 
     } else {
@@ -193,6 +193,43 @@ var editBox = document.getElementById("editor")
         </div>`
         editBox.style.display = "unset"
         editBox.innerHTML = html;
+    }
+
+    var ul = document.querySelector('ul');
+    var nodes = document.querySelectorAll('li');
+    var selected = 0;
+
+    [].forEach.call(nodes, function(el) {
+        el.addEventListener('click', function() {
+            select(this);
+        })
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode === 38) { // up
+            select(nodes[selected - 1]);
+        }
+        if (e.keyCode === 40) { // down
+            select(nodes[selected + 1]);
+        }
+        e.preventDefault();
+    });
+
+    function select(el) {
+        var s = [].indexOf.call(nodes, el);
+        if (s === -1) return;
+        
+        selected = s;
+        
+        var elHeight = $(el).height();
+        var scrollTop = $(ul).scrollTop();
+        var viewport = scrollTop + $(ul).height();
+        var elOffset = elHeight * selected;
+        
+        console.log('select', selected, ' viewport', viewport, ' elOffset', elOffset);
+        if (elOffset < scrollTop || (elOffset + elHeight) > viewport)
+            $(ul).scrollTop(elOffset);
+        el.click()
     }
  }
 
@@ -240,8 +277,8 @@ function noteSelect(){
     var noteList = document.querySelectorAll(".note");
     for (var i = 0; i < noteList.length; i++) {
         noteList[i].addEventListener("click", function () {
-            noteList.forEach(b => b.classList.remove('highlight'));
-            this.classList.add('highlight')
+            noteList.forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected')
         });
     }
 }

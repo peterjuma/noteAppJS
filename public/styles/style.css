@@ -18,6 +18,11 @@ h1 {
 
 p code.hljs, li code.hljs { display: inline; padding: .2em }
 
+.highlight {
+  background-color: #666;
+  color: white;
+}
+
 .container {
   height: 98vh;
   display: flex;
@@ -488,11 +493,6 @@ button[disabled]{
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgb(129, 128, 128);
-}
-
-.highlight {
-  background-color: #666;
-  color: white;
 }
 
 /**
