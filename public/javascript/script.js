@@ -346,12 +346,12 @@ function save() {
     var noteTitle = document.getElementById("title").value
     // Get textarea value with line breaks
     var noteText = document.getElementById("notebody").value
-    var noteBody = noteText.replace(/\n\r?/g, '<br />');
+    // var noteBody = noteText.replace(/\n\r?/g, '<br />');
     var id = Math.round(Date.now() / 1000)  
     const note = {
         noteid: id.toString(),
         title: noteTitle,
-        body: noteBody,
+        body: noteText,
         created_at: id.toString(),
         updated_at: id.toString()
     };
@@ -367,11 +367,9 @@ function addNote(note) {
         var store = tx.objectStore("notes")
         store.add(note);
         tx.oncomplete = function () {
-            // console.log('Note added');
+            getNote(note.noteid)
         }
     }  
-    getNote(note.noteid)
-    showNote(note.noteid)
     setTimeout(function(){
         document.getElementById(note.noteid).click()
    }, 100); //wait for atleast  200 ms before click action
@@ -402,16 +400,10 @@ function updateNote(note) {
         var store = tx.objectStore("notes")
         store.put(note);
         tx.oncomplete = function () {
-            document.getElementById(note.noteid).style.display = "none"
+            showNote(note.noteid)
         }
     }
-    // getNote(note.noteid)
-    showNote(note.noteid)
-    setTimeout(function(){
-        document.getElementById(note.noteid).click()
-   }, 200); // Wait for atleast  100 ms before click action
 }
-
 
 function cancelEdit(noteid){
     document.getElementById("editor").style.display = "none"

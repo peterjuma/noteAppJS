@@ -360,7 +360,7 @@ hr {
   border-bottom: 0.5px solid #f6f8fa;
 }
 
-p,
+.column > p,
 label {
   font: 0.9rem 'Fira Sans', sans-serif;
 }
