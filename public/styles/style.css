@@ -55,6 +55,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 .note:hover{
   background-color: #777;
   color: white;
+  transition: background-color 0.3s ease-in;
 }
 
 /* Clear floats after the columns */
