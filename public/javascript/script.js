@@ -372,7 +372,7 @@ function addNote(note) {
     }  
     setTimeout(function(){
         document.getElementById(note.noteid).click()
-   }, 100); //wait for atleast  200 ms before click action
+   }, 500); //wait for atleast  200 ms before click action
 }
 
 // Get updated values from the UI and generate a JSON object
