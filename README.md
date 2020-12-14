@@ -5,11 +5,11 @@ NoteApp is a server-less, lightweight and easy-to-use note-taking app that uses 
 Features 
 ------------
 - Add / Edit / Delete Notes.
+- Copied HTML content automatically converted to Markdown on paste event.
+- Syntax highliting for code blocks.
 - Download Notes as Markdown files.
 - Markdown editing tools.
 - Filter/Search notes.
-- Syntax highliting for code blocks.
-- Detect HTML in clipboard content (on paste event) and convert to Markdown.
 - Emojis!! :fire: :heart_eyes: :star2: :sunglasses: :sparkles: 
 
 Syntax guide
