@@ -1057,13 +1057,11 @@ column1 | column2 | column3`;
 }
 
 // Event listener for the 'beforeunload' event
-// Event listener for the 'beforeunload' event
 window.addEventListener('beforeunload', function (e) {
-
-    var title = document.getElementById("title")
-    var body = document.getElementById("notebody")
+    var body = document.querySelector("#notebody")
+    var tagName = body.tagName.toLowerCase();
     // Check if any of the input fields are filled
-    if (title !== '' || body !== '') {
+    if ( body.value !== '' && tagName === 'textarea') {
         // Cancel the event and show alert that
         // the unsaved changes would be lost
         e.preventDefault();
