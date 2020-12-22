@@ -192,6 +192,13 @@ function loadHome() {
     if(noteList.length > 0) {
         noteList.forEach(b => b.classList.remove('highlight'));
     }
+
+    setTimeout(function(){
+        // Highlight JS
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+            });
+    }, 20); 
 }
   
  function loadAfterTime(){
@@ -1048,6 +1055,21 @@ column1 | column2 | column3`;
             break;
     }
 }
+
+// Event listener for the 'beforeunload' event
+// Event listener for the 'beforeunload' event
+window.addEventListener('beforeunload', function (e) {
+
+    var title = document.getElementById("title")
+    var body = document.getElementById("notebody")
+    // Check if any of the input fields are filled
+    if (title !== '' || body !== '') {
+        // Cancel the event and show alert that
+        // the unsaved changes would be lost
+        e.preventDefault();
+        e.returnValue = '';
+    }
+});
 
 loadDB()
 queryDB()

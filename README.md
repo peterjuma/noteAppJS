@@ -103,6 +103,32 @@ Any URL (like `http://www.github.com/`) will be automatically converted into a c
 
 Any word wrapped with two tildes (like `~~this~~`) will appear crossed out.
 
+
+### Syntax Highlighting
+
+This will find and highlight code inside of `<pre><code>` tags; it tries to detect the language automatically.
+
+
+```
+#!/bin/bash
+
+###### CONFIG
+ACCEPTED_HOSTS="/root/.hag_accepted.conf"
+BE_VERBOSE=false
+
+if [ "$UID" -ne 0 ]
+then
+ echo "Superuser rights required"
+ exit 2
+fi
+
+genApacheConf(){
+ echo -e "# Host ${HOME_DIR}$1/$2 :"
+}
+
+echo '"quoted"' | tr -d \" > text.txt
+```
+
 ### Emoji
 
 NoteApp supports [emojis](https://www.webfx.com/tools/emoji-cheat-sheet/)!
