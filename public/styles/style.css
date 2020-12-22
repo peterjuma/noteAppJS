@@ -417,15 +417,15 @@ button[disabled]{
 }
 
 .md-editor-tools > button {
-  border: 1px solid #0066cc;
-  background-color: #0099cc;
+  border: 1px solid #222;
+  background-color: #666;
   color: #ffffff;
   padding: 5px 10px;
 }
 
 .md-editor-tools > button:hover {
-  border: 1px solid #0099cc;
-  background-color: #00aacc;
+  border: 1px solid #222;
+  background-color: #888;
   color: #ffffff;
   padding: 5px 10px;
 }
