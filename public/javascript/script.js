@@ -172,29 +172,38 @@ window.onload = function() {
 }
 
 
-
 let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
+
+function loadHome() {
+    readTextFile("README.md");
+    html = `
+    <div class="shwBtnsR">
+        <!--button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button-->
+    </div>
+    <div class="shownote markdown-body" id="editpad">
+        <div id="noteHtml">
+            <div class="notebody" id="notebody">${md.render(welcomebody)}</div>
+        </div>
+    </div>`
+    editBox.style.display = "unset"
+    editBox.innerHTML = html;
+    var noteList = document.querySelectorAll(".note");
+    if(noteList.length > 0) {
+        noteList.forEach(b => b.classList.remove('highlight'));
+    }
+}
   
  function loadAfterTime(){
     var notes = document.getElementsByClassName('note')
     if(notes[0]) {
         notes[0].click() 
     } else {
-        readTextFile("README.md");
-        html = `
-        <div class="shwBtnsR">
-            <!--button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button-->
-        </div>
-        <div class="shownote markdown-body" id="editpad">
-            <div id="noteHtml">
-                <div class="notebody" id="notebody">${md.render(welcomebody)}</div>
-            </div>
-        </div>`
-        editBox.style.display = "unset"
-        editBox.innerHTML = html;
+        loadHome() 
     }
  }
+
+document.getElementById("homeBtn").addEventListener('click', loadHome);
 
 // Show note when grid box clicked
 function showNote(notediv){
