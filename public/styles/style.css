@@ -159,7 +159,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 input[type="text"]#title {
   text-align: left;
   padding: 20px;
-  padding-left: 50px;
+  padding-left: 40px;
   font-size: 20px;
   font-weight: 300;
   border-top: solid 1px #bbb;
@@ -282,7 +282,7 @@ input[type="text"] {
 }
 
 textarea {
-  padding-left: 50px;
+  padding-left: 40px;
   padding-right: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
