@@ -283,8 +283,8 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
-                        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i></button>
+                        <button class="md-buttons" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
+                        <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i> Preview</button>
                     </div>
                     <div class="md-preview" id="md-preview">
                     </div> 
@@ -492,8 +492,8 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i></button>
-                        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i></button>
+                        <button class="md-buttons" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i> Edit</button>
+                        <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
                     </div>
                     <div class="md-preview" id="md-preview">
                     </div> 
@@ -581,8 +581,8 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>  
-        <button class="md-buttons" data-tooltip="Edit" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
-        <button class="md-buttons" data-tooltip="Preview" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i></button>
+        <button class="md-buttons" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
+        <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
     </div>
     <div class="md-preview" id="md-preview">
     </div> 
