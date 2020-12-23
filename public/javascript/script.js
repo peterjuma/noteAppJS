@@ -794,8 +794,8 @@ function getSel(button_handler) // javascript
     var sel = allText.substring(start, finish);
     //append te text;
 
-    var link = `[link](link-url)`
-    var img = `![alt text](image-url)`
+    var link = `[link](${sel})`
+    var img = `![alt text](${sel})`
     var cblock = `\`\`\``
     var tbl = 
 `column1 | column2 | column3
@@ -805,28 +805,20 @@ column1 | column2 | column3
 column1 | column2 | column3`;
 
     var tilde = `~~`;
-
     var hline = `----`;
-
-    var tab = `\t`;
 
     switch(button_handler) {
         case "code":
             var newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.value=newText;
-                    var searchText = sel
-                    var index = txtarea.value.indexOf(searchText)
                     if( index >= 0) {
-                        txtarea.selectionStart = index;
-                        txtarea.selectionEnd = index+searchText.length
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
                     }
                 }
             } 
@@ -835,14 +827,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}\*\*${sel}\*\*${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+2;
+                        txtarea.selectionEnd = finish+2;
+                    }
                 }
             } 
             break;
@@ -850,14 +842,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}\_${sel}\_${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
                 }
             } 
             break;
@@ -866,22 +858,30 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = txtarea.selectionEnd = start+2; 
+                    }
+                }
             } 
             break;
         case "link":
             var newText = `${allText.substring(0, start)}${link}${allText.substring(finish, allText.length)}`
             if (newText) {
-                var searchText = "link-url"
                 txtarea.value=newText;
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+7;
+                        txtarea.selectionEnd = finish+7;
+                    }
                 }
-            }
+            } 
             break;
         case "ulist":
             var transsel="";
@@ -899,10 +899,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = txtarea.selectionEnd = start+2; 
+                    }
+                }
             } 
             break;
         case "olist":
@@ -921,11 +925,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = txtarea.selectionEnd = start+3; 
+                    }
+                }
             } 
             break;
         case "quote":
@@ -933,20 +940,28 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = txtarea.selectionEnd = start+2; 
+                    }
+                }
             } 
             break;
         case "image":
             var newText = `${allText.substring(0, start)}${img}${allText.substring(finish, allText.length)}`
             if (newText) {
-                var searchText = "image-url"
                 txtarea.value=newText;
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+12;
+                        txtarea.selectionEnd = finish+12;
+                    }
                 }
             } 
             break;
@@ -966,26 +981,32 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-            } 
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = txtarea.selectionEnd = start+6; 
+                    }
+                }
+            }
             break;
         case "codeblock":
             var newText = `${allText.substring(0, start)}${cblock}\n${sel}\n${cblock}\n${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index; 
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+4;
+                        txtarea.selectionEnd = finish+4;
+                    }
                 }
             } 
             break;
         case "tab":
-            // console.log(sel.replace(/^/gm, "\t"))
-            // 
             var match = /\r|\n/.exec(sel);
             if (match) {
                 sel = sel.replace(/^/gm, "\t")
@@ -995,12 +1016,10 @@ column1 | column2 | column3`;
             if (newText) {
                 txtarea.value=newText;
                 var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
                     txtarea.selectionEnd = index+searchText.length
                 }
             } 
@@ -1009,14 +1028,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}\n${tbl}\n${sel}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = tbl
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
                 }
             } 
             break;
@@ -1024,14 +1043,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = sel
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+2;
+                        txtarea.selectionEnd = finish+2;
+                    }
                 }
             } 
             break;
@@ -1039,14 +1058,14 @@ column1 | column2 | column3`;
             var newText = `${allText.substring(0, start)}${sel}\n${hline}${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
-                var searchText = hline
-                txtarea.selectionStart = txtarea.selectionEnd = txtarea.value.indexOf(searchText)
                 txtarea.blur()
                 txtarea.focus()
-                var index = txtarea.value.indexOf(searchText)
+                index = start;
                 if( index >= 0) {
-                    txtarea.selectionStart = index;
-                    txtarea.selectionEnd = index+searchText.length
+                    if( index >= 0) {
+                        txtarea.selectionStart = start;
+                        txtarea.selectionEnd = finish;
+                    }
                 }
             } 
             break;
