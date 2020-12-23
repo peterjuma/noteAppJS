@@ -1000,8 +1000,8 @@ column1 | column2 | column3`;
                 index = start;
                 if( index >= 0) {
                     if( index >= 0) {
-                        txtarea.selectionStart = start+4;
-                        txtarea.selectionEnd = finish+4;
+                        txtarea.selectionStart = start+5;
+                        txtarea.selectionEnd = finish+5;
                     }
                 }
             } 
