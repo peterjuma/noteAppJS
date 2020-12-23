@@ -992,7 +992,7 @@ column1 | column2 | column3`;
             }
             break;
         case "codeblock":
-            var newText = `${allText.substring(0, start)}${cblock}\n${sel}\n${cblock}\n${allText.substring(finish, allText.length)}`
+            var newText = `${allText.substring(0, start)}\n${cblock}\n${sel}\n${cblock}\n${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
                 txtarea.blur()
