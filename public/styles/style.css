@@ -221,14 +221,15 @@ input[type="text"]#title::placeholder {
 }
 
 .shwBtns {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-evenly;
+  display: flex;
+  justify-content: flex-start;
   background-color: #bbb;
   position: fixed;
   padding: 10px;
   padding-top: 10px;
   padding-bottom: 0px;
+  width: 100%;
+  position: absolute;
 }
 
 .shwBtnsL {
@@ -239,6 +240,7 @@ input[type="text"]#title::placeholder {
   padding-left: 10px;
   padding-right: 10px;
   justify-content: space-between;
+  position: relative;
 }
 
 
