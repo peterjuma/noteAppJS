@@ -309,8 +309,8 @@ textarea {
 }
 
 #btnContainer {
-  padding-top: 10px;
-  justify-content: space-evenly;
+  padding: 10px 10px 0 10px;
+  justify-content: space-between;
   display: flex;
 }
 
