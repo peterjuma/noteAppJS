@@ -316,7 +316,7 @@ textarea {
 
 .md-editor-tools {
   display: flex;
-  padding: 5px;
+  padding: 1px;
   padding-left: 40px;
   background-color: #f1f1f1;
   border-bottom: solid 1px #bbb;
@@ -419,14 +419,12 @@ button[disabled]{
 }
 
 .md-editor-tools > button {
-  border: 1px solid #222;
   background-color: #666;
   color: #ffffff;
   padding: 5px 10px;
 }
 
 .md-editor-tools > button:hover {
-  border: 1px solid #222;
   background-color: #888;
   color: #ffffff;
   padding: 5px 10px;
