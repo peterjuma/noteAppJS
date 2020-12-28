@@ -40,7 +40,8 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 .row {
   padding: 2.5px;
   padding-right: 2.5px;
-  padding-top: 1px;
+  padding-top: 7.5px;
+  padding-left: 7.5px;
 }
 
 .note {
