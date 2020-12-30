@@ -277,7 +277,7 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="code" id="btnCode"><i class="fas fa-terminal"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
@@ -300,8 +300,8 @@ newNote.addEventListener("click", () => {
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
-    document.getElementById('notebody').addEventListener('keydown', handleTab);
-    document.getElementById('notebody').addEventListener('keyup', function(){ textAreaContent("notebody", "saveBtn") });
+    document.getElementById('notebody').addEventListener('keydown', handleKey);
+    document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "saveBtn") });
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
@@ -486,7 +486,7 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="code" id="btnCode"><i class="fas fa-terminal"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
@@ -510,7 +510,7 @@ function editNote(notediv) {
                 document.getElementById("notebody").value = turndownService.turndown(marked(matching.body));
                 document.getElementById("editor").style.display = "unset"
                 document.getElementById("notebody").addEventListener('paste', handlePaste);
-                document.getElementById('notebody').addEventListener('keydown', handleTab);
+                document.getElementById('notebody').addEventListener('keydown', handleKey);
                 document.querySelectorAll('.md-icon').forEach(item => {
                     item.addEventListener('click', function(e){
                         // console.log(this.dataset.handler)
@@ -575,7 +575,7 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
-        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="code" id="btnCode"><i class="fas fa-terminal"></i></button>
+        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
@@ -599,7 +599,7 @@ function continueEdit(noteid){
     document.getElementById("notebody").value = turndownService.turndown(marked(body));
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
-    document.getElementById('notebody').addEventListener('keydown', handleTab);
+    document.getElementById('notebody').addEventListener('keydown', handleKey);
     document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
     document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
     document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
@@ -721,12 +721,34 @@ function handlePaste (e) {
 };
 
 // Handle TAB
-function handleTab(event) {
-    if ( event.keyCode === 9 ) {
+function handleKey(event) {
+    if ( event.code === "Tab" ) {
         getSel('tab')
         event.preventDefault();
+    } else if ( event.key === "\""){
+        getSel('doublequote')
+        event.preventDefault();
+    } else if ( event.key === "\'"){
+        getSel('singlequote')
+        event.preventDefault();
+    } else if ( event.key === "\("){
+        getSel('brackets')
+        event.preventDefault();
+    } else if ( event.key === "\{"){
+        getSel('curlybrackets')
+        event.preventDefault();
+    } else if ( event.key === "\["){
+        getSel('squarebrackets')
+        event.preventDefault();
+    } else if ( event.key === "\<"){
+        getSel('anglebrackets')
+        event.preventDefault();
+    } else if ( event.key === "\`") {
+        getSel('backquote')
+        event.preventDefault();
     }
-  }
+}
+
 
 // Delete selected notes
 document.getElementById('delete').onclick = function() {
@@ -808,8 +830,98 @@ column1 | column2 | column3`;
     var hline = `----`;
 
     switch(button_handler) {
-        case "code":
+        case "backquote":
             var newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
+                }
+            } 
+            break;
+        case "doublequote":
+            var newText = `${allText.substring(0, start)}\"${sel}\"${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
+                }
+            } 
+            break;
+        case "singlequote":
+            var newText = `${allText.substring(0, start)}\'${sel}\'${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
+                }
+            } 
+            break;
+        case "brackets":
+            var newText = `${allText.substring(0, start)}\(${sel}\)${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
+                }
+            } 
+            break;
+        case "curlybrackets":
+            var newText = `${allText.substring(0, start)}\{${sel}\}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
+                }
+            } 
+            break;
+        case "squarebrackets":
+            var newText = `${allText.substring(0, start)}\[${sel}\]${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                index = start;
+                if( index >= 0) {
+                    if( index >= 0) {
+                        txtarea.selectionStart = start+1;
+                        txtarea.selectionEnd = finish+1;
+                    }
+                }
+            } 
+            break;
+        case "anglebrackets":
+            var newText = `${allText.substring(0, start)}\<${sel}\>${allText.substring(finish, allText.length)}`
             if (newText) {
                 txtarea.value=newText;
                 txtarea.blur()
