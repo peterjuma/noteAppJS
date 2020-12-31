@@ -643,7 +643,7 @@ function continueEdit(noteid){
             getSel(this.dataset.handler) 
         })
     })
-    document.getElementById("updateBtn").disabled = btnStatus;
+    btnStatus = document.getElementById("updateBtn").disabled;
     document.getElementById("continueEdit").disabled = true;
     document.getElementById("cancelEdit").disabled = false;
     function enableSaveBtn(event) {
