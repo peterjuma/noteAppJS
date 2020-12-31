@@ -90,7 +90,8 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 }
 
 .btn:hover {
-  background-color: #ddd;
+  background-color: #555;
+  color: white;
 }
 
 .btn.active {
@@ -260,6 +261,21 @@ input[type="text"]#title::placeholder {
   justify-content: space-between;
   position: relative;
 }
+
+/* .shwBtnsR > button:disabled, button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+} */
+
+.shwBtnsR > button {
+  background-color: #666;
+  color: #ffffff;
+}
+
+/* #saveBtn  {color: white; background-color: #28a745;;} */
+/* #cancelEdit {color: white; background-color: red;}  */
+/* #previewBtn {color: white; background-color: #28a745;} */
 
 #noteHtml {
   margin-top: 50px;

@@ -264,7 +264,7 @@ var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
         html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-                    <div class="md-editor-tools">
+                    <div class="md-editor-tools" id="mdtools">
                         <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" id="btnBold"><i class="fas fa-bold"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading"></i></button>
@@ -279,7 +279,7 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                        <button class="md-buttons" data-handler="continue-edit" id="continue-edit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
+                        <button class="md-buttons" data-handler="continue-edit" id="continueEdit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
                         <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i> Preview</button>
                     </div>
                     <div class="md-preview" id="md-preview">
@@ -289,8 +289,8 @@ newNote.addEventListener("click", () => {
                     </div> 
                 </div>
                     <div class="shwBtnsR">
-                    <button class="btn" id="saveBtn" onclick="save()"><i class="fas fa-save fa-lg"></i></button>
-                    <button class="btn" onclick='cancelEdit("")'><i class="fas fa-window-close fa-lg"></i></button>
+                    <button class="btn" id="saveBtn" onclick="save()" ><i class="fas fa-save fa-lg"></i></button>
+                    <button class="btn" id="cancelEdit" onclick='cancelEdit("")' ><i class="fas fa-window-close fa-lg"></i></button>
                  </div>
                  <script src="public/javascript/taboverride.js"></script>`
     editBox.innerHTML = html;
@@ -304,15 +304,15 @@ newNote.addEventListener("click", () => {
             getSel(this.dataset.handler) 
           })
     })
-    document.getElementById("title").focus();
-    document.getElementById("continue-edit").disabled = true;
-    document.getElementById("saveBtn").disabled = true;
-    document.getElementById("addBtn").disabled = true;
-    document.getElementById("homeBtn").disabled = true;
     var buttons = document.getElementById("notes").getElementsByTagName('button');
     for(var i = 0; i < buttons.length; i++){
         buttons[i].disabled = true;
     }
+    document.getElementById("title").focus();
+    document.getElementById("continueEdit").disabled = true;
+    document.getElementById("saveBtn").disabled = true;
+    document.getElementById("addBtn").disabled = true;
+    document.getElementById("homeBtn").disabled = true;
 })
 
 function textAreaContent(txtId, btnId) {
@@ -443,6 +443,10 @@ function cancelEdit(noteid){
     for(var i = 0; i < buttons.length; i++){
         buttons[i].disabled = false;
     }
+    document.getElementById("title").remove();
+    document.getElementById("notebody").remove();
+    document.getElementById("mdtools").remove();
+    document.getElementById("md-editor").remove();
     if(noteid.name !== "undefined"){
         showNote(noteid.name)
     }
@@ -496,7 +500,7 @@ function editNote(notediv) {
                 html = `
                 <div name="" class="editnote" id="editpad" contenteditable="false">
                     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-                    <div class="md-editor-tools">
+                    <div class="md-editor-tools" id="mdtools">
                         <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" data-tooltip="Bold" id="btnBold"><i class="fas fa-bold"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading"></i></button>
@@ -511,7 +515,7 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                        <button class="md-buttons" data-handler="continue-edit" id="continue-edit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i> Edit</button>
+                        <button class="md-buttons" data-handler="continue-edit" id="continueEdit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i> Edit</button>
                         <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
                     </div>
                     <div class="md-preview" id="md-preview">
@@ -521,8 +525,8 @@ function editNote(notediv) {
                     </div> 
                 </div>
                 <div class="shwBtnsR">
-                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i> </button>
-                    <button class="btn" id="cancel-edit" onclick='cancelEdit(this)' name="${matching.noteid}"><i class="fas fa-window-close fa-lg"></i></button>
+                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" ><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+                    <button class="btn" id="cancelEdit" onclick='cancelEdit(this)' name="${matching.noteid}" ><i class="fas fa-window-close fa-lg"></i></button>
                 </div>`
                 editBox.innerHTML = html;
                 document.getElementById("title").value = turndownService.turndown(marked(matching.title));
@@ -536,12 +540,6 @@ function editNote(notediv) {
                         getSel(this.dataset.handler) 
                     })
                 })
-                document.getElementById("continue-edit").disabled = true;
-                document.getElementById("notebody").blur();
-                document.getElementById("notebody").focus();
-                document.getElementById("updateBtn").disabled = true;
-                document.getElementById("addBtn").disabled = true;
-                document.getElementById("homeBtn").disabled = true;
                 var buttons = document.getElementById("notes").getElementsByTagName('button');
                 for(var i = 0; i < buttons.length; i++){
                     buttons[i].disabled = true;
@@ -553,6 +551,10 @@ function editNote(notediv) {
                     document.getElementById("updateBtn").disabled = false;
                     btnStatus = false
                 }
+                document.getElementById("updateBtn").disabled = true;
+                document.getElementById("addBtn").disabled = true;
+                document.getElementById("homeBtn").disabled = true;
+                document.getElementById("continueEdit").disabled = true;
             } else { }
         }
     }
@@ -561,27 +563,29 @@ function editNote(notediv) {
 var prevBody = ""
 
 //Preview Markdown
-function previewMarkdown(noteid){
-    const title = document.getElementById("title").innerHTML
+function previewMarkdown(){
     prevBody = document.getElementById("notebody").value
     html = `<div class="preview markdown-body" data-noteid="preview" id="editpad">
                 <div id="notebody" class="notebody" name="notebody">${md.render(prevBody)}</div>
             </div>`
-    document.getElementById("md-editor").style.display = "none"
-    document.getElementById("md-preview").style.display = "unset"
-    document.getElementById("md-preview").innerHTML = html;
-
+    if(document.getElementById("updateBtn")){
+        document.getElementById("updateBtn").disabled = true;
+    }
     var elems = document.getElementsByClassName("md-buttons");
     for(var i = 0; i < elems.length; i++) {
         elems[i].disabled = true;
     }
-    document.getElementById("continue-edit").disabled = false;
-    document.getElementById("cancel-edit").disabled = true;
-    document.getElementById("updateBtn").disabled = true;
     // Highlight JS
     document.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightBlock(block);
     });
+
+    document.getElementById("md-editor").style.display = "none"
+    document.getElementById("md-preview").style.display = "unset"
+    document.getElementById("md-preview").innerHTML = html;
+    document.getElementById("cancelEdit").disabled = true;
+    document.getElementById("continueEdit").disabled = false;
+    document.getElementById("saveBtn").disabled = true;
 }
 
 // Continue Editing
@@ -591,7 +595,7 @@ function continueEdit(noteid){
     html = `
     <div name="" class="editnote" id="editpad" contenteditable="false">
     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-    <div class="md-editor-tools">
+    <div class="md-editor-tools" id="mdtools">
         <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" data-tooltip="Bold" id="btnBold"><i class="fas fa-bold"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading"></i></button>
@@ -606,7 +610,7 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>  
-        <button class="md-buttons" data-handler="continue-edit" id="continue-edit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
+        <button class="md-buttons" data-handler="continue-edit" id="continueEdit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
         <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
     </div>
     <div class="md-preview" id="md-preview">
@@ -616,8 +620,8 @@ function continueEdit(noteid){
     </div> 
     </div>
     <div class="shwBtnsR">
-        <button class="btn" data-tooltip="Save" data-handler="save" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}"><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
-        <button class="btn" data-tooltip="Cancel" data-handler="cancel" id="cancel-edit" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}"><i class="fas fa-window-close fa-lg"></i></button>
+        <button class="btn" id="updateBtn" onclick='update(this)' name="${noteid}" data-noteid="${noteid}" ><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+        <button class="btn" id="cancelEdit" onclick='cancelEdit(this)' name="${noteid}" data-noteid="${noteid}" ><i class="fas fa-window-close fa-lg"></i></button>
     </div>`
     editBox.innerHTML = html;
     document.getElementById("title").value = turndownService.turndown(marked(title));
@@ -634,11 +638,9 @@ function continueEdit(noteid){
             getSel(this.dataset.handler) 
         })
     })
-    document.getElementById("continue-edit").disabled = true;
     document.getElementById("updateBtn").disabled = btnStatus;
-    document.getElementById("cancel-edit").disabled = false;
-    document.getElementById("notebody").blur();
-    document.getElementById("notebody").focus();
+    document.getElementById("continueEdit").disabled = true;
+    document.getElementById("cancelEdit").disabled = false;
     function enableSaveBtn(event) {
         document.getElementById("updateBtn").disabled = false;
         btnStatus = false
