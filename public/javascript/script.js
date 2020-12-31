@@ -280,7 +280,7 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
                         <button class="md-buttons" data-handler="continue-edit" id="continueEdit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
-                        <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()"><i class="fas fa-eye fa-lg"></i> Preview</button>
+                        <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()" disabled><i class="fas fa-eye fa-lg"></i> Preview</button>
                     </div>
                     <div class="md-preview" id="md-preview">
                     </div> 
@@ -298,6 +298,7 @@ newNote.addEventListener("click", () => {
     document.getElementById("notebody").addEventListener('paste', handlePaste);
     document.getElementById('notebody').addEventListener('keydown', handleKey);
     document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "saveBtn") });
+    document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
@@ -516,7 +517,7 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
                         <button class="md-buttons" data-handler="continue-edit" id="continueEdit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i> Edit</button>
-                        <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+                        <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})" disabled><i class="fas fa-eye fa-lg"></i> Preview</button>
                     </div>
                     <div class="md-preview" id="md-preview">
                     </div> 
@@ -547,6 +548,7 @@ function editNote(notediv) {
                 document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
+                document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
                 function enableSaveBtn(event) {
                     document.getElementById("updateBtn").disabled = false;
                     btnStatus = false
@@ -632,6 +634,7 @@ function continueEdit(noteid){
     document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
     document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
     document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
+    document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
