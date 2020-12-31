@@ -132,15 +132,10 @@ const queryDB = () => {
         request.onsuccess = (e) => {
             var cursor = e.target.result            
             if (cursor) {
-            // contenteditable
-                var date_diff = countDown(cursor.value.created_at)
-                var ago = []
-                date_diff.days > 0 ? ago[0] = (date_diff.days + "d ago") : date_diff.hours > 0 ? ago[1] = (date_diff.hours + "h ago") : date_diff.minutes > 0 ? ago[2] = (date_diff.minutes + "m ago") : ago[2] = "now"
-                html = `<div class="column note" id="${cursor.key}" onclick='showNote(this)'>
+                html = `<button class="column note" id="${cursor.key}" onclick='showNote(this)'>
                             <input type="checkbox" id="check" name="checked" value='${cursor.key}' onclick="event.stopPropagation();" autocomplete="off">
                             <label for="checked"> ${cursor.value.title}</label><br><br>
-                            <div class="caption"><caption>Created ${ago[0]||""} ${ago[1]||""} ${ago[2]||""}</caption></div>
-                        </div>`;
+                        </button>`;
                 notesGrid.innerHTML += html;
                 noteSelect() 
                 cursor.continue()
@@ -262,6 +257,7 @@ function noteSelect(){
     }
 }
 
+
 // Add new Note
 var editPad = document.getElementById("editpad")
 var newNote = document.getElementById("addBtn")
@@ -278,7 +274,7 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
@@ -311,6 +307,12 @@ newNote.addEventListener("click", () => {
     document.getElementById("title").focus();
     document.getElementById("continue-edit").disabled = true;
     document.getElementById("saveBtn").disabled = true;
+    document.getElementById("addBtn").disabled = true;
+    document.getElementById("homeBtn").disabled = true;
+    var buttons = document.getElementById("notes").getElementsByTagName('button');
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].disabled = true;
+    }
 })
 
 function textAreaContent(txtId, btnId) {
@@ -389,6 +391,12 @@ function addNote(note) {
     setTimeout(function(){
         document.getElementById(note.noteid).click()
    }, 500); //wait for atleast  200 ms before click action
+   document.getElementById("addBtn").disabled = false;
+   document.getElementById("homeBtn").disabled = false;
+   var buttons = document.getElementById("notes").getElementsByTagName('button');
+   for(var i = 0; i < buttons.length; i++){
+       buttons[i].disabled = false;
+   }
 }
 
 // Get updated values from the UI and generate a JSON object
@@ -419,15 +427,26 @@ function updateNote(note) {
             showNote(note.noteid)
         }
     }
+    document.getElementById("addBtn").disabled = false;
+    document.getElementById("homeBtn").disabled = false;
+    var buttons = document.getElementById("notes").getElementsByTagName('button');
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].disabled = false;
+    }
 }
 
 function cancelEdit(noteid){
     document.getElementById("editor").style.display = "none"
+    document.getElementById("addBtn").disabled = false;
+    document.getElementById("homeBtn").disabled = false;
+    var buttons = document.getElementById("notes").getElementsByTagName('button');
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].disabled = false;
+    }
     if(noteid.name !== "undefined"){
         showNote(noteid.name)
     }
 }
-
 // Get single note to display in the list and details areas
 function getNote(noteid) {
     var connection = indexedDB.open(DBNAME);
@@ -487,7 +506,7 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
@@ -521,6 +540,12 @@ function editNote(notediv) {
                 document.getElementById("notebody").blur();
                 document.getElementById("notebody").focus();
                 document.getElementById("updateBtn").disabled = true;
+                document.getElementById("addBtn").disabled = true;
+                document.getElementById("homeBtn").disabled = true;
+                var buttons = document.getElementById("notes").getElementsByTagName('button');
+                for(var i = 0; i < buttons.length; i++){
+                    buttons[i].disabled = true;
+                }
                 document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
@@ -576,7 +601,7 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
-        <button class="md-buttons md-icon" data-tooltip="Code Block" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
+        <button class="md-buttons md-icon" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
@@ -810,376 +835,277 @@ function getSel(button_handler) // javascript
     // obtain the index of the last selected character
     var finish = txtarea.selectionEnd;
     //obtain all Text
-    var allText = txtarea.value;
-    
+    var allText = txtarea.value; 
     // obtain the selected text
     var sel = allText.substring(start, finish);
-    //append te text;
-
-    var link = `[link](${sel})`
-    var img = `![alt text](${sel})`
-    var cblock = `\`\`\``
     var tbl = 
 `column1 | column2 | column3
 ------- | ------- | -------
 column1 | column2 | column3
 column1 | column2 | column3
 column1 | column2 | column3`;
-
-    var tilde = `~~`;
     var hline = `----`;
+
+    function processInput(keyCodes, startVal, endVal){
+
+        if(keyCodes.regEx == true){
+            var transsel="";
+            var match = /\r|\n/.exec(sel);
+            if (match) {
+                var lines = sel.split('\n');
+                for(var i = 0;i < lines.length;i++){
+                    if(lines[i].length > 0 && lines[i] !== undefined) {
+                        transsel +=`${keyCodes.special} ${lines[i]}\n`
+                    }  
+                }
+                sel = transsel;
+            } else {sel = sel.replace(/^/gm, `${keyCodes.special} `)}
+
+            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
+            if (newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                if(keyCodes.name === "tab"){
+                     txtarea.selectionEnd = start+sel.length 
+                } else {
+                    txtarea.selectionStart = txtarea.selectionEnd = start+startVal; 
+                }
+            }
+        } else {
+            if(keyCodes.special){
+                if(keyCodes.name == "image" || keyCodes.name == "link") {
+                    var newText = `${allText.substring(0, start)}${keyCodes.special}${allText.substring(finish, allText.length)}`
+                } else {
+                    var newText = `${allText.substring(0, start)}${sel}${keyCodes.special}${allText.substring(finish, allText.length)}`
+                }
+            } else {
+                var newText = `${allText.substring(0, start)}${keyCodes.open}${sel}${keyCodes.close}${allText.substring(finish, allText.length)}`
+            }
+            if(newText) {
+                txtarea.value=newText;
+                txtarea.blur()
+                txtarea.focus()
+                txtarea.selectionStart = start+startVal;
+                txtarea.selectionEnd = finish+endVal;
+            }
+
+        }
+    }
 
     switch(button_handler) {
         case "backquote":
-            var newText = `${allText.substring(0, start)}\`${sel}\`${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
+            keyCodes = {
+                name: "backquote",
+                open: "`",
+                close: "`",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
             break;
         case "doublequote":
-            var newText = `${allText.substring(0, start)}\"${sel}\"${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
+            keyCodes = {
+                name: "doublequote",
+                open: "\"",
+                close: "\"",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
             break;
         case "singlequote":
-            var newText = `${allText.substring(0, start)}\'${sel}\'${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
-            break;
-        case "brackets":
-            var newText = `${allText.substring(0, start)}\(${sel}\)${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
-            break;
-        case "curlybrackets":
-            var newText = `${allText.substring(0, start)}\{${sel}\}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
-            break;
-        case "squarebrackets":
-            var newText = `${allText.substring(0, start)}\[${sel}\]${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
-            break;
-        case "anglebrackets":
-            var newText = `${allText.substring(0, start)}\<${sel}\>${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
+            keyCodes = {
+                name: "singlequote",
+                open: "\'",
+                close: "\'",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
             break;
         case "bold":
-            var newText = `${allText.substring(0, start)}\*\*${sel}\*\*${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+2;
-                        txtarea.selectionEnd = finish+2;
-                    }
-                }
-            } 
+            keyCodes = {
+                name: "bold",
+                open: "**",
+                close: "**",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 2, 2)
             break;
         case "italic":
-            var newText = `${allText.substring(0, start)}\_${sel}\_${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
-            break;
-        case "heading":
-            sel = sel.replace(/^/gm, "# ")
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = txtarea.selectionEnd = start+2; 
-                    }
-                }
-            } 
-            break;
-        case "link":
-            var newText = `${allText.substring(0, start)}${link}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+7;
-                        txtarea.selectionEnd = finish+7;
-                    }
-                }
-            } 
-            break;
-        case "ulist":
-            var transsel="";
-            var match = /\r|\n/.exec(sel);
-            if (match) {
-                var lines = sel.split('\n');
-                for(var i = 0;i < lines.length;i++){
-                    if(lines[i].length > 0 && lines[i] !== undefined) {
-                        transsel +=`- ${lines[i]}\n`
-                    }  
-                }
-                sel = transsel;
-            } else {sel = sel.replace(/^/gm, "1. ")}
-
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = txtarea.selectionEnd = start+2; 
-                    }
-                }
-            } 
-            break;
-        case "olist":
-            var transsel="";
-            var match = /\r|\n/.exec(sel);
-            if (match) {
-                var lines = sel.split('\n');
-                for(var i = 0;i < lines.length;i++){
-                    if(lines[i].length > 0 && lines[i] !== undefined) {
-                        transsel +=`1. ${lines[i]}\n`
-                    }  
-                }
-                sel = transsel;
-            } else {sel = sel.replace(/^/gm, "1. ")}
-
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = txtarea.selectionEnd = start+3; 
-                    }
-                }
-            } 
-            break;
-        case "quote":
-            sel = sel.replace(/^/gm, "> ")
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = txtarea.selectionEnd = start+2; 
-                    }
-                }
-            } 
-            break;
-        case "image":
-            var newText = `${allText.substring(0, start)}${img}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+12;
-                        txtarea.selectionEnd = finish+12;
-                    }
-                }
-            } 
-            break;
-        case "tasklist":
-            var transsel="";
-            var match = /\r|\n/.exec(sel);
-            if (match) {
-                var lines = sel.split('\n');
-                for(var i = 0;i < lines.length;i++){
-                    if(lines[i].length > 0) {
-                        transsel +=`- [ ] ${lines[i]}\n`
-                    }  
-                }
-                sel = transsel;
-            } else {sel = sel.replace(/^/gm, "\- [ ] ")}
-            
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = txtarea.selectionEnd = start+6; 
-                    }
-                }
+            keyCodes = {
+                name: "italic",
+                open: "_",
+                close: "_",
+                special: "",
+                regEx: false
             }
-            break;
-        case "codeblock":
-            var newText = `${allText.substring(0, start)}\n${cblock}\n${sel}\n${cblock}\n${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+5;
-                        txtarea.selectionEnd = finish+5;
-                    }
-                }
-            } 
-            break;
-        case "tab":
-            var match = /\r|\n/.exec(sel);
-            if (match) {
-                sel = sel.replace(/^/gm, "\t")
-            } else {sel = sel.replace(/^/gm, "\t")}
-            
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                var searchText = sel
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    txtarea.selectionEnd = index+searchText.length
-                }
-            } 
-            break;
-        case "table":
-            var newText = `${allText.substring(0, start)}\n${tbl}\n${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+1;
-                        txtarea.selectionEnd = finish+1;
-                    }
-                }
-            } 
+            processInput(keyCodes, 1, 1)
             break;
         case "strike":
-            var newText = `${allText.substring(0, start)}${tilde}${sel}${tilde}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start+2;
-                        txtarea.selectionEnd = finish+2;
-                    }
-                }
-            } 
+            keyCodes = {
+                name: "strike",
+                open: "~~",
+                close: "~~",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 2, 2)
+            break;
+        case "codeblock":
+            var cblock = `\n\`\`\`\n`
+            keyCodes = {
+                name: "codeblock",
+                open: cblock,
+                close: cblock,
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 5, 5)
+            break;
+        case "brackets":
+            keyCodes = {
+                name: "brackets",
+                open: "(",
+                close: ")",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
+            break;
+        case "curlybrackets":
+            keyCodes = {
+                name: "curlybrackets",
+                open: "{",
+                close: "}",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
+            break;
+        case "squarebrackets":
+            keyCodes = {
+                name: "squarebrackets",
+                open: "[",
+                close: "]",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
+            break;
+        case "anglebrackets":
+            keyCodes = {
+                name: "anglebrackets",
+                open: "<",
+                close: ">",
+                special: "",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
+            break;
+        case "link":
+            var link = `[link](${sel})`
+            keyCodes = {
+                name: "link",
+                open: "",
+                close: "",
+                special: link,
+                regEx: false
+            }
+            processInput(keyCodes, 7, 7)
+            break;
+        case "image":
+            var img = `![alt text](${sel})`
+            keyCodes = {
+                name: "image",
+                open: "",
+                close: "",
+                special: img,
+                regEx: false
+            }
+            processInput(keyCodes, 12, 12)
+            break;
+        case "table":
+            keyCodes = {
+                name: "table",
+                open: "",
+                close: "",
+                special: "\n"+tbl+"\n",
+                regEx: false
+            }
+            processInput(keyCodes, 1, 1)
             break;
         case "hline":
-            var newText = `${allText.substring(0, start)}${sel}\n${hline}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                index = start;
-                if( index >= 0) {
-                    if( index >= 0) {
-                        txtarea.selectionStart = start;
-                        txtarea.selectionEnd = finish;
-                    }
-                }
-            } 
+            keyCodes = {
+                name: "hline",
+                open: "",
+                close: "",
+                special: "\n"+hline,
+                regEx: false
+            }
+            processInput(keyCodes, start, finish)
+            break;
+        case "ulist":
+            keyCodes = {
+                name: "ulist",
+                open: "",
+                close: "",
+                special: "- ",
+                regEx: true
+            }
+            processInput(keyCodes, 2, 2)
+            break;
+        case "olist":
+            keyCodes = {
+                name: "olist",
+                open: "",
+                close: "",
+                special: "1. ",
+                regEx: true
+            }
+            processInput(keyCodes, 3, 3)
+            break;
+        case "tasklist":
+            keyCodes = {
+                name: "tasklist",
+                open: "",
+                close: "",
+                special: "- [ ]",
+                regEx: true
+            }
+            processInput(keyCodes, 6, 6)
+            break;
+        case "heading":
+            keyCodes = {
+                name: "heading",
+                open: "",
+                close: "",
+                special: "#",
+                regEx: true
+            }
+            processInput(keyCodes, 2, 2)
+            break;
+        case "quote":
+            keyCodes = {
+                name: "quote",
+                open: "",
+                close: "",
+                special: "> ",
+                regEx: true
+            }
+            processInput(keyCodes, 2, 2)
+            break;
+        case "tab":
+            keyCodes = {
+                name: "tab",
+                open: "",
+                close: "",
+                special: "\t",
+                regEx: true
+            }
+            processInput(keyCodes, "", "")
             break;
         default:
             // Functionality

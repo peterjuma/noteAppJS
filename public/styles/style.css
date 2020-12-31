@@ -37,6 +37,11 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
   white-space: nowrap;
 }
 
+.row button:focus {
+  outline:none;
+  box-shadow: none;
+}
+
 .row {
   padding: 2.5px;
   padding-right: 2.5px;
