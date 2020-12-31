@@ -10,6 +10,7 @@ Features
 - Download Notes as Markdown files.
 - Markdown editing tools.
 - Filter/Search notes.
+- Auto close brackets and quotes.
 - Emojis!! :fire: :heart_eyes: :star2: :sunglasses: :sparkles: 
 
 Syntax guide
