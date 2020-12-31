@@ -573,6 +573,9 @@ function previewMarkdown(){
     if(document.getElementById("updateBtn")){
         document.getElementById("updateBtn").disabled = true;
     }
+    if(document.getElementById("saveBtn")){
+        document.getElementById("saveBtn").disabled = true;
+    }
     var elems = document.getElementsByClassName("md-buttons");
     for(var i = 0; i < elems.length; i++) {
         elems[i].disabled = true;
@@ -587,7 +590,6 @@ function previewMarkdown(){
     document.getElementById("md-preview").innerHTML = html;
     document.getElementById("cancelEdit").disabled = true;
     document.getElementById("continueEdit").disabled = false;
-    document.getElementById("saveBtn").disabled = true;
 }
 
 // Continue Editing
