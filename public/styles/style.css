@@ -274,7 +274,7 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: calc(100% - 111px);
+  height: calc(100% - 100px);
   border: none;
 }
 
