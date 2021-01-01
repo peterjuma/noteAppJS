@@ -68,12 +68,12 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 /* Style the buttons */
 .btn {
   outline: none;
-  border: solid 1px #D8D8D8;
+  border: solid 1px #888;
   padding: 12px 16px;
-  background-color: #bbb;
+  /* background-color: #bbb; */
   cursor: pointer;
   margin: 2px;
-  color: #24292e;
+  color: #444;
 }
 .btnSelect {
   border: none;
@@ -86,12 +86,12 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 }
 
 .btn:hover {
-  background-color: #555;
+  background-color: #666;
   color: white;
 }
 
 .btn.active {
-  background-color: #666;
+  background-color: #777;
   color: white;
 }
 
@@ -447,10 +447,9 @@ button[disabled]:hover{
 }
 
 .md-editor-tools > button {
-  background-color: #777;
-  color: white;
+  color: #444;
   padding: 5px 10px;
-  border: solid 1px #D8D8D8;
+  border: solid 1px #777;
 }
 
 .md-editor-tools > button:hover {
@@ -520,7 +519,7 @@ button[disabled]:hover{
 }
 
 .highlight {
-  background-color: #666;
+  background-color: #777;
   color: white;
 }
 
