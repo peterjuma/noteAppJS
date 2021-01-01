@@ -1,5 +1,5 @@
 body {
-  background-color: whitesmoke;
+  background-color: #bbb;
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
   height:100%;
 }
@@ -19,7 +19,7 @@ h1 {
 p code.hljs, li code.hljs { display: inline; padding: .2em }
 
 .container {
-  height: 98vh;
+  height: 97.6vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,15 +146,16 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
   width: 75%;
   display: inline-block;
   border: solid 1px #D8D8D8;
-  border-right: solid 2px #D8D8D8;
+  border-left: none;
   background-color: #bbb;
 }
 
 #notes {
   overflow: scroll;
   margin-top: 10px;
-  border: solid 1px #D8D8D8;
   height: calc(100% - 120px);
+  border-top: solid 1px #D8D8D8;
+  border-bottom: solid 1px #D8D8D8;
 }
 
 .notehead {
@@ -624,16 +625,17 @@ button[disabled]{
   }
 
   .editnote {
-    margin-top: 32px;
+    margin-top: 33px;
     border-style: solid;
     border: solid 0px #D8D8D8;
-    height: calc(100% - 64px);
+    height: calc(100% - 62px);
   }
 
   #notes {
     overflow: scroll;
     margin-top: 10px;
-    border: solid 1px #D8D8D8;
+    border-top: solid 1px #D8D8D8;
+    border-bottom: solid 1px #D8D8D8;
     height: calc(100% - 81.4px);
   }
 
@@ -761,13 +763,6 @@ input[type="text"]#title {
       margin-left: 5px;
       margin-right: 5px;
     }
-
-    .md-editor-tools > button {
-      border: 1px solid #0066cc;
-      background-color: #0099cc;
-      color: #ffffff;
-      padding: 5px 5px;
-    }
 }
 
 @media screen and (max-width: 1099px) {
@@ -824,7 +819,8 @@ input[type="text"]#title {
   #notes {
     overflow: scroll;
     margin-top: 1px;
-    border: solid 1px #D8D8D8;
+    border-top: solid 1px #D8D8D8;
+    border-bottom: solid 1px #D8D8D8;
     height: calc(100% - 53px);
 }
 
@@ -863,7 +859,8 @@ input[type="text"]#title {
   #notes {
     overflow: scroll;
     margin-top: 2px;
-    border: solid 1px #D8D8D8;
+    border-top: solid 1px #D8D8D8;
+    border-bottom: solid 1px #D8D8D8;
     height: calc(100% - 56px);
   }
 
@@ -906,13 +903,6 @@ input[type="text"]#title {
   .shwBtns {
     padding: 0px;
     padding-top: 5px;
-  }
-
-  .md-editor-tools > button {
-    border: 1px solid #0066cc;
-    background-color: #0099cc;
-    color: #ffffff;
-    padding: 5px 5px;
   }
 
   textarea {
