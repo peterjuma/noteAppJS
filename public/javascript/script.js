@@ -302,7 +302,7 @@ newNote.addEventListener("click", () => {
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
-            getSel(this.dataset.handler) 
+            processInput(this.dataset.handler) 
           })
     })
     var buttons = document.getElementById("notes").getElementsByTagName('button');
@@ -538,7 +538,7 @@ function editNote(notediv) {
                 document.querySelectorAll('.md-icon').forEach(item => {
                     item.addEventListener('click', function(e){
                         // console.log(this.dataset.handler)
-                        getSel(this.dataset.handler) 
+                        processInput(this.dataset.handler) 
                     })
                 })
                 var buttons = document.getElementById("notes").getElementsByTagName('button');
@@ -640,7 +640,7 @@ function continueEdit(noteid){
     document.querySelectorAll('.md-icon').forEach(item => {
         item.addEventListener('click', function(e){
             // console.log(this.dataset.handler)
-            getSel(this.dataset.handler) 
+            processInput(this.dataset.handler) 
         })
     })
     btnStatus = document.getElementById("updateBtn").disabled;
@@ -738,7 +738,7 @@ function handlePaste (e) {
         document.execCommand('insertText', false, pasteData);
     } else {
         // Insert text at the current position of caret
-        const range = document.getSelection().getRangeAt(0);
+        const range = document.processInputection().getRangeAt(0);
         range.deleteContents();
 
         const textNode = document.createTextNode(pasteData);
@@ -746,7 +746,7 @@ function handlePaste (e) {
         range.selectNodeContents(textNode);
         range.collapse(false);
 
-        const selection = window.getSelection();
+        const selection = window.processInputection();
         selection.removeAllRanges();
         selection.addRange(range);
     }
@@ -755,28 +755,28 @@ function handlePaste (e) {
 // Handle TAB
 function handleKey(event) {
     if ( event.code === "Tab" ) {
-        getSel('tab')
+        processInput('tab')
         event.preventDefault();
     } else if ( event.key === "\""){
-        getSel('doublequote')
+        processInput('doublequote')
         event.preventDefault();
     } else if ( event.key === "\'"){
-        getSel('singlequote')
+        processInput('singlequote')
         event.preventDefault();
     } else if ( event.key === "\("){
-        getSel('brackets')
+        processInput('brackets')
         event.preventDefault();
     } else if ( event.key === "\{"){
-        getSel('curlybrackets')
+        processInput('curlybrackets')
         event.preventDefault();
     } else if ( event.key === "\["){
-        getSel('squarebrackets')
+        processInput('squarebrackets')
         event.preventDefault();
     } else if ( event.key === "\<"){
-        getSel('anglebrackets')
+        processInput('anglebrackets')
         event.preventDefault();
     } else if ( event.key === "\`") {
-        getSel('backquote')
+        processInput('backquote')
         event.preventDefault();
     }
 }
@@ -832,9 +832,7 @@ input.addEventListener("keyup", function (event) {
    }
 });
 
-// Editor Buttons
-function getSel(button_handler) // javascript
-{  
+function processInput(eventcode){
     // obtain the object reference for the textarea>
     var txtarea = document.getElementById("notebody");
     // obtain the index of the first selected character
@@ -844,279 +842,53 @@ function getSel(button_handler) // javascript
     //obtain all Text
     var allText = txtarea.value; 
     // obtain the selected text
-    var sel = allText.substring(start, finish);
-    var tbl = 
-`column1 | column2 | column3
-------- | ------- | -------
-column1 | column2 | column3
-column1 | column2 | column3
-column1 | column2 | column3`;
-    var hline = `----`;
+    sel = allText.substring(start, finish);
+    var img = `![alt text](${sel})`
+    var link = `[link](${sel})`
+    keyCodes["image"].pattern = img;
+    keyCodes["link"].pattern = link;
+    var keyCode = keyCodes[eventcode]
+    if(keyCode.regEx == true){
+        var transsel="";
+        var match = /\r|\n/.exec(sel);
+        if (match) {
+            var lines = sel.split('\n');
+            for(var i = 0;i < lines.length;i++){
+                if(lines[i].length > 0 && lines[i] !== undefined) {
+                    transsel +=`${keyCode.pattern} ${lines[i]}\n`
+                }  
+            }
+            sel = transsel;
+        } else {sel = sel.replace(/^/gm, `${keyCode.pattern} `)}
 
-    function processInput(keyCodes, startVal, endVal){
-
-        if(keyCodes.regEx == true){
-            var transsel="";
-            var match = /\r|\n/.exec(sel);
-            if (match) {
-                var lines = sel.split('\n');
-                for(var i = 0;i < lines.length;i++){
-                    if(lines[i].length > 0 && lines[i] !== undefined) {
-                        transsel +=`${keyCodes.special} ${lines[i]}\n`
-                    }  
-                }
-                sel = transsel;
-            } else {sel = sel.replace(/^/gm, `${keyCodes.special} `)}
-
-            var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-            if (newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                if(keyCodes.name === "tab"){
-                     txtarea.selectionEnd = start+sel.length 
-                } else {
-                    txtarea.selectionStart = txtarea.selectionEnd = start+startVal; 
-                }
+        var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
+        if (newText) {
+            txtarea.value=newText;
+            txtarea.blur()
+            txtarea.focus()
+            if(eventcode === "tab"){
+                 txtarea.selectionEnd = start+sel.length 
+            } else {
+                txtarea.selectionStart = txtarea.selectionEnd = start+keyCode.offsetStart; 
+            }
+        }
+    } else {
+        if(keyCode.pattern){
+            if(eventcode == "image" || eventcode == "link") {
+                var newText = `${allText.substring(0, start)}${keyCode.pattern}${allText.substring(finish, allText.length)}`
+            } else {
+                var newText = `${allText.substring(0, start)}${sel}${keyCode.pattern}${allText.substring(finish, allText.length)}`
             }
         } else {
-            if(keyCodes.special){
-                if(keyCodes.name == "image" || keyCodes.name == "link") {
-                    var newText = `${allText.substring(0, start)}${keyCodes.special}${allText.substring(finish, allText.length)}`
-                } else {
-                    var newText = `${allText.substring(0, start)}${sel}${keyCodes.special}${allText.substring(finish, allText.length)}`
-                }
-            } else {
-                var newText = `${allText.substring(0, start)}${keyCodes.open}${sel}${keyCodes.close}${allText.substring(finish, allText.length)}`
-            }
-            if(newText) {
-                txtarea.value=newText;
-                txtarea.blur()
-                txtarea.focus()
-                txtarea.selectionStart = start+startVal;
-                txtarea.selectionEnd = finish+endVal;
-            }
-
+            var newText = `${allText.substring(0, start)}${keyCode.open}${sel}${keyCode.close}${allText.substring(finish, allText.length)}`
         }
-    }
-
-    switch(button_handler) {
-        case "backquote":
-            keyCodes = {
-                name: "backquote",
-                open: "`",
-                close: "`",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "doublequote":
-            keyCodes = {
-                name: "doublequote",
-                open: "\"",
-                close: "\"",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "singlequote":
-            keyCodes = {
-                name: "singlequote",
-                open: "\'",
-                close: "\'",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "bold":
-            keyCodes = {
-                name: "bold",
-                open: "**",
-                close: "**",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 2, 2)
-            break;
-        case "italic":
-            keyCodes = {
-                name: "italic",
-                open: "_",
-                close: "_",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "strike":
-            keyCodes = {
-                name: "strike",
-                open: "~~",
-                close: "~~",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 2, 2)
-            break;
-        case "codeblock":
-            var cblock = `\n\`\`\`\n`
-            keyCodes = {
-                name: "codeblock",
-                open: cblock,
-                close: cblock,
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 5, 5)
-            break;
-        case "brackets":
-            keyCodes = {
-                name: "brackets",
-                open: "(",
-                close: ")",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "curlybrackets":
-            keyCodes = {
-                name: "curlybrackets",
-                open: "{",
-                close: "}",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "squarebrackets":
-            keyCodes = {
-                name: "squarebrackets",
-                open: "[",
-                close: "]",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "anglebrackets":
-            keyCodes = {
-                name: "anglebrackets",
-                open: "<",
-                close: ">",
-                special: "",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "link":
-            var link = `[link](${sel})`
-            keyCodes = {
-                name: "link",
-                open: "",
-                close: "",
-                special: link,
-                regEx: false
-            }
-            processInput(keyCodes, 7, 7)
-            break;
-        case "image":
-            var img = `![alt text](${sel})`
-            keyCodes = {
-                name: "image",
-                open: "",
-                close: "",
-                special: img,
-                regEx: false
-            }
-            processInput(keyCodes, 12, 12)
-            break;
-        case "table":
-            keyCodes = {
-                name: "table",
-                open: "",
-                close: "",
-                special: "\n"+tbl+"\n",
-                regEx: false
-            }
-            processInput(keyCodes, 1, 1)
-            break;
-        case "hline":
-            keyCodes = {
-                name: "hline",
-                open: "",
-                close: "",
-                special: "\n"+hline,
-                regEx: false
-            }
-            processInput(keyCodes, start, finish)
-            break;
-        case "ulist":
-            keyCodes = {
-                name: "ulist",
-                open: "",
-                close: "",
-                special: "- ",
-                regEx: true
-            }
-            processInput(keyCodes, 2, 2)
-            break;
-        case "olist":
-            keyCodes = {
-                name: "olist",
-                open: "",
-                close: "",
-                special: "1. ",
-                regEx: true
-            }
-            processInput(keyCodes, 3, 3)
-            break;
-        case "tasklist":
-            keyCodes = {
-                name: "tasklist",
-                open: "",
-                close: "",
-                special: "- [ ]",
-                regEx: true
-            }
-            processInput(keyCodes, 6, 6)
-            break;
-        case "heading":
-            keyCodes = {
-                name: "heading",
-                open: "",
-                close: "",
-                special: "#",
-                regEx: true
-            }
-            processInput(keyCodes, 2, 2)
-            break;
-        case "quote":
-            keyCodes = {
-                name: "quote",
-                open: "",
-                close: "",
-                special: "> ",
-                regEx: true
-            }
-            processInput(keyCodes, 2, 2)
-            break;
-        case "tab":
-            keyCodes = {
-                name: "tab",
-                open: "",
-                close: "",
-                special: "\t",
-                regEx: true
-            }
-            processInput(keyCodes, "", "")
-            break;
-        default:
-            // Functionality
-            break;
+        if(newText) {
+            txtarea.value=newText;
+            txtarea.blur()
+            txtarea.focus()
+            txtarea.selectionStart = start+keyCode.offsetStart; ;
+            txtarea.selectionEnd = finish+keyCode.offsetEnd;
+        }
     }
 }
 
