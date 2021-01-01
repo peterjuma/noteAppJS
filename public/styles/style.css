@@ -1,5 +1,5 @@
 body {
-  background-color: #bbb;
+  background-color: #eee;
   font-family: 'Roboto Mono', monospace, Helvetica, Arial, sans-serif;
   height:100%;
 }
@@ -165,8 +165,9 @@ input[type="text"]#title {
   padding: 20px;
   padding-left: 40px;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 600;
   border-top: solid 1px #bbb;
+  font-family: "Courier New", Courier, monospace;
 }
 
 input[type="text"]#title::placeholder {
@@ -306,6 +307,7 @@ textarea {
   padding-right: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
+  font-size: 20px;
   width: 100%;
   overflow: auto;
   font-size: 100%;
