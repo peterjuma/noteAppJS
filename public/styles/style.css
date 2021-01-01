@@ -390,7 +390,7 @@ input[type=checkbox] {
   position: relative;
   cursor: pointer;
   margin: .4rem;
-  width: 16px;
+  width: 20px;
   height: 16px;
 }
 
@@ -402,15 +402,16 @@ input[type=checkbox]:before {
    height: 18px;
    top: 0;
    left: 0;
-   background-color:#bbb;
+   background-color: whitesmoke;
+   border: solid 1px #999;
 }
 
 input[type=checkbox]:checked:before {
    content: "";
    display: block;
    position: absolute;
-   width: 20px;
-   height: 20px;
+   width: 18px;
+   height: 18px;
    top: 0;
    left: 0;
    background-color:#666;
