@@ -279,13 +279,16 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                        <button class="md-buttons" data-handler="continue-edit" id="continueEdit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
-                        <button class="md-buttons" data-handler="preview" id="previewBtn" onclick="previewMarkdown()" disabled><i class="fas fa-eye fa-lg"></i> Preview</button>
+                        <div class="specialBtns">
+                            <button class="md-buttons" data-handler="continue-edit" data-tooltip="Edit" id="continueEdit" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
+                            <button class="md-buttons" data-handler="preview" data-tooltip="Preview" id="previewBtn" onclick="previewMarkdown()" disabled><i class="fas fa-eye fa-lg"></i></button>
+                            <button class="md-buttons" data-tooltip="Split Screen"  onclick="splitScreenPreview()"><i class="fas fa-columns fa-lg"></i></button>
+                        </div>
                     </div>
                     <div class="md-preview" id="md-preview">
                     </div> 
                     <div class="md-editor" id="md-editor">
-                        <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
+                        <textarea name="notebody" id="notebody" placeholder="Note"></textarea>
                     </div> 
                 </div>
                     <div class="shwBtnsR">
@@ -568,7 +571,7 @@ var prevBody = ""
 function previewMarkdown(){
     prevBody = document.getElementById("notebody").value
     html = `<div class="preview markdown-body" data-noteid="preview" id="editpad">
-                <div id="notebody" class="notebody" name="notebody">${md.render(prevBody)}</div>
+                <div>${md.render(prevBody)}</div>
             </div>`
     if(document.getElementById("updateBtn")){
         document.getElementById("updateBtn").disabled = true;
@@ -591,6 +594,22 @@ function previewMarkdown(){
     document.getElementById("cancelEdit").disabled = true;
     document.getElementById("continueEdit").disabled = false;
 }
+
+
+function splitScreenPreview () {
+    var textarea = document.getElementById("notebody")
+    textarea.style.width="50%"
+    var preview = document.createElement("DIV");  // Create a <DIV> element
+    var htmlContent = `${md.render(textarea.value)}`
+    preview.innerHTML = htmlContent;               // Insert text
+    preview.classList.add("split");
+    preview.setAttribute("id", "split");
+    document.getElementById("md-editor").appendChild(preview)
+    textarea.addEventListener('input', () => {
+        document.getElementById("split").innerHTML = md.render(textarea.value)
+    })
+}
+
 
 // Continue Editing
 function continueEdit(noteid){
@@ -620,7 +639,7 @@ function continueEdit(noteid){
     <div class="md-preview" id="md-preview">
     </div> 
     <div class="md-editor" id="md-editor">
-        <textarea name="notebody" id="notebody" class="notebody" placeholder="Note"></textarea>
+        <textarea name="notebody" id="notebody" placeholder="Note"></textarea>
     </div> 
     </div>
     <div class="shwBtnsR">

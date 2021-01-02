@@ -176,10 +176,6 @@ input[type="text"]#title::placeholder {
   color: #D8D8D8;
 }
 
-.notebody {
-  text-align: left;
-}
-
 .centered {
   position: absolute;
   top: 50%;
@@ -365,6 +361,25 @@ textarea {
 
 .md-editor {
   height: inherit;
+}
+
+.split {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  width: 50%;
+  vertical-align: top;
+  overflow-y: scroll;
+  background-color: #FFF6D9;
+  float: right;
+  height: 100%;
+  border: 1px solid #D8D8D8;
+  padding: 10px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+}
+
+.specialBtns {
+  padding-left: 25px;
 }
 
 * img {
