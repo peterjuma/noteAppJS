@@ -612,17 +612,6 @@ button[disabled]:hover{
     display: none;
   }
   
-  .search-bar .input-text {
-    max-width: 0;
-    border: 0;
-    border-color: #ccc;
-    font-size: 12px;
-    height: 24px;
-    padding: 4px 9px 0px 30px;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-  } 
-
   textarea {
     height: 98%;
     resize: none;
@@ -670,10 +659,6 @@ button[disabled]:hover{
     padding-right: 0px;
   }
 
-  .btn {
-    padding: 10px;
-  }
-
   .column {
     width: 100%;
     height: 40px;
@@ -686,12 +671,8 @@ button[disabled]:hover{
   }
 
   .btn {
-    border: none;
-    outline: none;
     font-size: 10px;
     padding: 5px 5px;
-    background-color: #f1f1f1;
-    cursor: pointer;
   }
 
   .shownote {
@@ -775,7 +756,7 @@ input[type="text"]#title {
   .shownote {
     padding: 15px;
     padding-top: 0%;
-    margin-top: 31px;
+    margin-top: 33px;
     width: 100%;
     height: calc(100% - 62px);
 }
@@ -789,24 +770,8 @@ input[type="text"]#title {
     height: calc(100% - 65px);
   }
 
-  .search-bar .icon {
-    padding: 5px;
-}
-
-#gridView, #listView {
+#gridView, #listView, .search-bar, .icon {
   display: none;
-}
-
-.search-bar .input-text {
-  max-width: 0;
-  margin-top: 2px;
-  border: 0;
-  border-color: #ccc;
-  font-size: 12px;
-  height: 22px;
-  padding: 0px 0px 0px 23px;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
 }
 
   .note {
@@ -834,6 +799,7 @@ input[type="text"]#title {
     padding: 0px;
     padding-right: 0;
     padding-top: 0;
+    padding-left: 5.5px;
   }
   .shwBtnsL {
     padding-top: 3px;
@@ -874,9 +840,6 @@ input[type="text"]#title {
     display: none;
   }
 
-  .search-bar .input-text {
-    height: 21px;
-}
   .left {
     height: 97.5%;
     padding-top: 5px;
