@@ -516,8 +516,11 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
-                        <button class="md-buttons" data-handler="continue-edit" id="continueEdit" name="${matching.noteid}" onclick="continueEdit(${matching.noteid})"><i class="fas fa-edit fa-lg"></i> Edit</button>
-                        <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${matching.noteid})" disabled><i class="fas fa-eye fa-lg"></i> Preview</button>
+                        <div class="specialBtns">
+                            <button class="md-buttons" data-handler="continue-edit" data-tooltip="Edit" id="continueEdit" name="${matching.noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
+                            <button class="md-buttons" data-handler="preview" data-tooltip="Preview" id="previewBtn" onclick="previewMarkdown(${matching.noteid})" disabled><i class="fas fa-eye fa-lg"></i></button>
+                            <button class="md-buttons" data-tooltip="Split Screen"  onclick="splitScreenPreview()"><i class="fas fa-columns fa-lg"></i></button>
+                        </div>
                     </div>
                     <div class="md-preview" id="md-preview">
                     </div> 
@@ -597,9 +600,9 @@ function splitScreenPreview () {
     var textarea = document.getElementById("notebody")
     var preview = document.createElement("DIV"); // Create a <DIV> element
     var htmlContent = `${md.render(textarea.value)}`
-    if (splitClicked) {
+    if (splitClicked && document.getElementById("split")) {
         document.getElementById("split").remove()
-        document.getElementById("previewBtn").style.display = "unset";
+        document.getElementById("previewBtn").disabled = false;
         textarea.style.width="100%";
         splitClicked = false;
     } else {
@@ -608,7 +611,7 @@ function splitScreenPreview () {
         preview.classList.add("split");
         preview.setAttribute("id", "split");
         document.getElementById("md-editor").appendChild(preview)
-        document.getElementById("previewBtn").style.display = "none";
+        document.getElementById("previewBtn").disabled = true;
         textarea.addEventListener('input', () => {
             htmlContent = `${md.render(textarea.value)}`
             console.log(htmlContent)
@@ -645,8 +648,11 @@ function continueEdit(noteid){
         <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
         <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>  
-        <button class="md-buttons" data-handler="continue-edit" id="continueEdit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i> Edit</button>
-        <button class="md-buttons" data-handler="preview" id="previewBtn"  onclick="previewMarkdown(${noteid})"><i class="fas fa-eye fa-lg"></i> Preview</button>
+        <div class="specialBtns">
+            <button class="md-buttons" data-handler="continue-edit" data-tooltip="Edit" id="continueEdit" name="${noteid}" onclick="continueEdit()"><i class="fas fa-edit fa-lg"></i></button>
+            <button class="md-buttons" data-handler="preview" data-tooltip="Preview" id="previewBtn" onclick="previewMarkdown(${noteid})" disabled><i class="fas fa-eye fa-lg"></i></button>
+            <button class="md-buttons" data-tooltip="Split Screen"  onclick="splitScreenPreview()"><i class="fas fa-columns fa-lg"></i></button>
+        </div>
     </div>
     <div class="md-preview" id="md-preview">
     </div> 
