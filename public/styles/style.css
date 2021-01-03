@@ -284,7 +284,7 @@ input[type="text"]#title::placeholder {
   display: block;
   font-size: 18px;
   width: 100%;
-  height: calc(100% - 100px);
+  height: 102%;
   border: none;
 }
 
@@ -333,7 +333,7 @@ textarea {
 .md-editor-tools {
   display: flex;
   padding: 1px;
-  padding-left: 40px;
+  padding-left: 35px;
   background-color: #bbb;
   border-bottom: solid 1px #bbb;
   border-top: solid 1px #bbb;
@@ -348,25 +348,13 @@ textarea {
   cursor: pointer;
 }
 
-.md-preview {
-  height: inherit;
-  background-color: antiquewhite;
-  min-height: 50%;
-  display: none;
-}
-
-.md-icon {
-  border: none;
-}
-
 .md-editor {
   height: inherit;
 }
 
-.split {
+.split, .full {
   font-size: 16px;
   line-height: 1.5;
-  padding: 0;
   margin: 0;
   color: #24292e;
   width: 50%;
@@ -374,9 +362,12 @@ textarea {
   overflow-y: scroll;
   background-color: #FFF6D9;
   float: right;
-  height: 100%;
+  height: 102%;
   border: 1px solid #D8D8D8;
-  padding: 10px;
+  padding-left: 40px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   word-wrap: break-word;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
   -ms-text-size-adjust: 100%;
@@ -385,6 +376,10 @@ textarea {
 
 .specialBtns {
   padding-left: 25px;
+}
+
+.specialBtns > button {
+  margin: 20px;
 }
 
 * img {
@@ -402,7 +397,7 @@ hr {
 }
 
 .column > p,
-label {
+  label {
   font: 0.9rem 'Fira Sans', sans-serif;
 }
 
@@ -452,30 +447,31 @@ input[type=checkbox]:checked:after {
    left: 6px;
 }
 
-.md-editor-tools > button:disabled,
+.md-editor-tools  button:disabled,
 button[disabled]{
-  border: 1px solid #999999;
+  /* border: 1px solid #999999; */
   background-color: #cccccc;
   color: #666666;
 }
 
-.md-editor-tools > button:disabled:hover,
+.md-editor-tools  button:disabled:hover,
 button[disabled]:hover{
-  border: 1px solid #999999;
+  /* border: 1px solid #999999; */
   background-color: #cccccc;
   color: #666666;
 }
 
-.md-editor-tools > button {
+.md-editor-tools  button {
   color: #444;
-  padding: 5px 10px;
-  border: solid 1px #777;
+  /* border: solid 1px #777;  */
+  margin: 1px;
+  height: 40px;
+  width: 40px;
 }
 
-.md-editor-tools > button:hover {
-  background-color: #444;
+.md-editor-tools  button:hover {
+  background-color: #666;
   color: #ffffff;
-  padding: 5px 10px;
 }
 
 .caption {
@@ -635,6 +631,10 @@ button[disabled]:hover{
     font-size: 1.0rem;
   }
 
+  .md-editor-tools {
+    padding-left: 5px;
+  }
+
   .editnote {
     margin-top: 33px;
     border-style: solid;
@@ -714,13 +714,6 @@ input[type="text"]#title {
       height: calc(100% - 66px);
     }
 
-    .md-editor-tools {
-      display: flex;
-      padding: 5px;
-      background-color: #f1f1f1;
-      border-bottom: solid 1px #bbb;
-    }
-
     .md-buttons {
       border: none;
       margin: auto;
@@ -745,7 +738,7 @@ input[type="text"]#title {
       width: 100%;
   }
 
-    #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock {
+    #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock, #splitScreen {
       display: none;
     }
 
@@ -779,7 +772,7 @@ input[type="text"]#title {
 }
 
   .preview {
-    height: calc(100% - 65px);
+    height: 104%;
   }
 
 #gridView, #listView, .search-bar, .icon {
