@@ -131,7 +131,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 
 .left {
   height: inherit; 
-  width: 23%;
+  width: 25%;
   border: solid 1px #D8D8D8;
   background-color: #bbb;
 }
@@ -139,7 +139,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 .right {
   position: relative;
   height: inherit; 
-  width: 77%;
+  width: 75%;
   display: inline-block;
   border: solid 1px #D8D8D8;
   border-left: none;
@@ -208,7 +208,7 @@ input[type="text"]#title::placeholder {
 }
 
 .editnote {
-  background: #FFF6D9;
+  background: #F5F5F5;
   border: none;
   margin-top: 64px;
   height: calc(100% - 119px);
@@ -709,7 +709,7 @@ input[type="text"]#title {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: 100%;
+      height: 102%;
     }
 
     .md-buttons {
@@ -770,7 +770,7 @@ input[type="text"]#title {
 }
 
   .preview {
-    height: 100%;
+    height: 102%;
   }
 
 #gridView, #listView, .search-bar, .icon {

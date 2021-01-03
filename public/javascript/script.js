@@ -529,7 +529,7 @@ function editNote(notediv) {
                     </div> 
                 </div>
                 <div class="shwBtnsR">
-                    <button class="btn" id="updateBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" ><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
+                    <button class="btn" id="saveBtn" onclick='update(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" ><i class="fa fa-save fa-lg" aria-hidden="true"></i></button>
                     <button class="btn" id="cancelEdit" onclick='cancelEdit(this)' name="${matching.noteid}" ><i class="fas fa-window-close fa-lg"></i></button>
                 </div>`
                 editBox.innerHTML = html;
@@ -553,10 +553,10 @@ function editNote(notediv) {
                 document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
                 function enableSaveBtn(event) {
-                    document.getElementById("updateBtn").disabled = false;
+                    document.getElementById("saveBtn").disabled = false;
                     btnStatus = false
                 }
-                document.getElementById("updateBtn").disabled = true;
+                document.getElementById("saveBtn").disabled = true;
                 document.getElementById("addBtn").disabled = true;
                 document.getElementById("homeBtn").disabled = true;
             } else { }
@@ -580,12 +580,7 @@ function fullScreenPreview() {
             elems[i].disabled = false;
         }
     } else {
-        if(document.getElementById("updateBtn")){
-            document.getElementById("updateBtn").disabled = true;
-        }
-        if(document.getElementById("saveBtn")){
-            document.getElementById("saveBtn").disabled = true;
-        }
+        document.getElementById("saveBtn").disabled = true;
         var elems = document.getElementsByClassName("md-buttons");
         for(var i = 0; i < elems.length; i++) {
             elems[i].disabled = true;
