@@ -131,7 +131,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 
 .left {
   height: inherit; 
-  width: 20%;
+  width: 23%;
   border: solid 1px #D8D8D8;
   background-color: #bbb;
 }
@@ -139,7 +139,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 .right {
   position: relative;
   height: inherit; 
-  width: 80%;
+  width: 77%;
   display: inline-block;
   border: solid 1px #D8D8D8;
   border-left: none;
