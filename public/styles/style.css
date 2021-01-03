@@ -256,20 +256,17 @@ input[type="text"]#title::placeholder {
   position: relative;
 }
 
-/* .shwBtnsR > button:disabled, button[disabled] {
+.shwBtnsR > button:disabled, button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
-} */
-
-.shwBtnsR > button {
-  background-color: #666;
-  color: #ffffff;
 }
 
-/* #saveBtn  {color: white; background-color: #28a745;;} */
-/* #cancelEdit {color: white; background-color: red;}  */
-/* #previewBtn {color: white; background-color: #28a745;} */
+.shwBtnsR > button {
+  /* background-color: #bbb; */
+  background-color: #f1f1f1;
+  color: #444;
+}
 
 #noteHtml {
   margin-top: 50px;
@@ -333,7 +330,7 @@ textarea {
 .md-editor-tools {
   display: flex;
   padding: 1px;
-  padding-left: 35px;
+  padding-left: 3px;
   background-color: #bbb;
   border-bottom: solid 1px #bbb;
   border-top: solid 1px #bbb;
@@ -348,7 +345,7 @@ textarea {
   cursor: pointer;
 }
 
-.md-editor {
+.md-editor {  
   height: inherit;
 }
 
@@ -375,11 +372,12 @@ textarea {
 }
 
 .specialBtns {
-  padding-left: 25px;
+  padding-left: 10px; 
 }
 
-.specialBtns > button {
-  margin: 20px;
+.specialBtns  button {
+  margin: 15px;
+  border: 1px solid #999999; 
 }
 
 * img {
@@ -632,7 +630,7 @@ button[disabled]:hover{
   }
 
   .md-editor-tools {
-    padding-left: 5px;
+    padding-left: 3px;
   }
 
   .editnote {
