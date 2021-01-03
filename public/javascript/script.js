@@ -1,7 +1,19 @@
-// alert("Connected!")
+// Turndown
+var turndownService = new TurndownService();
+var gfm = turndownPluginGfm.gfm
+var tsklst = turndownPluginGfm.taskListItems
+turndownService.use(gfm)
+turndownService.use(tsklst)
+
+// Markdown-It
+var md = new window.markdownit()
+md.use(window.markdownitEmoji);
+
+// Task List
+md.use(window.markdownitTaskLists)
+
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
-
 var e = document.createElement("base");
 e.target = "_blank";
 document.head.appendChild(e);
@@ -92,20 +104,6 @@ function deleteDB() {
         console.log("Couldn't delete database due to the operation being blocked");
     };
 }
-
-// Turndown
-var gfm = turndownPluginGfm.gfm
-var tsklst = turndownPluginGfm.taskListItems
-const turndownService = new TurndownService();
-turndownService.use(gfm)
-turndownService.use(tsklst)
-
-// Markdown-It
-var md = new window.markdownit()
-md.use(window.markdownitEmoji);
-
-// Task List
-md.use(window.markdownitTaskLists)
 
 // Embedded video
 var html5medialPlugin = window.markdownitHTML5Embed;
@@ -256,7 +254,6 @@ function noteSelect(){
         });
     }
 }
-
 
 // Add new Note
 var editPad = document.getElementById("editpad")
@@ -595,19 +592,34 @@ function previewMarkdown(){
     document.getElementById("continueEdit").disabled = false;
 }
 
-
+var splitClicked = false;
 function splitScreenPreview () {
     var textarea = document.getElementById("notebody")
-    textarea.style.width="50%"
-    var preview = document.createElement("DIV");  // Create a <DIV> element
+    var preview = document.createElement("DIV"); // Create a <DIV> element
     var htmlContent = `${md.render(textarea.value)}`
-    preview.innerHTML = htmlContent;               // Insert text
-    preview.classList.add("split");
-    preview.setAttribute("id", "split");
-    document.getElementById("md-editor").appendChild(preview)
-    textarea.addEventListener('input', () => {
-        document.getElementById("split").innerHTML = md.render(textarea.value)
-    })
+    if (splitClicked) {
+        document.getElementById("split").remove()
+        document.getElementById("previewBtn").style.display = "unset";
+        textarea.style.width="100%";
+        splitClicked = false;
+    } else {
+        textarea.style.width="50%"
+        preview.innerHTML = htmlContent; // Insert text
+        preview.classList.add("split");
+        preview.setAttribute("id", "split");
+        document.getElementById("md-editor").appendChild(preview)
+        document.getElementById("previewBtn").style.display = "none";
+        textarea.addEventListener('input', () => {
+            htmlContent = `${md.render(textarea.value)}`
+            console.log(htmlContent)
+            document.getElementById("split").innerHTML = htmlContent
+                // Highlight JS
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        })
+        splitClicked = true;
+    }
 }
 
 
@@ -771,7 +783,7 @@ function handlePaste (e) {
     }
 };
 
-// Handle TAB
+// Handle Editor Keys
 function handleKey(event) {
     if ( event.code === "Tab" ) {
         processInput('tab')
@@ -799,7 +811,6 @@ function handleKey(event) {
         event.preventDefault();
     }
 }
-
 
 // Delete selected notes
 document.getElementById('delete').onclick = function() {

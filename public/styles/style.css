@@ -364,9 +364,11 @@ textarea {
 }
 
 .split {
+  font-size: 16px;
+  line-height: 1.5;
   padding: 0;
   margin: 0;
-  white-space: nowrap;
+  color: #24292e;
   width: 50%;
   vertical-align: top;
   overflow-y: scroll;
@@ -375,7 +377,10 @@ textarea {
   height: 100%;
   border: 1px solid #D8D8D8;
   padding: 10px;
+  word-wrap: break-word;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 .specialBtns {
@@ -475,10 +480,6 @@ button[disabled]:hover{
 
 .caption {
   padding-left: 2.1rem;
-}
-
-.disparu {
-  display: none;
 }
 
 /* Search */
@@ -679,10 +680,6 @@ button[disabled]:hover{
     height: 40px;
     border: 1px solid #D8D8D8;
     border-radius: 5%;
-  }
-
-  .caption {
-    display: none;
   }
 
   .btn {
