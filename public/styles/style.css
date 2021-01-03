@@ -208,7 +208,7 @@ input[type="text"]#title::placeholder {
 }
 
 .editnote {
-  background: #F5F5F5;
+  background: #FFF6D9;
   border: none;
   margin-top: 64px;
   height: calc(100% - 119px);
@@ -709,7 +709,7 @@ input[type="text"]#title {
       display: block;
       font-size: 18px;
       width: 100%;
-      height: calc(100% - 66px);
+      height: 100%;
     }
 
     .md-buttons {
@@ -770,7 +770,7 @@ input[type="text"]#title {
 }
 
   .preview {
-    height: 104%;
+    height: 100%;
   }
 
 #gridView, #listView, .search-bar, .icon {
