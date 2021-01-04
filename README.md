@@ -11,6 +11,7 @@ Features
 - Markdown editing tools.
 - Filter/Search notes.
 - Auto close brackets and quotes.
+- Split screen for Markdown Live Preview
 - Emojis!! :fire: :heart_eyes: :star2: :sunglasses: :sparkles: 
 
 Syntax guide
@@ -211,7 +212,6 @@ If you find that inconvenient, try using fenced code blocks. Depending on your M
     }
     ```
 
-
 ### Syntax Highlighting
 
 NoteApp uses a Markdown processors that support syntax highlighting for fenced code blocks. This feature attempts to detects the language automatically and adds color highlighting for whatever language your code was written in. 
@@ -235,6 +235,10 @@ genApacheConf(){
 
 echo '"quoted"' | tr -d \" > text.txt
 ```
+
+### Markdown Live Preview
+
+Live markdown previews for your favorite editor on a split screen.
 
 ### Emoji
 

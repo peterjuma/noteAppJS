@@ -35,6 +35,7 @@ function gridView() {
     }
 }
 
+// Toggle note highlighting
 var container = document.getElementById("btnContainer");
 document.addEventListener('DOMContentLoaded', toggleActive());
 function toggleActive() {
@@ -146,6 +147,7 @@ window.onload = function() {
     setTimeout(loadAfterTime, 100)
  }; 
 
+ // Fetch and read the README.md file
  function readTextFile(file)
 {
     var rawFile = new XMLHttpRequest();
@@ -168,6 +170,7 @@ window.onload = function() {
 let btnAction = document.getElementsByClassName("btnnote")
 var editBox = document.getElementById("editor")
 
+// Display the README.md file contents on demand
 function loadHome() {
     readTextFile("README.md");
     html = `
@@ -193,7 +196,8 @@ function loadHome() {
             });
     }, 20); 
 }
-  
+
+// Display README.md contents if there are no notes else display the first note
  function loadAfterTime(){
     var notes = document.getElementsByClassName('note')
     if(notes[0]) {
@@ -437,6 +441,7 @@ function updateNote(note) {
     }
 }
 
+// Cancel current note-edit
 function cancelEdit(noteid){
     document.getElementById("editor").style.display = "none"
     document.getElementById("addBtn").disabled = false;
@@ -564,6 +569,7 @@ function editNote(notediv) {
     }
 }
 
+// Markdown preview in full screen mode
 var fullPreviewClicked = false;
 function fullScreenPreview() {
     var textarea = document.getElementById("notebody")
@@ -606,6 +612,7 @@ function fullScreenPreview() {
     document.getElementById("previewBtn").disabled = false;
 }
 
+// Split screen in two: text input and live markdown preview
 var splitPreviewClicked = false;
 function splitScreenPreview () {
     var textarea = document.getElementById("notebody")
@@ -815,6 +822,7 @@ input.addEventListener("keyup", function (event) {
    }
 });
 
+// Process customized textarea input 
 function processInput(eventcode){
     // obtain the object reference for the textarea>
     var txtarea = document.getElementById("notebody");

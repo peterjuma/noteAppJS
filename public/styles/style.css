@@ -383,6 +383,7 @@ textarea {
 * img {
   display: block;
   width: 50%;
+  border: 1px solid #999999; 
 }
 
 hr {
@@ -509,6 +510,10 @@ button[disabled]:hover{
   padding: 10px 10px 10px 35px;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+}
+
+.disparu {
+  display: none;
 }
 
 /* width */
