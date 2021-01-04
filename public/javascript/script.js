@@ -616,7 +616,7 @@ function fullScreenPreview() {
 var splitPreviewClicked = false;
 function splitScreenPreview () {
     var textarea = document.getElementById("notebody")
-    var htmlContent = `${md.render(textarea.value)}`
+    var htmlContent = `${md.render(textarea.value)}` || "[...]";
     if (splitPreviewClicked && document.getElementById("split")) {
         document.getElementById("split").remove()
         document.getElementById("previewBtn").disabled = false; 
@@ -632,7 +632,7 @@ function splitScreenPreview () {
         preview.setAttribute("id", "split");
         document.getElementById("md-editor").appendChild(preview)
         textarea.addEventListener('input', () => {
-            htmlContent = `${md.render(textarea.value)}`
+            htmlContent = `${md.render(textarea.value)}` || "[...]"
             document.getElementById("split").innerHTML = htmlContent
             // Highlight JS
             document.querySelectorAll('pre code').forEach((block) => {
