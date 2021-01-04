@@ -134,6 +134,7 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
   width: 25%;
   border: solid 1px #D8D8D8;
   background-color: #bbb;
+  position: relative;
 }
 
 .right {
@@ -148,8 +149,8 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 
 #notes {
   overflow: scroll;
-  margin-top: 10px;
-  height: calc(100% - 120px);
+  margin-top: 8px;
+  height: calc(100% - 123px);
   border-top: solid 1px #D8D8D8;
   border-bottom: solid 1px #D8D8D8;
 }
@@ -162,11 +163,11 @@ p code.hljs, li code.hljs { display: inline; padding: .2em }
 
 input[type="text"]#title {
   text-align: left;
-  padding: 20px;
-  padding-left: 40px;
+  padding: 15px;
+  padding-left: 20px;
   font-size: 20px;
   font-weight: 600;
-  border-top: solid 1px #bbb;
+  border: solid 1px #bbb;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -202,16 +203,17 @@ input[type="text"]#title::placeholder {
   box-shadow: none;
   display: block;
   font-size: 18px;
-  margin-top: 65px;
+  margin-top: 64px;
   width: 100%;
-  height: calc(100% - 120px);
+  height: calc(100% - 124px);
 }
 
 .editnote {
   background: #F5F5F5;
   border: none;
   margin-top: 64px;
-  height: calc(100% - 119px);
+  height: 87.15%;
+  display: inline;
 }
 
 .continueBtn {
@@ -238,6 +240,7 @@ input[type="text"]#title::placeholder {
   align-items: center;
   background-color: #bbb;
   position: absolute;
+  bottom: 10px;
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 5.2px;
@@ -245,8 +248,9 @@ input[type="text"]#title::placeholder {
   justify-content: space-between;
 }
 
+
 .shwBtnsL {
-  padding-top: 3px;
+  padding-top: 5px;
   display: inline-flex;
   width: 100%;
   align-items: center;
@@ -254,6 +258,7 @@ input[type="text"]#title::placeholder {
   padding-right: 10px;
   justify-content: space-between;
   position: relative;
+  bottom: 0px;
 }
 
 .shwBtnsR > button:disabled, button[disabled] {
@@ -278,10 +283,10 @@ input[type="text"]#title::placeholder {
   overflow: auto;
   background: #F5F5F5;
   background-color: #FFF6D9;
-  display: block;
+  /* display: inline-block; */
   font-size: 18px;
   width: 100%;
-  height: 102%;
+  height: 99%;
   border: none;
 }
 
@@ -299,21 +304,22 @@ textarea {
   padding-left: 40px;
   padding-right: 50px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
   font-size: 20px;
   width: 100%;
   overflow: auto;
-  font-size: 100%;
+  font-size: 1rem;
   line-height: 1.45;
   background-color: #f6f8fa;
   border-radius: 0px;
   resize: none;
   outline: none;
   box-shadow: none;
-  border: none;
+  border: solid 1px #bbb;
   font-family: "Courier New", Courier, monospace;
-  height: 100%;
+  height: 101%;
 }
+
 
 .editBtns {
   justify-content: space-evenly;
@@ -345,11 +351,12 @@ textarea {
   cursor: pointer;
 }
 
-.md-editor {  
+.md-editor {
   height: inherit;
+  position: relative;
 }
 
-.split, .full {
+.split {
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
@@ -357,14 +364,42 @@ textarea {
   width: 50%;
   vertical-align: top;
   overflow-y: scroll;
-  background-color: #FFF6D9;
+  /* background-color: #FFF6D9; */
+  background-color: #F5F5F5;
   float: right;
-  height: 102%;
+  height: 101%;
+  position: relative;
   border: 1px solid #D8D8D8;
+  border-bottom: none;
   padding-left: 40px;
   padding-right: 50px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
+  word-wrap: break-word;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.full {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  color: #24292e;
+  width: 100%;
+  vertical-align: top;
+  overflow-y: scroll;
+  /* background-color: #FFF6D9; */
+  background-color: #F5F5F5;
+  float: right;
+  height: 101%;
+  position: relative;
+  border: 1px solid #D8D8D8;
+  border-bottom: none;
+  padding-left: 40px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 60px;
   word-wrap: break-word;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
   -ms-text-size-adjust: 100%;
@@ -613,11 +648,6 @@ button[disabled]:hover{
     padding-bottom: 0px;
   }
 
-  .fa,
-  * {
-    font-size: 1rem;
-  }
-
   #btnContainer {
     padding-top: 10px;
     justify-content: space-between;
@@ -627,32 +657,40 @@ button[disabled]:hover{
   #check {
     display: none;
   }
-  
+
   textarea {
-    height: 98%;
+    height: 97%;
     resize: none;
-    padding: 25px;
+    padding: 10px;
     font-size: 1.0rem;
   }
 
   .md-editor-tools {
-    padding-left: 3px;
+    padding-left: 1px;
+    padding: 0px;
+  }
+
+  .full, .split {
+    padding: 15px;
+    height: 97%;
   }
 
   .editnote {
-    margin-top: 33px;
-    border-style: solid;
-    border: solid 0px #D8D8D8;
-    height: calc(100% - 62px);
+    background: #F5F5F5;
+    border: none;
+    margin-top: 64px;
+    height: 87.15%;
+    display: inline;
   }
 
   #notes {
     overflow: scroll;
-    margin-top: 10px;
+    margin-top: 1px;
     border-top: solid 1px #D8D8D8;
     border-bottom: solid 1px #D8D8D8;
-    height: calc(100% - 81.4px);
+    height: calc(100% - 80px);
   }
+
 
   .column p {
     margin: 2px;
@@ -667,10 +705,6 @@ button[disabled]:hover{
     height: 97.5%;
   }
 
-  .md-editor {
-    height: 90%;
-  }
-
   .left {
     height: 97.5%;
     padding-top: 5px;
@@ -681,16 +715,14 @@ button[disabled]:hover{
 
   .column {
     width: 100%;
-    height: 40px;
+    height: 45px;
     border: 1px solid #D8D8D8;
     border-radius: 5%;
   }
-
   .btn {
     font-size: 10px;
-    padding: 5px 5px;
+    padding: 8px 10px;
   }
-
   .shownote {
     padding: 15px;
     padding-top: 0%;
@@ -699,13 +731,11 @@ button[disabled]:hover{
     height: calc(100% - 90px);
   }
 
-input[type="text"]#title {
-    font-weight: 100;
-    font-size: medium;
-    line-height: 1;
-    padding: 10px;
-    border: none;
-    }
+  input[type="text"]#title {
+      line-height: 1;
+      padding: 10px;
+      border: none;
+      }
 
     .preview {
       padding: 15px;
@@ -718,13 +748,13 @@ input[type="text"]#title {
       height: 102%;
     }
 
-    .md-buttons {
-      border: none;
-      margin: auto;
-      outline: none;
-      padding: 2px;
-      background-color: #f1f1f1;
-      cursor: pointer;
+
+  .md-editor-tools button {
+      color: #444;
+      /* border: solid 1px #777; */
+      margin: 1px;
+      height: 30px;
+      width: 40px;
   }
 
     .shwBtns {
@@ -733,26 +763,8 @@ input[type="text"]#title {
       padding-left: 10px;
     }
 
-    .shwBtnsR {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #bbb; 
-      position: absolute;
-      padding: 2px 5px 0px 5px;
-      width: 100%;
-  }
-
-    #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock, #splitScreen {
-      display: none;
-    }
-
     .note {
       padding: 5px;
-    }
-
-    .column {
-      height: 30px;
     }
 
     .btnShow {
@@ -766,14 +778,27 @@ input[type="text"]#title {
   }
 }
 
-@media screen and (max-width: 1099px) {
+@media screen and (max-width: 1299px) {
   .shownote {
     padding: 15px;
     padding-top: 0%;
-    margin-top: 33px;
+    margin-top: 39px;
     width: 100%;
-    height: calc(100% - 62px);
+    height: calc(100% - 86px);
 }
+
+  textarea {
+    height: 104%;
+  }
+
+  .full, .split {
+    padding: 50px;
+    height: 104%;
+  }
+
+  #btnLink, #btnOList, #btnUList, #btnQuote, #btnImage, #btnTask, #btnTable, #btnStrike, #btnHline, #btnCodeBlock, #splitScreen {
+    display: none;
+  }
 
 .shwBtns {
   padding: 0px;
@@ -806,7 +831,7 @@ input[type="text"]#title {
     margin-top: 1px;
     border-top: solid 1px #D8D8D8;
     border-bottom: solid 1px #D8D8D8;
-    height: calc(100% - 53px);
+    height: calc(100% - 77px);
 }
 
   .row {
@@ -814,15 +839,6 @@ input[type="text"]#title {
     padding-right: 0;
     padding-top: 0;
     padding-left: 5.5px;
-  }
-  .shwBtnsL {
-    padding-top: 3px;
-    display: inline-flex;
-    width: 100%;
-    align-items: center;
-    padding-left: 5px;
-    padding-right: 5px;
-    justify-content: space-between;
   }
 
   #btnContainer {
@@ -855,7 +871,6 @@ input[type="text"]#title {
   }
 
   .left {
-    height: 97.5%;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 2px;

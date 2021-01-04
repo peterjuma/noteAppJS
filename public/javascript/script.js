@@ -595,7 +595,7 @@ function fullScreenPreview() {
         textarea.style.display="none";
         var preview = document.createElement("DIV"); // Create a <DIV> element
         preview.innerHTML = htmlContent; // Insert text
-        preview.classList.add("preview");
+        preview.classList.add("full");
         preview.classList.add("markdown-body");
         preview.setAttribute("id", "full");
         document.getElementById("md-editor").appendChild(preview)
