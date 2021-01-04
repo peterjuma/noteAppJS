@@ -605,8 +605,9 @@ button[disabled]:hover{
   opacity: 1;
 }
 
+
 /* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1300px) {
   body {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -614,12 +615,12 @@ button[disabled]:hover{
 
   .fa,
   * {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   #btnContainer {
     padding-top: 10px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     display: flex;
   }
 
@@ -693,9 +694,9 @@ button[disabled]:hover{
   .shownote {
     padding: 15px;
     padding-top: 0%;
-    margin-top: 50px;
+    margin-top: 52px;
     width: 100%;
-    height: calc(100% - 91px);
+    height: calc(100% - 90px);
   }
 
 input[type="text"]#title {
@@ -728,7 +729,8 @@ input[type="text"]#title {
 
     .shwBtns {
       padding: 0px;
-      padding-top: 10px;
+      padding-top: 15px;
+      padding-left: 10px;
     }
 
     .shwBtnsR {
@@ -758,6 +760,10 @@ input[type="text"]#title {
       margin-left: 5px;
       margin-right: 5px;
     }
+    .search-bar .input-text {
+      height: 25px;
+      padding: 8px 8px 8px 35px;
+  }
 }
 
 @media screen and (max-width: 1099px) {
