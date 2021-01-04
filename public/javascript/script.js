@@ -616,7 +616,7 @@ function fullScreenPreview() {
 var splitPreviewClicked = false;
 function splitScreenPreview () {
     var textarea = document.getElementById("notebody")
-    var htmlContent = `${md.render(textarea.value)}` || "[...]";
+    var htmlContent = `${md.render(textarea.value)}` || "[...][...]";
     if (splitPreviewClicked && document.getElementById("split")) {
         document.getElementById("split").remove()
         document.getElementById("previewBtn").disabled = false; 
