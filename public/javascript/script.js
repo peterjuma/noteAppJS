@@ -575,7 +575,7 @@ function fullScreenPreview() {
     var textarea = document.getElementById("notebody")
     var htmlContent = `${md.render(textarea.value)}`
     if (fullPreviewClicked && document.getElementById("full")) {
-        document.getElementById("full").remove()
+        document.getElementById("full").style.display = "none";
         document.getElementById("splitScreen").disabled = false;
         document.getElementById("cancelEdit").disabled = false;
         document.getElementById("saveBtn").disabled = false
@@ -593,12 +593,16 @@ function fullScreenPreview() {
         }
         document.getElementById("cancelEdit").disabled = true;
         textarea.style.display="none";
-        var preview = document.createElement("DIV"); // Create a <DIV> element
-        preview.innerHTML = htmlContent; // Insert text
-        preview.classList.add("full");
-        preview.classList.add("markdown-body");
-        preview.setAttribute("id", "full");
-        document.getElementById("md-editor").appendChild(preview)
+        if(document.getElementById("full")){
+            document.getElementById("full").style.display = "unset"
+        } else {
+            var preview = document.createElement("DIV"); // Create a <DIV> element
+            preview.innerHTML = htmlContent; // Insert text
+            preview.classList.add("full");
+            preview.classList.add("markdown-body");
+            preview.setAttribute("id", "full");
+            document.getElementById("md-editor").appendChild(preview)
+       }
         textarea.addEventListener('input', () => {
             htmlContent = `${md.render(textarea.value)}`
             document.getElementById("full").innerHTML = htmlContent
@@ -618,19 +622,24 @@ function splitScreenPreview () {
     var textarea = document.getElementById("notebody")
     var htmlContent = `${md.render(textarea.value)}` || "[...][...]";
     if (splitPreviewClicked && document.getElementById("split")) {
-        document.getElementById("split").remove()
+        document.getElementById("split").style.display = "none"
         document.getElementById("previewBtn").disabled = false; 
         textarea.style.width="100%";
         splitPreviewClicked = false;
     } else {
         document.getElementById("previewBtn").disabled = true;
         textarea.style.width="50%"
-        var preview = document.createElement("DIV"); // Create a <DIV> element
-        preview.innerHTML = htmlContent; // Insert text
-        preview.classList.add("split");
-        preview.classList.add("markdown-body");
-        preview.setAttribute("id", "split");
-        document.getElementById("md-editor").appendChild(preview)
+        if(document.getElementById("split")){
+            document.getElementById("split").style.display = "unset"
+        } else
+        {
+            var preview = document.createElement("DIV"); // Create a <DIV> element
+            preview.innerHTML = htmlContent; // Insert text
+            preview.classList.add("split");
+            preview.classList.add("markdown-body");
+            preview.setAttribute("id", "split");
+            document.getElementById("md-editor").appendChild(preview)
+        }
         textarea.addEventListener('input', () => {
             htmlContent = `${md.render(textarea.value)}` || "[...]"
             document.getElementById("split").innerHTML = htmlContent
@@ -711,35 +720,37 @@ function handlePaste (e) {
     // Prevent the default action
     e.preventDefault();
 
-    // Get the copied text from the clipboard
-    const text = (e.clipboardData)
-        ? (e.originalEvent || e).clipboardData.getData('text/plain')
-        // For IE
-        : (window.clipboardData ? window.clipboardData.getData('Text') : '');
+    if(e.clipboardData) {
+        // Get the copied text from the clipboard
+        const text = (e.clipboardData)
+            ? (e.originalEvent || e).clipboardData.getData('text/plain')
+            // For IE
+            : (window.clipboardData ? window.clipboardData.getData('Text') : '');
 
-    // Get the copied text from the clipboard
-    const html = (e.clipboardData)
-        ? (e.originalEvent || e).clipboardData.getData('text/html')
-        // For IE
-        : (window.clipboardData ? window.clipboardData.getData('Html') : '');
+        // Get the copied text from the clipboard
+        const html = (e.clipboardData)
+            ? (e.originalEvent || e).clipboardData.getData('text/html')
+            // For IE
+            : (window.clipboardData ? window.clipboardData.getData('Html') : '');
 
-    const pasteData = html ? turndownService.turndown(marked(html)) : text    
+        const pasteData = html ? turndownService.turndown(marked(html)) : text    
 
-    if (document.queryCommandSupported('insertText')) {
-        document.execCommand('insertText', false, pasteData);
-    } else {
-        // Insert text at the current position of caret
-        const range = document.processInputection().getRangeAt(0);
-        range.deleteContents();
+        if (document.queryCommandSupported('insertText')) {
+            document.execCommand('insertText', false, pasteData);
+        } else {
+            // Insert text at the current position of caret
+            const range = document.processInputection().getRangeAt(0);
+            range.deleteContents();
 
-        const textNode = document.createTextNode(pasteData);
-        range.insertNode(textNode);
-        range.selectNodeContents(textNode);
-        range.collapse(false);
+            const textNode = document.createTextNode(pasteData);
+            range.insertNode(textNode);
+            range.selectNodeContents(textNode);
+            range.collapse(false);
 
-        const selection = window.processInputection();
-        selection.removeAllRanges();
-        selection.addRange(range);
+            const selection = window.processInputection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
     }
 };
 

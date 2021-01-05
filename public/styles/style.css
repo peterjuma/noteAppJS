@@ -240,7 +240,7 @@ input[type="text"]#title::placeholder {
   align-items: center;
   background-color: #bbb;
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 5.2px;
