@@ -175,7 +175,6 @@ function loadHome() {
     readTextFile("README.md");
     html = `
     <div class="shwBtnsR">
-        <!--button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button-->
     </div>
     <div class="shownote markdown-body" id="editpad">
         <div id="noteHtml">
@@ -241,11 +240,11 @@ function showNote(notediv){
             } else{}
         }
         setTimeout(function(){
-        // Highlight JS
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
-            });
-    }, 20); 
+            // Highlight JS
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+                });
+        }, 50); 
     } 
 }
 
@@ -294,8 +293,7 @@ newNote.addEventListener("click", () => {
                     <div class="shwBtnsR">
                     <button class="btn" id="saveBtn" onclick="save()" ><i class="fas fa-save fa-lg"></i></button>
                     <button class="btn" id="cancelEdit" onclick='cancelEdit("")' ><i class="fas fa-window-close fa-lg"></i></button>
-                 </div>
-                 <script src="public/javascript/taboverride.js"></script>`
+                 </div>`
     editBox.innerHTML = html;
     document.getElementById("editor").style.display = "unset"
     document.getElementById("notebody").addEventListener('paste', handlePaste);
@@ -368,9 +366,7 @@ function countDown(epoch_timestamp) {
 // Save / Add New Note
 function save() {
     var noteTitle = document.getElementById("title").value
-    // Get textarea value with line breaks
     var noteText = document.getElementById("notebody").value
-    // var noteBody = noteText.replace(/\n\r?/g, '<br />');
     var id = Math.round(Date.now() / 1000)  
     const note = {
         noteid: id.toString(),
@@ -396,7 +392,7 @@ function addNote(note) {
     }  
     setTimeout(function(){
         document.getElementById(note.noteid).click()
-   }, 500); //wait for atleast  200 ms before click action
+   }, 200); //wait for atleast  200 ms before click action
    document.getElementById("addBtn").disabled = false;
    document.getElementById("homeBtn").disabled = false;
    var buttons = document.getElementById("notes").getElementsByTagName('button');
@@ -471,12 +467,12 @@ function getNote(noteid) {
             var matching = request.result;
             if (matching) {
                 notesGrid.innerHTML = "";
-                html2 = `
-                <div class="shwBtnsR">
-                    <button class="btnShow" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='white'"><i class="fa fa-edit"></i></button>
-                    <button class="btnShow" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
-                    <button class="btnShow" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
-                    <button class="btnShow" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                var html = `
+                <div class="shwBtns">
+                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='white'"><i class="fa fa-edit"></i></button>
+                    <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
+                    <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
+                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
                 </div>
                     <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                         <div id="noteHtml">
@@ -484,7 +480,7 @@ function getNote(noteid) {
                             <div class="notebody" id="notebody">${md.render(matching.body)}</div>
                         </div>
                     </div>`
-                editBox.innerHTML = html2;
+                editBox.innerHTML = html;
             } 
         }
     }
@@ -850,7 +846,7 @@ function processInput(eventcode){
     keyCodes["image"].pattern = img;
     keyCodes["link"].pattern = link;
     var keyCode = keyCodes[eventcode]
-    if(keyCode.regEx == true){
+    if(keyCode.regEx){
         var transsel="";
         var match = /\r|\n/.exec(sel);
         if (match) {
@@ -864,7 +860,7 @@ function processInput(eventcode){
         } else {sel = sel.replace(/^/gm, `${keyCode.pattern} `)}
 
         var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
-        if (newText) {
+        if (newText){
             txtarea.value=newText;
             txtarea.blur()
             txtarea.focus()
@@ -875,7 +871,7 @@ function processInput(eventcode){
             }
         }
     } else {
-        if(keyCode.pattern){
+        if(keyCode.pattern !== ""){
             if(eventcode == "image" || eventcode == "link") {
                 var newText = `${allText.substring(0, start)}${keyCode.pattern}${allText.substring(finish, allText.length)}`
             } else {

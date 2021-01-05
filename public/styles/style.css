@@ -227,7 +227,7 @@ input[type="text"]#title::placeholder {
   display: flex;
   justify-content: flex-start;
   background-color: #bbb;
-  position: fixed;
+  top: 0;
   padding: 10px;
   padding-top: 10px;
   padding-bottom: 0px;
