@@ -829,6 +829,21 @@ input.addEventListener("keyup", function (event) {
    }
 });
 
+function setSelectionRange(input, selectionStart, selectionEnd) {
+    if (input.setSelectionRange) {
+      input.setSelectionRange(selectionStart, selectionEnd);
+    }
+    else if (input.createTextRange) {
+      var range = input.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', selectionEnd);
+      range.moveStart('character', selectionStart);
+      range.select();
+    }
+    input.blur();
+    input.focus();
+  }
+
 // Process customized textarea input 
 function processInput(eventcode){
     // obtain the object reference for the textarea>
@@ -858,16 +873,13 @@ function processInput(eventcode){
             }
             sel = transsel;
         } else {sel = sel.replace(/^/gm, `${keyCode.pattern} `)}
-
         var newText = `${allText.substring(0, start)}${sel}${allText.substring(finish, allText.length)}`
         if (newText){
             txtarea.value=newText;
-            txtarea.blur()
-            txtarea.focus()
             if(eventcode === "tab"){
-                 txtarea.selectionEnd = start+sel.length 
+                setSelectionRange(txtarea, start+sel.length, start+sel.length)
             } else {
-                txtarea.selectionStart = txtarea.selectionEnd = start+keyCode.offsetStart; 
+                setSelectionRange(txtarea, start+keyCode.offsetStart, start+keyCode.offsetStart)
             }
         }
     } else {
@@ -882,10 +894,7 @@ function processInput(eventcode){
         }
         if(newText) {
             txtarea.value=newText;
-            txtarea.blur()
-            txtarea.focus()
-            txtarea.selectionStart = start+keyCode.offsetStart; ;
-            txtarea.selectionEnd = finish+keyCode.offsetEnd;
+            setSelectionRange(txtarea, start+keyCode.offsetStart, finish+keyCode.offsetEnd)
         }
     }
 }
