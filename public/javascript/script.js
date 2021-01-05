@@ -109,15 +109,15 @@ function deleteDB() {
 // Embedded video
 var html5medialPlugin = window.markdownitHTML5Embed;
 md.use(html5medialPlugin, { 
-        html5embed: { useLinkSyntax: true, useImageSyntax: true, 
-            attributes: {
-            'audio': 'width="33%" controls class="audioplayer"',
-            'video': 'width="33%" height="auto" class="audioplayer" controls' },
-            is_allowed_mime_type: function(mimetype) {
-                var v = document.createElement(mimetype[1]);
-                return v.canPlayType && v.canPlayType(mimetype[0]) !== ''; }
-        } 
-    });
+    html5embed: { useLinkSyntax: true, useImageSyntax: true, 
+        attributes: {
+        'audio': 'width="33%" controls class="audioplayer"',
+        'video': 'width="33%" height="auto" class="audioplayer" controls' },
+        is_allowed_mime_type: function(mimetype) {
+            var v = document.createElement(mimetype[1]);
+            return v.canPlayType && v.canPlayType(mimetype[0]) !== ''; }
+    } 
+});
 
 /* Load Data */
 var notesGrid = document.getElementById("notes")
@@ -264,56 +264,57 @@ var newNote = document.getElementById("addBtn")
 newNote.addEventListener("click", () => {
         html = `<div name="" class="editnote" id="editpad" contenteditable="false">
                     <input name="title" type="text" id="title" placeholder="Title" autocomplete="off">
-                    <div class="md-editor-tools" id="mdtools">
-                        <button class="md-buttons md-icon" data-tooltip="Bold" data-handler="bold" id="btnBold"><i class="fas fa-bold"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Link" data-handler="link" id="btnLink"><i class="fas fa-link"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
+                    <div class="md-editor-tools" id="mdtools" tabindex="-1">
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Bold" data-handler="bold" id="btnBold"><i class="fas fa-bold"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Italic" data-handler="italic" id="btnItalic"><i class="fas fa-italic"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Header" data-handler="heading" id="btnHeading"><i class="fas fa-heading"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Link" data-handler="link" id="btnLink"><i class="fas fa-link"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Table" data-handler="table" id="btnTable"><i class="fas fa-table"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Strikethrough" data-handler="strike" id="btnStrike"><i class="fas fa-strikethrough"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Horizontal Line" data-handler="hline" id="btnHline"><span style='font-size:16px;'>&mdash;</span></button>
                         <div class="specialBtns">
-                            <button class="md-buttons" data-handler="preview" data-tooltip="Preview" id="previewBtn" onclick="fullScreenPreview()"><i class="fas fa-eye fa-lg"></i></button>
-                            <button class="md-buttons" data-tooltip="Split Screen"  onclick="splitScreenPreview()" id="splitScreen"><i class="fas fa-columns fa-lg"></i></button>
+                            <button class="md-buttons" tabindex="-1" data-handler="preview" data-tooltip="Preview" id="previewBtn" onclick="fullScreenPreview()"><i class="fas fa-eye fa-lg"></i></button>
+                            <button class="md-buttons" tabindex="-1" data-tooltip="Split Screen"  onclick="splitScreenPreview()" id="splitScreen"><i class="fas fa-columns fa-lg"></i></button>
                         </div>
                     </div>
-                    <div class="md-preview" id="md-preview">
+                    <div class="md-preview" id="md-preview" tabindex="-1">
                     </div> 
                     <div class="md-editor" id="md-editor">
-                        <textarea name="notebody" id="notebody" placeholder="Note"></textarea>
+                        <textarea name="notebody" id="notebody" placeholder="Note" tabindex="0"></textarea>
                     </div> 
                 </div>
                     <div class="shwBtnsR">
                     <button class="btn" id="saveBtn" onclick="save()" ><i class="fas fa-save fa-lg"></i></button>
-                    <button class="btn" id="cancelEdit" onclick='cancelEdit("")' ><i class="fas fa-window-close fa-lg"></i></button>
+                    <button class="btn" id="cancelEdit" onclick='cancelEdit(this)' name="newnote"><i class="fas fa-window-close fa-lg"></i></button>
                  </div>`
-    editBox.innerHTML = html;
-    document.getElementById("editor").style.display = "unset"
-    document.getElementById("notebody").addEventListener('paste', handlePaste);
-    document.getElementById('notebody').addEventListener('keydown', handleKey);
-    document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "saveBtn") });
-    document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
-    document.querySelectorAll('.md-icon').forEach(item => {
-        item.addEventListener('click', function(e){
-            // console.log(this.dataset.handler)
-            processInput(this.dataset.handler) 
-          })
-    })
-    var buttons = document.getElementById("notes").getElementsByTagName('button');
-    for(var i = 0; i < buttons.length; i++){
-        buttons[i].disabled = true;
-    }
-    document.getElementById("title").focus();
-    document.getElementById("saveBtn").disabled = true;
-    document.getElementById("addBtn").disabled = true;
-    document.getElementById("homeBtn").disabled = true;
+        editBox.innerHTML = html;
+        document.getElementById("editor").style.display = "unset"
+        document.getElementById("notebody").addEventListener('paste', handlePaste);
+        document.getElementById('notebody').addEventListener('keydown', handleKey);
+        document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "saveBtn") });
+        document.getElementById('title').addEventListener('input', function(){ textAreaContent("title", "saveBtn") });
+        document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
+        document.querySelectorAll('.md-icon').forEach(item => {
+            item.addEventListener('click', function(e){
+                // console.log(this.dataset.handler)
+                processInput(this.dataset.handler) 
+            })
+        })
+        var buttons = document.getElementById("notes").getElementsByTagName('button');
+        for(var i = 0; i < buttons.length; i++){
+            buttons[i].disabled = true;
+        }
+        document.getElementById("title").focus();
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("addBtn").disabled = true;
+        document.getElementById("homeBtn").disabled = true;
 })
 
 function textAreaContent(txtId, btnId) {
@@ -450,7 +451,7 @@ function cancelEdit(noteid){
     document.getElementById("notebody").remove();
     document.getElementById("mdtools").remove();
     document.getElementById("md-editor").remove();
-    if(noteid.name !== "undefined"){
+    if(noteid.name !== "newnote"){
         showNote(noteid.name)
     }
 }
@@ -551,6 +552,7 @@ function editNote(notediv) {
                 }
                 document.getElementById('notebody').addEventListener('paste', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('input', enableSaveBtn, false)
+                document.getElementById('title').addEventListener('input', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('propertychange', enableSaveBtn, false)
                 document.getElementById('notebody').addEventListener('input', function(){ textAreaContent("notebody", "previewBtn") });
                 function enableSaveBtn(event) {
@@ -560,6 +562,7 @@ function editNote(notediv) {
                 document.getElementById("saveBtn").disabled = true;
                 document.getElementById("addBtn").disabled = true;
                 document.getElementById("homeBtn").disabled = true;
+                setSelectionRange(document.getElementById('notebody'), 0, 0);
             } else { }
         }
     }
@@ -581,6 +584,9 @@ function fullScreenPreview() {
         for(var i = 0; i < elems.length; i++) {
             elems[i].disabled = false;
         }
+        var start = textarea.selectionStart;
+        var finish = textarea.selectionEnd;
+        setSelectionRange(textarea, start, finish);
     } else {
         document.getElementById("saveBtn").disabled = true;
         var elems = document.getElementsByClassName("md-buttons");
@@ -646,6 +652,14 @@ function splitScreenPreview () {
         })
         splitPreviewClicked = true;
     }
+
+        var txtarea = document.getElementById("notebody");
+        // obtain the index of the first selected character
+        var start = txtarea.selectionStart;
+        // obtain the index of the last selected character
+        var finish = txtarea.selectionEnd;
+
+        setSelectionRange(txtarea, start, finish);
 }
 
 // Save Markdown
