@@ -224,10 +224,10 @@ function showNote(notediv){
             if (matching) {
                 html = `
                 <div class="shwBtns">
-                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='white'"><i class="fa fa-edit fa-lg"></i></button>
+                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='white'"><i class="fas fa-edit fa-lg"></i></button>
                     <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy fa-lg"></i></button>
                     <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download fa-lg"></i></button>
-                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='red'"><i class="fa fa-trash fa-lg"></i></button>
+                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='red'"><i class="fas fa-trash fa-lg"></i></button>
                 </div>
                 <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                     <div id="noteHtml">
@@ -272,7 +272,7 @@ newNote.addEventListener("click", () => {
                         <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol"></i></button>
                         <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
                         <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
-                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
+                        <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Image" data-handler="image" id="btnImage"><i class="fas fa-image fa-lg"></i></button>
                         <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
                         <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
                         <button class="md-buttons md-icon" tabindex="-1" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
@@ -470,10 +470,10 @@ function getNote(noteid) {
                 notesGrid.innerHTML = "";
                 var html = `
                 <div class="shwBtns">
-                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='white'"><i class="fa fa-edit"></i></button>
+                    <button class="btn" onclick='editNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='white'"><i class="fas fa-edit"></i></button>
                     <button class="btn" id="copy"  onclick="copyMarkdown()"><i class="fas fa-copy"></i></button>
                     <button class="btn" id="dwld"  onclick="downloadFile()"><i class="fas fa-download"></i></button>
-                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='red'"><i class="fa fa-trash"></i></button>
+                    <button class="btn" onclick='deleteNote(this)' name="${matching.noteid}" data-noteid="${matching.noteid}" onMouseOut="this.style.color='#444'" onMouseOver="this.style.color='red'"><i class="fas fa-trash"></i></button>
                 </div>
                     <div name=${matching.noteid} data-noteid="${matching.noteid}" class="shownote markdown-body" id="editpad">
                         <div id="noteHtml">
@@ -512,7 +512,7 @@ function editNote(notediv) {
                         <button class="md-buttons md-icon" data-tooltip="Ordered List" data-handler="olist" id="btnOList"><i class="fas fa-list-ol"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Unordered List" data-handler="ulist" id="btnUList"><i class="fas fa-list"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Quote" data-handler="quote" id="btnQuote"><i class="fas fa-quote-left"></i></button>
-                        <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="far fa-image fa-lg"></i></button>
+                        <button class="md-buttons md-icon" data-tooltip="Image" data-handler="image" id="btnImage"><i class="fas fa-image fa-lg"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Inline Code" data-handler="backquote" id="btnCode"><i class="fas fa-terminal"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Fenced Code" data-handler="codeblock" id="btnCodeBlock"><i class="fas fa-code"></i></button>
                         <button class="md-buttons md-icon" data-tooltip="Task List" data-handler="tasklist" id="btnTask"><i class="fas fa-check-square"></i></button>
