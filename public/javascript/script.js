@@ -733,17 +733,26 @@ function handlePaste (e) {
     if(e.clipboardData) {
         // Get the copied text from the clipboard
         const text = (e.clipboardData)
-            ? (e.originalEvent || e).clipboardData.getData('text/plain')
-            // For IE
-            : (window.clipboardData ? window.clipboardData.getData('Text') : '');
+        ? (e.originalEvent || e).clipboardData.getData('text/plain')
+        // For IE
+        : (window.clipboardData ? window.clipboardData.getData('Text') : '');
 
         // Get the copied text from the clipboard
         const html = (e.clipboardData)
             ? (e.originalEvent || e).clipboardData.getData('text/html')
             // For IE
             : (window.clipboardData ? window.clipboardData.getData('Html') : '');
-
-        const pasteData = html ? turndownService.turndown(marked(html)) : text    
+        // var pasteData = html ? turndownService.turndown(marked(html)) : turndownService.turndown(text)  
+        // /<:__|[*#]|\[.*?\]\(.*>/.test(val) // detect MD
+        let pasteData;
+        
+        if(html) {
+            pasteData = turndownService.turndown(html)
+        } else {
+            /<[a-z][\s\S]*>/i.test(text) ? pasteData = turndownService.turndown(marked(text)) 
+            : 
+            pasteData = text
+        } 
 
         if (document.queryCommandSupported('insertText')) {
             document.execCommand('insertText', false, pasteData);
